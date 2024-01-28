@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 import styled from'styled-components'
 
 
@@ -24,14 +25,29 @@ const Nav = () => {
  
   return (
     <NavWrapper show={show}>
-    <Logo>
-      <img
-        alt="Rossetta Logo" 
-        src="./assets/logo.png" //None background 로고
-        onClick={() => (window.location.href = "/")} //To main-page
-      />
-    </Logo>
-  </NavWrapper>
+      {/* 로고 삽입 보류 */}
+      {/* <Logo>
+        <img
+          alt="Rossetta Logo" 
+          src="./assets/logo.png" //None background 로고
+          onClick={() => (window.location.href = "/")} //To main-page
+        />
+      </Logo> */}
+      <NavInside>
+        <MenuWrapper>
+          <li className='myli' style={{fontSize: 18, fontFamily: 'Korean-Font'}}>학습</li>
+          <li className='myli' style={{fontSize: 18, fontFamily: 'Korean-Font'}}>소개</li>
+          <li className='myli' style={{fontSize: 18, fontFamily: 'Korean-Font'}}>검사</li>
+        </MenuWrapper>
+        <div className='title-wrapper' style={{width: 300, fontSize: 36, fontFamily: 'English-Font'}} >
+          Rossetta
+        </div>
+        <UserMenuWrapper>
+          <li className='myli' style={{fontSize: 15, fontFamily: 'Korean-Font'}}>로그인</li>
+          <li className='myli' style={{fontSize: 15, fontFamily: 'Korean-Font'}}>회원가입</li>
+        </UserMenuWrapper>
+      </NavInside>
+    </NavWrapper>
   )
 }
 export default Nav
@@ -48,14 +64,14 @@ const NavWrapper = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 36px;
-  letter-spacing: 16px;
+  letter-spacing: 4px;
   z-index: 3;
 `;
 
 
 const Logo = styled.a`
   padding:0;
-  width: 80px;
+  width: 100px;
   margin-top: 4px;
   max-height: 70px;
   font-size: 0;
@@ -65,5 +81,33 @@ const Logo = styled.a`
     display: block;
     width: 100%;
   }
-`
+`;
+
+const NavInside = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 34px;
+  gap: 50px;
+  color: #212121;
+  justify-content: space-between;
+  margin: 0 100px;
+`;
+
+const MenuWrapper = styled.div`
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+`;
+
+const UserMenuWrapper = styled.div`
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+`;
+
 
