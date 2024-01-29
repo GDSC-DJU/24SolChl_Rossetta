@@ -25,7 +25,7 @@ const Nav = () => {
  
   return (
     <NavWrapper show={show}>
-      {/* 로고 삽입 보류 */}
+      {/* 로고 삽입 보류.. 안 이쁨 */}
       {/* <Logo>
         <img
           alt="Rossetta Logo" 
@@ -35,21 +35,21 @@ const Nav = () => {
       </Logo> */}
       <NavInside>
         <MenuWrapper>
-          <li style={{fontSize: 18, fontFamily: 'Korean-Font'}}>학습</li>
-          <li style={{fontSize: 18, fontFamily: 'Korean-Font'}}>소개</li>
-          <li style={{fontSize: 18, fontFamily: 'Korean-Font'}}>검사</li>
+          <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>학습</li>
+          <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>소개</li>
+          <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>검사</li>
         </MenuWrapper>
-        <MenuWrapper>
+        <TitleWrapper>
           <div className='title-wrapper' 
           style={{fontSize: 36, fontFamily: 'English-Font'}} 
           onClick={() => (window.location.href = "/")}>
             Rossetta
           </div>
-        </MenuWrapper>
-        <MenuWrapper>
-          <li style={{fontSize: 15, fontFamily: 'Korean-Font'}}>로그인</li>
-          <li style={{fontSize: 15, fontFamily: 'Korean-Font'}}>회원가입</li>
-        </MenuWrapper>
+        </TitleWrapper>
+        <UserMenuWrapper>
+          <li style={{fontSize: 12, fontFamily: 'Korean-Font'}}>로그인</li>
+          <li style={{fontSize: 12, fontFamily: 'Korean-Font'}}>회원가입</li>
+        </UserMenuWrapper>
       </NavInside>
     </NavWrapper>
   )
@@ -94,15 +94,33 @@ const NavInside = styled.div`
   gap: 50px;
   color: #212121;
   justify-content: space-between;
-  margin: 0 100px;
+  margin: 0px 80px;
 `;
 
 const MenuWrapper = styled.div`
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
-  width: 200px;
+  width: 500px;
+  gap: 150px;
   height: 100%;
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 100%;
+`;
+
+const UserMenuWrapper = styled.div`
+  list-style: none;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 500px;
+  height: 100%;
+  gap: 50px;
+`;
