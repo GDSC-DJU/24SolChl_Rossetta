@@ -35,17 +35,21 @@ const Nav = () => {
       </Logo> */}
       <NavInside>
         <MenuWrapper>
-          <li className='myli' style={{fontSize: 18, fontFamily: 'Korean-Font'}}>학습</li>
-          <li className='myli' style={{fontSize: 18, fontFamily: 'Korean-Font'}}>소개</li>
-          <li className='myli' style={{fontSize: 18, fontFamily: 'Korean-Font'}}>검사</li>
+          <li style={{fontSize: 18, fontFamily: 'Korean-Font'}}>학습</li>
+          <li style={{fontSize: 18, fontFamily: 'Korean-Font'}}>소개</li>
+          <li style={{fontSize: 18, fontFamily: 'Korean-Font'}}>검사</li>
         </MenuWrapper>
-        <div className='title-wrapper' style={{width: 300, fontSize: 36, fontFamily: 'English-Font'}} >
-          Rossetta
-        </div>
-        <UserMenuWrapper>
-          <li className='myli' style={{fontSize: 15, fontFamily: 'Korean-Font'}}>로그인</li>
-          <li className='myli' style={{fontSize: 15, fontFamily: 'Korean-Font'}}>회원가입</li>
-        </UserMenuWrapper>
+        <MenuWrapper>
+          <div className='title-wrapper' 
+          style={{fontSize: 36, fontFamily: 'English-Font'}} 
+          onClick={() => (window.location.href = "/")}>
+            Rossetta
+          </div>
+        </MenuWrapper>
+        <MenuWrapper>
+          <li style={{fontSize: 15, fontFamily: 'Korean-Font'}}>로그인</li>
+          <li style={{fontSize: 15, fontFamily: 'Korean-Font'}}>회원가입</li>
+        </MenuWrapper>
       </NavInside>
     </NavWrapper>
   )
@@ -68,26 +72,25 @@ const NavWrapper = styled.nav`
   z-index: 3;
 `;
 
+// const Logo = styled.a`
+//   padding:0;
+//   width: 100px;
+//   margin-top: 4px;
+//   max-height: 70px;
+//   font-size: 0;
+//   diplay: inline-block;
 
-const Logo = styled.a`
-  padding:0;
-  width: 100px;
-  margin-top: 4px;
-  max-height: 70px;
-  font-size: 0;
-  diplay: inline-block;
-
-  img {
-    display: block;
-    width: 100%;
-  }
-`;
+//   img {
+//     display: block;
+//     width: 100%;
+//   }
+// `;
 
 const NavInside = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   align-items: center;
-  height: 34px;
   gap: 50px;
   color: #212121;
   justify-content: space-between;
@@ -97,17 +100,9 @@ const NavInside = styled.div`
 const MenuWrapper = styled.div`
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 80px;
+  width: 200px;
+  height: 100%;
 `;
-
-const UserMenuWrapper = styled.div`
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-`;
-
 
