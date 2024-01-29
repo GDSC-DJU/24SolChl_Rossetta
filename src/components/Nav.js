@@ -41,7 +41,7 @@ const Nav = () => {
         </MenuWrapper>
         <TitleWrapper>
           <div className='title-wrapper' 
-          style={{fontSize: 36, fontFamily: 'English-Font'}} 
+          style={{fontSize: 44, fontFamily: 'English-Font', letterSpacing: 0}} 
           onClick={() => (window.location.href = "/")}>
             Rossetta
           </div>
