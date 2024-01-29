@@ -22,13 +22,27 @@ const Signup = () => {
   const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
-    // 폼 유효성 검사 업데이트에 아이디 유효성 추가
+
+
     setFormValid(
       usernameValid && pwValid && pwConfirmValid && emailValid && mobileValid && birthdateValid && name !== '' && gender !== ''
     );
   }, [usernameValid, pw, pwConfirm, pwValid, pwConfirmValid, emailValid, mobileValid, birthdateValid, name, gender]);
+  useEffect(()=>{
+    console.log(formValid)
+  },[formValid]);
 
+  useEffect(()=>{
+    // 비밀번호 확인 유효성 검사 추가
+    setPwConfirmValid(pw === pwConfirm);
+    // 핸드폰 번호 유효성 검사 추가
+    setMobileValid(/^\d{11}$/.test(mobile));
+    // 생년월일 유효성 검사 추가
+    setBirthdateValid(/^\d{8}$/.test(birthdate));
+  },[pw,birthdate,pwConfirm])
+  
   const handleUsername = (e) => {
+    
     const value = e.target.value.toLowerCase(); // 입력값을 소문자로 변환
     setUsername(value);
     const regex = /^[a-z0-9]+$/; // 영어 소문자와 숫자만
