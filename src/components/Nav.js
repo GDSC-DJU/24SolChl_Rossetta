@@ -35,8 +35,8 @@ const Nav = () => {
       </Logo> */}
       <NavInside>
         <MenuWrapper>
-          <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>학습</li>
           <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>소개</li>
+          <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>학습</li>
           <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>검사</li>
         </MenuWrapper>
         <TitleWrapper>
