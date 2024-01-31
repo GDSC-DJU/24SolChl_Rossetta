@@ -35,20 +35,18 @@ const Nav = () => {
       </Logo> */}
       <NavInside>
         <MenuWrapper>
-          <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>소개</li>
-          <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>학습</li>
-          <li style={{fontSize: 20, fontFamily: 'Korean-Font'}}>검사</li>
+          <li>소개</li>
+          <li>학습</li>
+          <li>검사</li>
         </MenuWrapper>
         <TitleWrapper>
-          <div className='title-wrapper' 
-          style={{fontSize: 44, fontFamily: 'English-Font', letterSpacing: 0}} 
-          onClick={() => (window.location.href = "/")}>
+          <div onClick={() => (window.location.href = "/")}>
             Rossetta
           </div>
         </TitleWrapper>
         <UserMenuWrapper>
-          <li style={{fontSize: 12, fontFamily: 'Korean-Font'}}>로그인</li>
-          <li style={{fontSize: 12, fontFamily: 'Korean-Font'}}>회원가입</li>
+          <Link to="Login" className='link-to' >로그인</Link>
+          <li>회원가입</li>
         </UserMenuWrapper>
       </NavInside>
     </NavWrapper>
@@ -69,6 +67,7 @@ const NavWrapper = styled.nav`
   align-items: center;
   padding: 0 36px;
   letter-spacing: 4px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
   z-index: 3;
 `;
 
@@ -105,6 +104,8 @@ const MenuWrapper = styled.div`
   width: 500px;
   gap: 150px;
   height: 100%;
+  font-Size: 20px; 
+  font-Family:'Korean-Font-bold';
 `;
 
 const TitleWrapper = styled.div`
@@ -113,6 +114,9 @@ const TitleWrapper = styled.div`
   align-items: center;
   width: auto;
   height: 100%;
+  font-Size: 44px;
+  font-Family: 'English-Font'; 
+  letter-Spacing: 0px;
 `;
 
 const UserMenuWrapper = styled.div`
@@ -123,4 +127,8 @@ const UserMenuWrapper = styled.div`
   width: 500px;
   height: 100%;
   gap: 50px;
+  font-size: 12px;
+  font-Family: 'Korean-Font-bold';
+  text-Decoration: "none"
 `;
+

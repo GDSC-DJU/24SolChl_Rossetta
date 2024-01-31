@@ -52,16 +52,11 @@ const Login = () => {
     return (
       <div className="page">
         <div className="titleWrap">
-          이메일과 비밀번호를
-          <br />
-          입력해주세요
+          로그인
         </div>
-
         <div className="contentWrap">
           <div className="inputTitle">이메일 주소</div>
-          <div
-            className="inputWrap"
-          >
+          <div className="inputWrap">
             <input
               className="input"
               type="text"
@@ -95,9 +90,18 @@ const Login = () => {
           </div>
         </div>
 
+        <div className='findWrap'>
+          <span>아이디찾기</span>
+          <span> | </span>
+          <span>비밀번호찾기</span>
+        </div>
+
         <div>
-          <button onClick={onClickConfirmButton} disabled={notAllow} className="bottomButton">
-            확인
+          <button onClick={onClickConfirmButton} disabled={notAllow} className="loginButton">
+            로그인
+          </button>
+          <button className="signUpButton">
+            회원가입
           </button>
         </div>
       </div>
