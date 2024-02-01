@@ -1,0 +1,32 @@
+{
+  "name": "solchel",
+  "version": "1.0.0",
+  "description": "rossetta",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GDSC-DJU/24SolChl_Rossetta_BE.git"
+  },
+  "keywords": [
+    "solution",
+    "challenge"
+  ],
+  "author": "HAI && honggyo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GDSC-DJU/24SolChl_Rossetta_BE/issues"
+  },
+  "homepage": "https://github.com/GDSC-DJU/24SolChl_Rossetta_BE#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.8.0",
+    "nodemon": "^3.0.3"
+  }
+}
