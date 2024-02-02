@@ -1,0 +1,16 @@
+body { 
+    position: relative; 
+    width: 1280; 
+    height: 720; 
+}
+#video, #canvas { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+}
+#video { 
+    transform: scaleX(-1); /* 좌우 반전 */ 
+}
+#canvas { 
+    pointer-events: none; 
+}

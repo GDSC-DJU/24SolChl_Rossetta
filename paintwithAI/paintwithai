@@ -1,0 +1,62 @@
+const videoElement = document.getElementById('video');
+const canvasElement = document.getElementById('canvas');
+const canvasCtx = canvasElement.getContext('2d');
+let xp = 0, yp = 0;
+let drawColor = 'rgb(255, 0, 0)'; // 빨간색
+let thickness = 20;
+
+videoElement.width = 1280;
+videoElement.height = 720;
+canvasElement.width = 1280;
+canvasElement.height = 720;
+
+const hands = new Hands({
+    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
+});
+
+hands.setOptions({
+    maxNumHands: 1,
+    modelComplexity: 1,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5,
+});
+
+hands.onResults(onResults);
+
+const camera = new Camera(videoElement, {
+    onFrame: async () => {
+        await hands.send({image: videoElement});
+    },
+    width: 1280,
+    height: 720
+});
+
+camera.start();
+
+function onResults(results) {
+    if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        const landmarks = results.multiHandLandmarks[0];
+        const indexFingerTipX = canvasElement.width - (landmarks[8].x * canvasElement.width);
+        const indexFingerTipY = landmarks[8].y * canvasElement.height;
+
+        if (xp !== 0 && yp !== 0) {
+            drawLine(xp, yp, indexFingerTipX, indexFingerTipY);
+        }
+
+        xp = indexFingerTipX;
+        yp = indexFingerTipY;
+    } else {
+        xp = 0;
+        yp = 0;
+    }
+}
+
+function drawLine(x1, y1, x2, y2) {
+    canvasCtx.beginPath();
+    canvasCtx.moveTo(x1, y1);
+    canvasCtx.lineTo(x2, y2);
+    canvasCtx.strokeStyle = drawColor;
+    canvasCtx.lineWidth = thickness;
+    canvasCtx.lineCap = 'round';
+    canvasCtx.stroke();
+}
