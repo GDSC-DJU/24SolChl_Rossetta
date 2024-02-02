@@ -1,8 +1,6 @@
 import React,{ useState, useRef, useEffect,useCallback} from 'react';
-// import './styles/pronunciation.css';
-import { useReactMediaRecorder } from "react-media-recorder";
+import '../styles/pronunciation.css';
 import axios from 'axios';
-// import webmToMp4 from 'webm-to-mp4';
 
 const Pronunciation = () =>{
   const [stream, setStream] = useState();
@@ -13,6 +11,9 @@ const Pronunciation = () =>{
   const [audioUrl, setAudioUrl] = useState();
   const [recordedData,setRecordedData] = useState('');
   const [score, setScore] = useState(0.0);
+  const [result,setResult] = useState(true);
+  const [text, setText] = useState('');
+  const [level,setLevel] = useState(1);
 
   const onRecAudio = async() => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
@@ -61,6 +62,7 @@ const Pronunciation = () =>{
     stream.getAudioTracks().forEach(function (track) {
       track.stop();
     });
+    setResult(false);
 
     // 미디어 캡처 중지
     media.stop();
@@ -68,6 +70,7 @@ const Pronunciation = () =>{
     
     analyser.disconnect();
     source.disconnect();
+
   };
   const [url,setUrl] = useState('');
   
@@ -102,25 +105,34 @@ const bufferToBase64 = (buffer)=> {
 const onSubmitAudioFile = useCallback(async () => {
   let base64;
     if (audioUrl) {
+
       const arrayBuffer = await audioUrl.arrayBuffer();
     const audioContext = new AudioContext();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
     const resampledAudioBuffer = await downsampleAudioBuffer(audioBuffer, 16000);
     const pcmData = resampledAudioBuffer.getChannelData(0);
-
     const pcmArrayBuffer = pcmData.buffer;
     
     const base64 = bufferToBase64(pcmArrayBuffer);
+    setWait(false);
 
     setRecordedData(base64);
-
-    setUrl(URL.createObjectURL(audioUrl));
+    
       
       
     } else {
       console.log('no audio');
     }
+    setResult(true)
   }, [audioUrl]);
+  useEffect(()=>{
+    if(audioUrl){
+      setUrl(URL.createObjectURL(audioUrl));
+    }
+  },[audioUrl])
+
+  const [wait,setWait] = useState(true);
+
 
   useEffect(()=>{
     if(recordedData){
@@ -139,6 +151,10 @@ const onSubmitAudioFile = useCallback(async () => {
       .then((res)=>{
         console.log(res);
         setScore(res.data.return_object.score);
+        setTimeout(()=>{
+          setWait(true);
+
+        },1000)
       })
       .catch((err)=>{
         console.log(err);
@@ -146,36 +162,54 @@ const onSubmitAudioFile = useCallback(async () => {
     }
   },[recordedData])
 
+  const levelClick = () =>{
+    const one = ['안녕하세요','반갑습니다','안녕히가세요','감사합니다','사랑해요'];
+    const two = ['밥을 먹어요','사이좋게 지내자', '집에 가자', '동물원에 가요','공을 던져요'];
+    const three = ['사이좋게 지내자','재미있게 놀았습니다','공놀이를 하였습니다.','친구들이 많았습니다','고구마 하나 더 주세요'];
+    let num = Math.floor(Math.random() * 5);
+    console.log(num)
+    if(level === 1){
+      setText(one[num]);
+    }else if(level === 2){
+      setText(two[num]);
+    }else if(level === 3){
+      setText(three[num]);
+    }
+  }
+
   return (
     <div className='pronunciation-page-container'>
-      <div className='level-container'>
-        <div className='level-itme'>
-          1
-        </div>
-        <div className='level-itme'>
-          2
-        </div>
-        <div className='level-itme'>
-          3
-        </div>
-      </div>
       <div className='pronunciation-container'>
-        <div className='audio-container'>
-          <audio src={url} controls/>
+        <div className='level-container'>
+          <button onClick={()=>{setLevel(1)}} className='level-button'>
+            1
+          </button>
+          <button onClick={()=>{setLevel(2)}} className='level-button'>
+            2
+          </button>
+          <button onClick={()=>{setLevel(3)}} className='level-button'>
+            3
+          </button>
         </div>
-        <div className='example-text'>
-          안녕하세요
+        <div className='pronunciation-funtion-container'>
+          <div className='audio-container'>
+            <audio src={url} controls/>
+          </div>
+          <div className='example-text'>
+            {text}
+          </div>
+          <div className='score'>
+            점수 : {wait ? score*20 : '잠시만 기다려 주세요!'}
+          </div>
+          <div className='pronunciation-button-container'>
+            <button onClick={levelClick}> 랜덤 문장</button>
+            <button className='pronunciation-record-button' onClick={onRec ? onRecAudio : offRecAudio} >{onRec ? '녹음' : '중지'}</button>
+            <button className='pronunciation-evaluation-button' onClick={onSubmitAudioFile} disabled={result}>결과 확인</button>
+          </div>
+
         </div>
-        <div className='score'>
-          점수 : {score}
-        </div>
-        <button onClick={onRec ? onRecAudio : offRecAudio}>{onRec ? '녹음' : '중지'}</button>
-        <button onClick={onSubmitAudioFile}>결과 확인</button>
       </div>
       
-      
-      <div>
-      </div>
     </div>
   );
 }
