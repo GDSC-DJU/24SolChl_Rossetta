@@ -26,7 +26,7 @@ hands.onResults(onResults);
 
 const camera = new Camera(videoElement, {
     onFrame: async () => {
-        await hands.send({image: videoElement});
+        await hands.send({ image: videoElement });
     },
     width: 1280,
     height: 720
@@ -59,6 +59,36 @@ function onResults(results) {
         const landmarks = results.multiHandLandmarks[0];
         const fingersUp = areFingersUp(landmarks);
 
+
+        // 대기 모드 판단 (검지와 새끼손가락만 올라가 있어야 함)
+        const nonStand = [0, 2, 3]; // 엄지, 중지, 약지
+        const isStandbyMode = fingersUp[1] === 1 && fingersUp[4] === 1 && nonStand.every(index => fingersUp[index] === 0);
+
+        if (isStandbyMode) {
+            const indexFingerTip = {
+                x: landmarks[8].x,
+                y: landmarks[8].y
+            };
+            const pinkyFingerTip = {
+                x: landmarks[20].x,
+                y: landmarks[20].y
+            };
+            updateFingerLine(indexFingerTip, pinkyFingerTip, canvasElement);
+        } else {
+            document.getElementById('fingerLine').style.display = 'none';
+        }
+
+        // 선택 모드 판단 (검지와 중지만 올라가 있어야 함)
+        const nonSel = [0, 3, 4]; // 엄지, 약지, 새끼손가락
+        const isSelectionMode = fingersUp[1] === 1 && fingersUp[2] === 1 && nonSel.every(index => fingersUp[index] === 0);
+
+        if (isSelectionMode) {
+            // 선택 모드 시각화: 검지와 중지 손가락 사이에 선을 그림
+
+        }
+
+        const nonDraw = [0, 2, 3, 4];
+        const isDrawMode = fingersUp[1] === 1 && fingersUp.every((val, i) => i === 1 || val === 0);
         // 검지손가락만 올라가 있고, 나머지 손가락들은 접혀있는지 확인
         if (fingersUp[1] === 1 && fingersUp.every((val, i) => i === 1 || val === 0)) {
             const indexFingerTipX = canvasElement.width - (landmarks[8].x * canvasElement.width);
@@ -73,6 +103,13 @@ function onResults(results) {
         } else {
             xp = 0;
             yp = 0;
+        }
+        
+        // 주먹쥐면 캔버스 초기화
+        const isClearMode = fingersUp.every(finger => finger === 0);
+        if (isClearMode) {
+            // 캔버스 초기화
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
         }
     } else {
         xp = 0;
@@ -89,3 +126,37 @@ function drawLine(x1, y1, x2, y2) {
     canvasCtx.lineCap = 'round';
     canvasCtx.stroke();
 }
+
+// 손가락 사이 선 긋기
+function updateFingerLine(indexFingerTip, pinkyFingerTip, canvasElement) {
+    const fingerLine = document.getElementById('fingerLine');
+
+    // 좌우 반전된 좌표를 화면에 맞게 조정
+    const indexFingerTipX = canvasElement.width - (indexFingerTip.x * canvasElement.width);
+    const indexFingerTipY = indexFingerTip.y * canvasElement.height;
+    const pinkyFingerTipX = canvasElement.width - (pinkyFingerTip.x * canvasElement.width);
+    const pinkyFingerTipY = pinkyFingerTip.y * canvasElement.height;
+
+    // 선의 시작점과 끝점 계산
+    const startX = Math.min(indexFingerTipX, pinkyFingerTipX);
+    const startY = Math.min(indexFingerTipY, pinkyFingerTipY);
+    const endX = Math.max(indexFingerTipX, pinkyFingerTipX);
+    const endY = Math.max(indexFingerTipY, pinkyFingerTipY);
+
+    // 선의 길이와 각도 계산
+    const length = Math.hypot(endX - startX, endY - startY);
+    const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+
+    // 선의 위치 조정
+    fingerLine.style.left = `${startX}px`;
+    fingerLine.style.top = `${startY - fingerLine.offsetHeight / 2}px`; // 높이의 절반만큼 올리기
+
+    // 선의 스타일 설정
+    fingerLine.style.width = `${length}px`;
+    fingerLine.style.transform = `rotate(${angle}deg)`;
+    fingerLine.style.transformOrigin = '0 0'; // 회전의 기준점을 선의 시작점으로 설정
+
+    // 선을 보이게 함
+    fingerLine.style.display = 'block';
+}
+
