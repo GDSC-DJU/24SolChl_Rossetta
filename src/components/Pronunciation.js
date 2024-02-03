@@ -35,7 +35,7 @@ const Pronunciation = () =>{
     }
     
     // 마이크 사용 권한 획득 후 녹음 시작
-    const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: {sampleRate : 16000} });
     const mediaRecorder = new MediaRecorder(mediaStream);
     mediaRecorder.start();
     setStream(mediaStream);
@@ -109,8 +109,8 @@ const onSubmitAudioFile = useCallback(async () => {
       const arrayBuffer = await audioUrl.arrayBuffer();
     const audioContext = new AudioContext();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    const resampledAudioBuffer = await downsampleAudioBuffer(audioBuffer, 16000);
-    const pcmData = resampledAudioBuffer.getChannelData(0);
+    // const resampledAudioBuffer = await downsampleAudioBuffer(audioBuffer, 16000);
+    const pcmData = audioBuffer.getChannelData(0);
     const pcmArrayBuffer = pcmData.buffer;
     
     const base64 = bufferToBase64(pcmArrayBuffer);
@@ -140,7 +140,7 @@ const onSubmitAudioFile = useCallback(async () => {
       {
         argument: {
           language_code: 'korean',
-          script: '안녕하세요',
+          script: text,
           audio: recordedData
       }
       },{
