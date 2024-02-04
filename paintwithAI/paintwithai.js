@@ -6,10 +6,10 @@ let xp = 0, yp = 0;
 let drawColor = 'rgb(255, 0, 0)'; // 빨간색
 let thickness = 20;
 
-videoElement.width = 1280;
-videoElement.height = 720;
-canvasElement.width = 1280;
-canvasElement.height = 720;
+videoElement.width = 800;
+videoElement.height = 450;
+canvasElement.width = 800;
+canvasElement.height = 450;
 
 const hands = new Hands({
     locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,

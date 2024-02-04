@@ -1,18 +1,16 @@
-body { 
-    position: relative; 
-    width: 1280; 
-    height: 720; 
-}
-#video, #canvas { 
+
+#video, #canvas, #fingerLine { 
     position: absolute; 
     top: 0; 
     left: 0; 
+    width: 800px;
+    height: 450px;
 }
 #video { 
     transform: scaleX(-1); /* 좌우 반전 */ 
 }
 #canvas { 
-    pointer-events: none; 
+    pointer-events: none;
 }
 #fingerLine {
     height: 5px; /* 선의 두께 */
@@ -20,11 +18,4 @@ body {
     position: absolute;
     display: none; /* 기본적으로 숨겨진 상태 */
     transition: width 0.2s ease; /* 선의 너비 변화에 애니메이션 적용 */
-}
-#thicknessCircle {
-    position: absolute;
-    border-radius: 50%; /* 원 모양 */
-    background-color: rgba(255, 0, 0, 0.5); /* 반투명한 빨간색 */
-    display: none; /* 기본적으로 숨김 */
-    transition: width 0.2s ease, height 0.2s ease, left 0.2s ease, top 0.2s ease; /* 부드러운 변화 */
 }
