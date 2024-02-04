@@ -36,7 +36,7 @@ const Nav = () => {
       <NavInside>
         <MenuWrapper>
           <li>소개</li>
-          <li>학습</li>
+          <Link to="situation-quiz" className='link-to'>학습</Link>
           <li>검사</li>
         </MenuWrapper>
         <TitleWrapper>
@@ -45,7 +45,7 @@ const Nav = () => {
           </div>
         </TitleWrapper>
         <UserMenuWrapper>
-          <Link to="Login" className='link-to' >로그인</Link>
+          <Link to="login" className='link-to' >로그인</Link>
           <li>회원가입</li>
         </UserMenuWrapper>
       </NavInside>
