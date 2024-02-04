@@ -1,4 +1,15 @@
 
+.paint-with-ai-page-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-align: center;
+}
+#container{
+    width: 800px;
+    height: 450px;
+}
 #video, #canvas, #fingerLine { 
     position: absolute; 
     top: 0; 
@@ -15,7 +26,7 @@
 #fingerLine {
     height: 5px; /* 선의 두께 */
     background-color: red; /* 선의 색상 */
-    position: absolute;
+    /* position: absolute; */
     display: none; /* 기본적으로 숨겨진 상태 */
     transition: width 0.2s ease; /* 선의 너비 변화에 애니메이션 적용 */
 }
