@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles/Signup.css';
+import './styles/Login.css';
 
 const Signup = () => {
     // input tage values
