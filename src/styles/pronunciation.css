@@ -1,0 +1,58 @@
+/* .App{
+  padding: 30px;
+} */
+.pronunciation-page-container{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+
+}
+.pronunciation-container{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  display: grid;
+  grid-template-rows: 10% 70%;
+  grid-row-gap: 20%;
+  width: 50%;
+  background-color: #F7F7F7;
+
+}
+.level-container{
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  border-radius: 5px;
+  grid-column-gap: 5%;
+  padding: 5%;
+
+}
+.level-container .level-button{
+  background-color: #36BC9B ;
+  border-radius: 10px;
+  padding: 10%;
+}
+.level-container .level-button:active{
+  background-color: #2d9f82 ;
+}
+.pronunciation-funtion-container{
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+}
+.pronunciation-funtion-container .audio-container{
+  padding-top: 10%;
+}
+.pronunciation-funtion-container .example-text{
+  padding-top: 10%;
+}
+.pronunciation-funtion-container .score{
+  padding-top: 10%;
+}
+.pronunciation-button-container{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+.pronunciation-button-container button{
+  margin: 10%;
+}
+.audio-container audio{
+  width: 90%;
+}

@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import "./App.css";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Situation from "./components/Situation";
+import Pronunciation from "./components/Pronunciation";
 
 function App() {
   return (
@@ -14,8 +15,10 @@ function App() {
 			<Route path="/" element={<Main/>}/>
 			<Route path="situation-quiz" element={<Situation/>}/>
 			<Route path="login" element={<Login/>}/>
+      <Route path="pronunciation" element={<Pronunciation/>}/>
 		</Routes>
     </>
+
   );
 }
 
