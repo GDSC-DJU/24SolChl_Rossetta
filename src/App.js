@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from "./pages/Login";
+import Main from "./pages/Main";
+import Nav from "./components/Nav";
+// import Main from "./components/Main";
+import "./App.css";
+import { Outlet, Route, Routes } from "react-router-dom";
+import Situation from "./components/Situation";
+import Pronunciation from "./components/Pronunciation";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+		<Nav />
+      	<Routes>
+			<Route path="/" element={<Main/>}/>
+			<Route path="situation-quiz" element={<Situation/>}/>
+			<Route path="login" element={<Login/>}/>
+      <Route path="pronunciation" element={<Pronunciation/>}/>
+		</Routes>
+    </>
+
   );
 }
 
 export default App;
+
+
