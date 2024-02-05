@@ -136,6 +136,7 @@ const onSubmitAudioFile = useCallback(async () => {
 
   useEffect(()=>{
     if(recordedData){
+      console.log(text);
       axios.post('http://aiopen.etri.re.kr:8000/WiseASR/PronunciationKor', 
       {
         argument: {
@@ -176,18 +177,21 @@ const onSubmitAudioFile = useCallback(async () => {
       setText(three[num]);
     }
   }
+  useEffect(()=>{
+    console.log(text)
+  },[text])
 
   return (
     <div className='pronunciation-page-container'>
       <div className='pronunciation-container'>
         <div className='level-container'>
-          <button onClick={()=>{setLevel(1)}} className='level-button'>
+          <button onClick={()=>{setLevel(1); setText('')}} className='level-button'>
             1
           </button>
-          <button onClick={()=>{setLevel(2)}} className='level-button'>
+          <button onClick={()=>{setLevel(2); setText('')}} className='level-button'>
             2
           </button>
-          <button onClick={()=>{setLevel(3)}} className='level-button'>
+          <button onClick={()=>{setLevel(3); setText('')}} className='level-button'>
             3
           </button>
         </div>
@@ -196,7 +200,7 @@ const onSubmitAudioFile = useCallback(async () => {
             <audio src={url} controls/>
           </div>
           <div className='example-text'>
-            {text}
+            LEVEL {level} : {text}
           </div>
           <div className='score'>
             점수 : {wait ? score*20 : '잠시만 기다려 주세요!'}

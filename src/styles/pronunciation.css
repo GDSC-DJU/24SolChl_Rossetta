@@ -30,6 +30,9 @@
   border-radius: 10px;
   padding: 10%;
 }
+.level-container .level-button:active{
+  background-color: #2d9f82 ;
+}
 .pronunciation-funtion-container{
   display: grid;
   grid-template-rows: 25% 25% 25% 25%;
