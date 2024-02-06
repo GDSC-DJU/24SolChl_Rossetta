@@ -4,18 +4,21 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    flex-align: center;
+    text-align: left;
 }
 #container{
-    width: 800px;
+    width: 100%;
     height: 450px;
+    overflow: hidden; /* 부모의 크기를 안 벗어남 */
+    display: grid; /* 비율 설정 */
+  grid-template-columns: 800px 50%;
 }
-#video, #canvas, #fingerLine { 
+#video, #canvas {
     position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 800px;
-    height: 450px;
+    max-width: 100%; /* 최대 너비 설정 */
+    height: auto; /* 높이 자동 조정 */
+    min-width: 800px; /* 최소 너비 설정 */
+    min-height: 450px; /* 최소 높이 설정 */
 }
 #video { 
     transform: scaleX(-1); /* 좌우 반전 */ 
@@ -29,4 +32,23 @@
     /* position: absolute; */
     display: none; /* 기본적으로 숨겨진 상태 */
     transition: width 0.2s ease; /* 선의 너비 변화에 애니메이션 적용 */
+}
+/* ColorPicker.css */
+.color-picker-container {
+    position: relative;
+    left: 0;
+
+}
+
+.color-picker-dropdown {
+    position: absolute;
+    z-index: 2;
+    right: 1; /* 화면 크기에 따라 위치 조정이 필요할 수 있음 */
+}
+
+@media (max-width: 768px) {
+    .color-picker-dropdown {
+        right: auto; /* 모바일 화면에서는 다른 위치 조정 */
+        left: 0;
+    }
 }
