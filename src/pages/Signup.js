@@ -143,7 +143,7 @@ const Signup = () => {
         </div>
 
         {/* 이메일 입력 필드 */}
-        <div className="inputTitle">이메일</div>
+        <div className="inputTitle" style={{marginTop: "8px"}}>이메일</div>
         <div className="inputWrap">
           <input
             className="input"
@@ -170,8 +170,8 @@ const Signup = () => {
         </div>
 
         {/* 성별 입력 필드 */}
-        <div className="inputTitle">성별</div>
-        <div className="inputWrap" style={{ flexDirection: 'row' }}>
+        <div className="inputTitle" style={{marginTop: "8px"}}>성별</div>
+        <div className="inputWrap" style={{ flexDirection: 'row'}}>
           <label>
             <input
               type="radio"
@@ -191,7 +191,7 @@ const Signup = () => {
         </div>
 
         {/* 생년월일 입력 필드 */}
-        <div className="inputTitle">생년월일</div>
+        <div className="inputTitle" style={{marginTop: "8px"}}>생년월일</div>
         <div className="inputWrap">
           <input
             className="input"
