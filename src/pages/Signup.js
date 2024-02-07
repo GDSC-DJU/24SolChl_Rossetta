@@ -203,7 +203,7 @@ const Signup = () => {
         </div>
 
       </div>
-      <button onClick={onClickRegisterButton} disabled={!formValid} className="bottomButton">
+      <button onClick={onClickRegisterButton} disabled={!formValid} className="signupButton">
         가입하기
       </button>
     </div>

@@ -99,7 +99,7 @@ const Login = () => {
           <button onClick={onClickConfirmButton} disabled={notAllow} className="loginButton">
             로그인
           </button>
-          <button onClick={() => signupNavigate(`/signup`)} className="signUpButton">
+          <button onClick={() => signupNavigate(`/signup`)} className="toSignUpButton">
             회원가입
           </button>
         </div>
