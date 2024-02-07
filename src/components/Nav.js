@@ -46,7 +46,7 @@ const Nav = () => {
         </TitleWrapper>
         <UserMenuWrapper>
           <Link to="login" className='link-to' >로그인</Link>
-          <li>회원가입</li>
+          <Link to="signup" className='link-to' >회원가입</Link>
         </UserMenuWrapper>
       </NavInside>
     </NavWrapper>

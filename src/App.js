@@ -6,6 +6,7 @@ import "./App.css";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Situation from "./components/Situation";
 import Pronunciation from "./components/Pronunciation";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
 			<Route path="/" element={<Main/>}/>
 			<Route path="situation-quiz" element={<Situation/>}/>
 			<Route path="login" element={<Login/>}/>
-      <Route path="pronunciation" element={<Pronunciation/>}/>
+			<Route path="signup" element={<Signup/>}/>
+      		<Route path="pronunciation" element={<Pronunciation/>}/>
 		</Routes>
     </>
 

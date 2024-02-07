@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles/Login.css';
+import '../styles/Login.css';
 
 const Signup = () => {
     // input tage values
@@ -22,12 +22,11 @@ const Signup = () => {
   const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
-
-
     setFormValid(
       usernameValid && pwValid && pwConfirmValid && emailValid && mobileValid && birthdateValid && name !== '' && gender !== ''
     );
   }, [usernameValid, pw, pwConfirm, pwValid, pwConfirmValid, emailValid, mobileValid, birthdateValid, name, gender]);
+  
   useEffect(()=>{
     console.log(formValid)
   },[formValid]);
@@ -42,14 +41,12 @@ const Signup = () => {
   },[pw,birthdate,pwConfirm])
   
   const handleUsername = (e) => {
-    
     const value = e.target.value.toLowerCase(); // 입력값을 소문자로 변환
     setUsername(value);
     const regex = /^[a-z0-9]+$/; // 영어 소문자와 숫자만
     setUsernameValid(regex.test(value));
   };
   
-
   const handlePw = (e) => {
     const value = e.target.value;
     setPw(value);
