@@ -184,7 +184,7 @@ const onSubmitAudioFile = useCallback(async () => {
   return (
     <div className='pronunciation-page-container'>
       <div className='pronunciation-container'>
-        <div className='level-container'>
+        {/* <div className='level-container'>
           <button onClick={()=>{setLevel(1); setText('')}} className='level-button'>
             1
           </button>
@@ -194,16 +194,26 @@ const onSubmitAudioFile = useCallback(async () => {
           <button onClick={()=>{setLevel(3); setText('')}} className='level-button'>
             3
           </button>
+        </div> */}
+        <div className='level-container'>
+            LEVEL {level}
         </div>
         <div className='pronunciation-funtion-container'>
+
+      
           <div className='audio-container'>
             <audio src={url} controls/>
           </div>
           <div className='example-text'>
-            LEVEL {level} : {text}
+            <div>
+              {text !== '' ? text : '따라 말해보세요!'}
+            </div>
           </div>
           <div className='score'>
-            점수 : {wait ? score*20 : '잠시만 기다려 주세요!'}
+            <div>
+              점수 : 
+            </div>
+            <div> {wait ? score*20+'점' : '잠시만 기다려 주세요!'}</div>
           </div>
           <div className='pronunciation-button-container'>
             <button onClick={levelClick}> 랜덤 문장</button>
