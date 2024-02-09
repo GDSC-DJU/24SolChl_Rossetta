@@ -18,12 +18,9 @@ a{
 .graph-container{
   display: grid;
   grid-template-columns: 70% 30%;
-  /* width: 99.7%; */
   overflow: hidden;
-  /* height: 99.7%; */
 }
 .graph-container .test-graph-data{
-  /* border: 1px solid black; */
   background-color: #fff;
   margin: 20px;
   box-shadow:1px 1px 1px #adb5bd;
@@ -34,16 +31,8 @@ a{
 }
 .graph-container .wchsler-graph-data{
   /* border: 1px solid black; */
-  background-color: #fff;
-  margin: 20px;
-  box-shadow:1px 1px 1px #adb5bd;
-  border-radius: 10px;
-  box-sizing : border-box;
-  overflow: hidden;
+
   
-}
-.wchsler-graph-data{
-  /* width: 100%; */
 }
 .test-graph-data{
   
@@ -166,6 +155,11 @@ a{
   display: grid;
   grid-template-rows: 25% 18.75% 18.75 18.75 18.75;
   overflow: hidden;
+  background-color: #fff;
+  margin: 20px;
+  box-shadow:1px 1px 1px #adb5bd;
+  border-radius: 10px;
+  box-sizing : border-box;
 }
 .wchsler-graph{
   display: grid;
@@ -173,8 +167,10 @@ a{
   overflow: hidden;
 }
 .wchsler-graph div{
-  /* border-right: 1px solid #adb5bd; */
-  margin: auto;
+
+  margin-top: 30%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 .wchsler-data{
   margin: 20px;
