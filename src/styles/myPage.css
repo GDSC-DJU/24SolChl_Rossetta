@@ -55,9 +55,32 @@ a{
   border-radius: 10px;
   box-sizing : border-box;
   display: grid;
-  grid-template-rows: 40% 60%;
-
+  grid-template-rows: 30% 60% 10%;
+  overflow: hidden;
 }
+.child-info-container .child-info{
+  display: grid;
+  grid-template-rows: 80% 20%;
+  overflow: hidden;
+}
+.menu-container{
+  margin: 150px 20px;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-rows: 33% 33% 33%; */
+  overflow: hidden;
+}
+.menu-container a{
+  margin: 10px;
+  font-size: 1.3em;
+  font-weight:600;
+}
+.sign-out{
+  color: red;
+  font-size: 1em;
+  font-weight:600;
+}
+
 .training-info-container{
   display: grid;
   grid-template-rows: 60% 40%;
@@ -110,6 +133,9 @@ a{
   height: 15%;
   box-sizing : border-box;
 }
+.list-columns:hover{
+  background-color: rgba(	173, 181, 189, 0.2);
+}
 .list-item-continer{
   overflow-y: auto
 }
@@ -145,8 +171,57 @@ a{
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   overflow: hidden;
-  margin: 20px;
+}
+.wchsler-graph div{
+  /* border-right: 1px solid #adb5bd; */
+  margin: auto;
 }
 .wchsler-data{
   margin: 20px;
+  border-bottom: 1px solid #adb5bd;
+  display: grid;
+  grid-template-columns: 10% 15% 36% 36%;
+  overflow: hidden;
+}
+
+.wchsler-data div:nth-child(1) {
+
+  width: 50%;
+  height: 25%;
+  /* margin-bottom: auto;
+  margin-left: 30%;
+  ma */
+}
+.wchsler-data div{
+  height: 35%;
+  margin: auto;
+  font-weight: 600;
+}
+.wchsler-data div:nth-child(2){
+  color: #adb5bd;
+}
+.wchsler-data .first-color{
+  background-color: rgba(	128, 0, 128, 0.2);
+  border: 1px solid rgba(	128, 0, 128, 1);
+}
+.wchsler-data .second-color{
+  background-color: rgba(0, 128, 47, 0.2);
+  border: 1px solid rgba(0, 128, 47, 1);
+}
+.wchsler-data .third-color{
+  background-color: rgba(15, 0, 128, 0.2);
+  border: 1px solid rgba(15, 0, 128, 1);
+}
+.wchsler-data .fourth-color{
+  background-color: rgba(246, 1, 1, 0.26);
+  border: 1px solid rgba(246, 1, 1, 1);
+}
+
+.child-info-ficture{
+  margin: auto;
+  border: 1px solid #adb5bd;
+  width: 60%;
+  height: 70%;
+  border-radius: 100%;
+  overflow: hidden;
 }
