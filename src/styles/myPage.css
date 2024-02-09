@@ -1,0 +1,152 @@
+.App{
+  width: 100vw;
+  height: 100vh;
+}
+a{
+  text-decoration-line: none;
+  color: black;
+}
+.my-page-container{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 85% 15%;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.graph-container{
+  display: grid;
+  grid-template-columns: 70% 30%;
+  /* width: 99.7%; */
+  overflow: hidden;
+  /* height: 99.7%; */
+}
+.graph-container .test-graph-data{
+  /* border: 1px solid black; */
+  background-color: #fff;
+  margin: 20px;
+  box-shadow:1px 1px 1px #adb5bd;
+  border-radius: 10px;
+  box-sizing : border-box;
+  overflow: hidden;
+  
+}
+.graph-container .wchsler-graph-data{
+  /* border: 1px solid black; */
+  background-color: #fff;
+  margin: 20px;
+  box-shadow:1px 1px 1px #adb5bd;
+  border-radius: 10px;
+  box-sizing : border-box;
+  overflow: hidden;
+  
+}
+.wchsler-graph-data{
+  /* width: 100%; */
+}
+.test-graph-data{
+  
+}
+.child-info-container{
+  background-color: #fff;
+  margin: 20px 20px 20px 0;
+  box-shadow:1px 1px 1px #adb5bd;
+  border-radius: 10px;
+  box-sizing : border-box;
+  display: grid;
+  grid-template-rows: 40% 60%;
+
+}
+.training-info-container{
+  display: grid;
+  grid-template-rows: 60% 40%;
+  /* height: 94%; */
+  width: auto;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+
+}
+.list-container{
+  background-color: #fff;
+  margin: 0 20px 20px 20px;
+  box-shadow:1px 1px 1px #adb5bd;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 10% 90%;
+  box-sizing : border-box;
+  /* margin: 10px; */
+}
+.list-top-container{
+  text-align: left;
+}
+.list-second-container{
+  display: grid;
+  grid-template-rows: 15% 85%;
+  margin: 20px;
+  border-radius: 10px;
+
+  border: 1px solid #adb5bd;
+  box-sizing : border-box;
+}
+.list-title-columns{
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  background-color: #f8f9fa;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid #adb5bd;
+  box-sizing : border-box;
+}
+
+.list-container .list-columns:nth-last-child(1){
+  border-bottom: 1px solid #adb5bd;
+
+}
+.list-columns{
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  border-top: 1px solid #adb5bd;
+  height: 15%;
+  box-sizing : border-box;
+}
+.list-item-continer{
+  overflow-y: auto
+}
+.list-columns div{
+  border-left: 1px solid #adb5bd;
+  padding-top: 2%;
+  box-sizing: border-box;
+}
+.list-title-columns div{
+
+  border-left: 1px solid #adb5bd;
+  
+  padding-top: 2%;
+  box-sizing: border-box;
+}
+.list-columns div:nth-child(1){
+  border-left: 0;
+}
+.list-title-columns div:nth-child(1){
+  border-left: 0;
+}
+.list-top-container{
+  box-sizing: border-box;
+  padding-left: 25px;
+  padding-top: 10px;
+}
+.wchsler-graph-data{
+  display: grid;
+  grid-template-rows: 25% 18.75% 18.75 18.75 18.75;
+  overflow: hidden;
+}
+.wchsler-graph{
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  overflow: hidden;
+  margin: 20px;
+}
+.wchsler-data{
+  margin: 20px;
+}
