@@ -17,7 +17,7 @@ exports.insertParents = async (body)=> {
         const conn = await pool.getConnection(async(conn) => conn);
         const {id,pw,idNum,name,phoneNum,email,adress,joinDate} = body;
         // console.log(pwd)
-        await conn.query(`INSERT INTO parents (ID,PW,IDNUM,NAME,PHONENUM,EMAIL,ADRESS,JOINDATE) VALUES ("${id}","${pw}","${idNum}","${name}",,"${phoneNum}","${email}","${adress}","${joinDate}")`);
+        await conn.query(`INSERT INTO parents (id,pw,idNum,name,phoneNum,address,joinDate) VALUES ("${id}","${pw}","${idNum}","${name}",,"${phoneNum}","${email}","${adress}","${joinDate}")`);
         conn.release();
 
     }catch(err){
@@ -29,7 +29,7 @@ exports.insertParents = async (body)=> {
 exports.deleteParents = async (id)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        await conn.query(`DELETE FROM parents WHERE ID="${id}"`);
+        await conn.query(`DELETE FROM parents WHERE id="${id}"`);
         conn.release();
     }catch(err){
         console.log(err);
@@ -42,7 +42,7 @@ exports.updateParents = async (id,body)=> {
         console.log(body)
         const conn = await pool.getConnection(async(conn) => conn);
         const {pw,phoneNum,adress} = body;
-        await conn.query(`UPDATE parents SET PW="${pw}",PHONENUM="${phoneNum}",ADRESS="${adress}" WHERE ID="${id}"`);
+        await conn.query(`UPDATE parents SET pw="${pw}",phoneNum="${phoneNum}",address="${adress}" WHERE id="${id}"`);
         conn.release();
     }catch(err){
         console.log(err);
@@ -53,7 +53,7 @@ exports.updateParents = async (id,body)=> {
 exports.selectParents = async (id)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        const list = await conn.query(`SELECT * FROM parents WHERE ID="${id}"`);
+        const list = await conn.query(`SELECT * FROM parents WHERE id="${id}"`);
         console.log(list)
         conn.release();
         return list[0][0];
@@ -70,7 +70,7 @@ exports.insertChild = async (body)=> {
         const conn = await pool.getConnection(async(conn) => conn);
         const {idNum,name,parentsId} = body;
         // console.log(pwd)
-        await conn.query(`INSERT INTO child (IDNUM,NAME,PARENTSID) VALUES ("${idNum}","${name}","${parentsId}")`);
+        await conn.query(`INSERT INTO child (idNum,name,parentsId) VALUES ("${idNum}","${name}","${parentsId}")`);
         conn.release();
 
     }catch(err){
@@ -82,7 +82,7 @@ exports.insertChild = async (body)=> {
 exports.deleteChild = async (id)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        await conn.query(`DELETE FROM child WHERE PARENTSID="${id}"`);
+        await conn.query(`DELETE FROM child WHERE parentsId="${id}"`);
         conn.release();
     }catch(err){
         console.log(err);
@@ -95,7 +95,7 @@ exports.updateChild = async (id,body)=> {
         console.log(body)
         const conn = await pool.getConnection(async(conn) => conn);
         const {parentsId,name} = body;
-        await conn.query(`UPDATE child SET NAME="${name}" WHERE ID="${parentsId}"`);
+        await conn.query(`UPDATE child SET name="${name}" WHERE parentsId="${id}"`);
         conn.release();
     }catch(err){
         console.log(err);
@@ -106,7 +106,7 @@ exports.updateChild = async (id,body)=> {
 exports.selectChild = async (parentsId)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        const list = await conn.query(`SELECT * FROM child WHERE PARENTSID="${parentsId}"`);
+        const list = await conn.query(`SELECT * FROM child WHERE parentsId="${parentsId}"`);
         conn.release();
         return list[0][0];
     }catch(err){
@@ -125,7 +125,7 @@ exports.insertWechsler = async (body)=> {
         const conn = await pool.getConnection(async(conn) => conn);
         const {chilIddNum,lang,pr,wm,ps,iq} = body;
         // console.log(pwd)
-        await conn.query(`INSERT INTO wechsler (CHILDIDNUM,LANG,PR,WM,PS,IQ) VALUES ("${chilIddNum}","${lang}","${pr}","${wm}","${ps}","${iq}")`);
+        await conn.query(`INSERT INTO wechsler (childIdNum,lang,pr,wm,ps,iq) VALUES ("${chilIddNum}","${lang}","${pr}","${wm}","${ps}","${iq}")`);
         conn.release();
 
     }catch(err){
@@ -137,7 +137,7 @@ exports.insertWechsler = async (body)=> {
 exports.deleteWechsler = async (num)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        await conn.query(`DELETE FROM wechsler WHERE ID="${num}"`);
+        await conn.query(`DELETE FROM wechsler WHERE num="${num}"`);
         conn.release();
     }catch(err){
         console.log(err);
@@ -150,7 +150,7 @@ exports.updateWechsler = async (num,body)=> {
         console.log(body)
         const conn = await pool.getConnection(async(conn) => conn);
         const {lang,pr,wm,ps,iq} = body;
-        await conn.query(`UPDATE wechsler SET LANG="${lang}",PR="${pr}",WM="${wm}",PS="${ps}",IQ="${iq}" WHERE NUM="${num}"`);
+        await conn.query(`UPDATE wechsler SET lang="${lang}",pr="${pr}",wm="${wm}",ps="${ps}",iq="${iq}" WHERE num="${num}"`);
         conn.release();
     }catch(err){
         console.log(err);
@@ -161,7 +161,7 @@ exports.updateWechsler = async (num,body)=> {
 exports.selectWechsler = async (childIdNum)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        const list = await conn.query(`SELECT * FROM wechsler WHERE CHILDIDNUM="${childIdNum}"`);
+        const list = await conn.query(`SELECT * FROM wechsler WHERE childIdNum="${childIdNum}"`);
         conn.release();
         return list[0];
     }catch(err){
