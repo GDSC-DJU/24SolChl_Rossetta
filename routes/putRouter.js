@@ -11,4 +11,5 @@ router.put('/parents',verifyToken,parentsInfoUpdate);
 
 //웩슬러 정보 수정 router
 router.put('/wechsler',verifyToken,wechslerInfoUpdate);
+
 module.exports = router;

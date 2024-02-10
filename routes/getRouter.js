@@ -10,5 +10,6 @@ router.get('/info/child',verifyToken,childInfo);
 router.get('/info/parents',verifyToken,parentsInfo);
 
 //웩슬러 정보 get router
-router.get('/info/wechsler',verifyToken,wechslerInfo);
+router.get('/info/wechsler/:childNum',verifyToken,wechslerInfo);
+
 module.exports = router;

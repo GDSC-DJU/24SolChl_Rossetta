@@ -13,5 +13,5 @@ router.post('/sign-up/parents',parentsSignUp);
 router.post('/sign-in',signIn);
 
 //웩슬러 정보 입력 router
-router.post('/sign-up/wechsler',insertWechslerInfo);
+router.post('/sign-up/wechsler',verifyToken,insertWechslerInfo);
 module.exports = router;
