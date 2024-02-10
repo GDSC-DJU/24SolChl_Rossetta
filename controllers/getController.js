@@ -24,6 +24,9 @@ exports.childInfo = async(req,res,next) => {
     try{
         const {id} = req.decoded;
         const data = await selectChild(id);
+        const date = new Date()
+        data.age = date.getFullYear() - Number(20+data.idNum.substr(0,2)) + 1;
+        console.log(data)
         res.status(200).json({
             code:200,
             massage:'success selecte',
