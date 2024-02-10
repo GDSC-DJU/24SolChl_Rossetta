@@ -27,12 +27,13 @@ a{
   border-radius: 10px;
   box-sizing : border-box;
   overflow: hidden;
-  
 }
-.graph-container .wchsler-graph-data{
-  /* border: 1px solid black; */
-
-  
+.wchsler-graph-data .wchsler-graph-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: 600;
 }
 .test-graph-data{
   
@@ -53,15 +54,15 @@ a{
   overflow: hidden;
 }
 .menu-container{
-  margin: 150px 20px;
+  margin: 50% 5%;
   display: flex;
   flex-direction: column;
   /* grid-template-rows: 33% 33% 33%; */
   overflow: hidden;
 }
 .menu-container a{
-  margin: 10px;
-  font-size: 1.3em;
+  margin: 5px;
+  font-size: 1.0em;
   font-weight:600;
 }
 .sign-out{
@@ -121,6 +122,7 @@ a{
   border-top: 1px solid #adb5bd;
   height: 15%;
   box-sizing : border-box;
+  cursor: pointer;
 }
 .list-columns:hover{
   background-color: rgba(	173, 181, 189, 0.2);
@@ -153,10 +155,9 @@ a{
 }
 .wchsler-graph-data{
   display: grid;
-  grid-template-rows: 25% 18.75% 18.75 18.75 18.75;
   overflow: hidden;
   background-color: #fff;
-  margin: 20px;
+  margin: 7%;
   box-shadow:1px 1px 1px #adb5bd;
   border-radius: 10px;
   box-sizing : border-box;
@@ -173,7 +174,7 @@ a{
   margin-right: 10%;
 }
 .wchsler-data{
-  margin: 20px;
+  margin: 10px;
   border-bottom: 1px solid #adb5bd;
   display: grid;
   grid-template-columns: 10% 15% 36% 36%;
@@ -182,7 +183,7 @@ a{
 
 .wchsler-data div:nth-child(1) {
 
-  width: 50%;
+  width: 30%;
   height: 25%;
   /* margin-bottom: auto;
   margin-left: 30%;
@@ -220,4 +221,9 @@ a{
   height: 70%;
   border-radius: 100%;
   overflow: hidden;
+}
+img{
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
 }
