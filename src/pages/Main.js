@@ -9,7 +9,7 @@ const Main = () => {
             <MainBanner/>
             <SubBanner/>
         </MainContainer>
-    )
+        )
     }
 
 export default Main
@@ -21,5 +21,6 @@ const MainContainer = styled.main`
     align-items: center;
     position: relative;
     top: 70px;
+    font-family: 'News-Font-bold';
     z-index: 1;
 `;

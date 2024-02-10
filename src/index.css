@@ -63,6 +63,14 @@ table {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'News-Font-bold';
+  src: url('/public/assets/NotoSansKR-Bold.ttf');
+  font-style: normal;
+}
+
+
+
 
 .link-to{
   color: black;
