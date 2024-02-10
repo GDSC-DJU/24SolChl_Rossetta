@@ -1,5 +1,5 @@
 const {insertParents,insertChild,insertWechsler,selectParents} = require('../models/db');
-
+const jwt = require('jsonwebtoken');
 //회원가입 부모
 exports.parentsSignUp = async(req,res,next) => { 
     try{
@@ -77,7 +77,7 @@ exports.signIn = async(req,res,next) => {
             }); 
         }
     } catch(err){
-        console.error(error);
+        console.error(err);
         return res.status(500).json({
             code: 400,
             message: '토큰 발급 실패',

@@ -37,12 +37,12 @@ exports.deleteParents = async (id)=> {
 }
 
 //부모 정보 업데이트
-exports.updateParents = async (body)=> {
+exports.updateParents = async (id,body)=> {
     try{
         console.log(body)
         const conn = await pool.getConnection(async(conn) => conn);
-        const {id,pw,phoneNum,email,adress,joinDate} = body;
-        await conn.query(`UPDATE parents SET PW="${pw}",PHONENUM="${phoneNum}",EMAIL="${email}",ADRESS="${adress}",JOINDATE="${joinDate}" WHERE ID="${id}"`);
+        const {pw,phoneNum,adress} = body;
+        await conn.query(`UPDATE parents SET PW="${pw}",PHONENUM="${phoneNum}",ADRESS="${adress}" WHERE ID="${id}"`);
         conn.release();
     }catch(err){
         console.log(err);
@@ -56,7 +56,7 @@ exports.selectParents = async (id)=> {
         const list = await conn.query(`SELECT * FROM parents WHERE ID="${id}"`);
         console.log(list)
         conn.release();
-        return list[0];
+        return list[0][0];
     }catch(err){
         console.log(err);
     }
@@ -79,10 +79,10 @@ exports.insertChild = async (body)=> {
 }
 
 //자식 정보 삭제
-exports.deleteChild = async (idNum)=> {
+exports.deleteChild = async (id)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        await conn.query(`DELETE FROM child WHERE ID="${idNum}"`);
+        await conn.query(`DELETE FROM child WHERE PARENTSID="${id}"`);
         conn.release();
     }catch(err){
         console.log(err);
@@ -90,7 +90,7 @@ exports.deleteChild = async (idNum)=> {
 }
 
 //자식 정보 업데이트
-exports.updateChild = async (body)=> {
+exports.updateChild = async (id,body)=> {
     try{
         console.log(body)
         const conn = await pool.getConnection(async(conn) => conn);
@@ -102,11 +102,11 @@ exports.updateChild = async (body)=> {
     }
 }
 
-//자식 정보 가져오기
+//부모 정보로 자식 정보 가져오기
 exports.selectChild = async (parentsId)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        const list = await conn.query(`SELECT * FROM child WHERE ID="${parentsId}"`);
+        const list = await conn.query(`SELECT * FROM child WHERE PARENTSID="${parentsId}"`);
         conn.release();
         return list[0][0];
     }catch(err){
@@ -145,11 +145,11 @@ exports.deleteWechsler = async (num)=> {
 }
 
 //웩슬러 정보 업데이트
-exports.updateWechsler = async (body)=> {
+exports.updateWechsler = async (num,body)=> {
     try{
         console.log(body)
         const conn = await pool.getConnection(async(conn) => conn);
-        const {num,lang,pr,wm,ps,iq} = body;
+        const {lang,pr,wm,ps,iq} = body;
         await conn.query(`UPDATE wechsler SET LANG="${lang}",PR="${pr}",WM="${wm}",PS="${ps}",IQ="${iq}" WHERE NUM="${num}"`);
         conn.release();
     }catch(err){
