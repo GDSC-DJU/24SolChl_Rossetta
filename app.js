@@ -4,11 +4,13 @@ const dotenv = require('dotenv');
 const  cors = require('cors');
 
 dotenv.config();
-//1.
-const getRouter = require('./routes/getRouter');
-const postRouter = require('./routes/postRouter');
-const putRouter = require('./routes/putRouter');
-const deleteRouter = require('./routes/deleteRouter');
+
+const memberRouter = require('./routes/memberRouter');
+const wechslerRouter = require('./routes/wechslerRouter')
+const paintRouter = require('./routes/paintRouter');
+const patternRouter = require('./routes/patternRouter');
+const pronunciationRouter = require('./routes/pronunciationRouter');
+const situationRouter = require('./routes/situationRouter')
 const app = express();
 
 
@@ -20,11 +22,14 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(cors());
 
 app.use(cors({ origin: 'http://localhost:3000'}));
-//2.
-app.use('/get',getRouter);
-app.use('/delete',putRouter);
-app.use('/put',deleteRouter);
-app.use('/post',postRouter);
+
+app.use('/wechsler',wechslerRouter);
+app.use('/member',memberRouter);
+app.use('/paint',paintRouter);
+app.use('/pattern',patternRouter);
+app.use('/pronunciation',pronunciationRouter);
+app.use('/situation',situationRouter);
+
 
 
 app.use((req,res,next)=>{
