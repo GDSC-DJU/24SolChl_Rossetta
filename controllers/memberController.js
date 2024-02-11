@@ -89,7 +89,9 @@ exports.childInfo = async(req,res,next) => {
 exports.parentsSignUp = async(req,res,next) => { 
     try{
         const info = req.body;
-        await insertParents(info);
+        const date = new Date();
+        const joinDate = date.getFullYear() + '.' +date.getMonth() + '.' + getgetDate();
+        await insertParents(info,joinDate);
         res.status(200).json({
             code:200,
             massage:'success signUp',
