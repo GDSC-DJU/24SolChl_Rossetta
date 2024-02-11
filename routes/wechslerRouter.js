@@ -13,6 +13,6 @@ router.get('/info/:childNum',verifyToken,wechslerInfo);
 router.post('/sign-up/wechsler',verifyToken,insertWechslerInfo);
 
 //웩슬러 정보 수정 router
-router.put('/update',verifyToken,wechslerInfoUpdate);
+router.put('/update/:wechslerNum',verifyToken,wechslerInfoUpdate);
 
 module.exports = router;
