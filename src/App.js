@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import PaintWithAi from './components/PaintWithAi';
+import PaintWithAi from './pages/PaintWithAi';
 
 function App() {
   return (

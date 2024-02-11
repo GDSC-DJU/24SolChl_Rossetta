@@ -13,6 +13,14 @@
     display: grid; /* 비율 설정 */
   grid-template-columns: 800px 50%;
 }
+#settings{
+    width: 800px;
+    height: 45px;
+    overflow: hidden; /* 부모의 크기를 안 벗어남 */
+    display: flex; /* 비율 설정 */
+    flex-direction: row;
+    margin-top: 200px;
+}
 #video, #canvas {
     position: absolute; 
     max-width: 100%; /* 최대 너비 설정 */
