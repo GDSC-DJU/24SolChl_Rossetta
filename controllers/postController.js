@@ -58,7 +58,7 @@ exports.signIn = async(req,res,next) => {
         const data = await selectParents(id);
         console.log(data)
 
-        if(data.length !== 0 && data.PW === pw){
+        if(data.length !== 0 && data.pw === pw){
             token = jwt.sign(
                 {
                 type: "JWT",
@@ -67,7 +67,7 @@ exports.signIn = async(req,res,next) => {
                 },
                 process.env.JWT_SECRET,
                 {
-                expiresIn: "10000m", // 100분후 만료
+                expiresIn: "10000m", // 10000분후 만료
                 issuer: "server",
                 }
             );
@@ -77,10 +77,7 @@ exports.signIn = async(req,res,next) => {
                 token
             }); 
         }else{
-            return res.status(500).json({
-                code: 400,
-                message: '토큰 발급 실패',
-            });
+            throw(err);
         }
     } catch(err){
         console.error(err);

@@ -29,11 +29,11 @@ app.use('/post',postRouter);
 
 app.use((req,res,next)=>{
     const err = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-    err.status = 404;
-    res.json({
-        code: err.status,
-        massage : "undefined"
+    res.status(404).json({
+        code:404,
+        massage:'failed Update',
     });
+
     next(err);
 });
 app.use((err,req,res,next)=>{

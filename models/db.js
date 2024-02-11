@@ -163,7 +163,7 @@ exports.selectWechsler = async (childIdNum)=> {
         const conn = await pool.getConnection(async(conn) => conn);
         const list = await conn.query(`SELECT * FROM wechsler WHERE childIdNum="${childIdNum}"`);
         conn.release();
-        return list[0];
+        return list[0][0];
     }catch(err){
         console.log(err);
     }

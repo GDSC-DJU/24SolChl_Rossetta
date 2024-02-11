@@ -45,14 +45,16 @@ exports.wechslerInfo = async(req,res,next) => {
     try{
         // const {id} = req.decoded;
         const {childNum} = req.params;
-        console.log(req.params)
+        console.log("asdf")
         const data = await selectWechsler(childNum);
+        console.log(data);
         res.status(200).json({
             code:200,
             massage:'success selecte',
             response:data
         });
     }catch(err){
+        console.log("asdf")
         res.status(400).json({
             code:400,
             massage:'failed selecte',
