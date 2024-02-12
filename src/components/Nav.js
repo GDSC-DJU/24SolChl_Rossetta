@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import styled from'styled-components'
+import '../styles/Nav.css'
 
 
 const Nav = () => {
@@ -45,8 +46,8 @@ const Nav = () => {
           </div>
         </TitleWrapper>
         <UserMenuWrapper>
-          <Link to="login" className='link-to' >로그인</Link>
-          <Link to="signup" className='link-to' >회원가입</Link>
+          <Link to="login" className='link-to' id='link-to__login' >로그인</Link>
+          <Link to="signup" className='link-to' id='link-to__signup'>회원가입</Link>
         </UserMenuWrapper>
       </NavInside>
     </NavWrapper>
