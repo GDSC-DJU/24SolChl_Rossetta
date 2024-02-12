@@ -7,11 +7,13 @@ const ChangePassword = (props) => {
   const [pwValid,setPwValid] = useState(false);
   const [pwConfirmValid, setPwConfirmValid] = useState(false);
   const [comparePsw,setComparePsw] = useState(false);
-  const [psw,setPsw] = useState(props.data.pw)
+  const [psw,setPsw] = useState('1')
   const buttonRef = useRef();
   const [btnDisabled,setBtnDisabled] = useState(true);
   // 새 비밀번호 유효성 검사
-
+  useEffect(()=>{
+    setPsw(props.data.pw)
+  },[props])
   const saveButtonClick = () =>{
     axios.put('http://localhost:8000/member/parents/update',{
       pw:newPsw,
@@ -45,7 +47,6 @@ const ChangePassword = (props) => {
     console.log(confirmPsw)
     setPwConfirmValid(newPsw === confirmPsw);
   },[confirmPsw])
-  console.log(props.display)
   return (
     <div className="item-container" style={{display:`${props.display ? '':'none'}`}}>
       <div className="item" >
@@ -62,7 +63,7 @@ const ChangePassword = (props) => {
           {!pwConfirmValid && confirmPsw.length > 0 && <div className="confirm">비밀번호가 일치하지 않습니다.</div>} 
         </div>
       </div>
-      <button ref={buttonRef}  disabled={btnDisabled} onClick={saveButtonClick}  className="save-button">저장</button> 
+      <button ref={buttonRef}  disabled={btnDisabled} onClick={saveButtonClick}  className={btnDisabled ? "disabled-btn":"save-button" }>저장</button> 
     </div>
   )
 }

@@ -32,8 +32,8 @@ const ChangeUserInfo = () =>{
       <div className="user-info-container">
         <div className="user-info-title">회원 정보 수정</div>
         <div className="user-info">
-          <button onClick={()=>{setPhoneCpt(true); setAddressCpt(false)}}>비밀번호 변경</button>
-          <button onClick={()=>{setPhoneCpt(false); setAddressCpt(true)}}>전화번호 주소 변경</button>
+          <button className="change-button" onClick={()=>{setPhoneCpt(true); setAddressCpt(false)}}>비밀번호 변경</button>
+          <button className="change-button" onClick={()=>{setPhoneCpt(false); setAddressCpt(true)}}>전화번호 주소 변경</button>
           <ChangePassword display={phoneCpt} data={info}/>
           <ChangeAdrPN display={addressCpt} data={info}/>
  
