@@ -68,6 +68,7 @@ exports.situationInfo = async(req,res,next) => {
         info.forEach(async(item,index) => {
             const select = await selectSituationSelect(item.num);
             situation.push({
+                situationNum:item.num,
                 index:select.num,
                 image:item.image,
                 question:item.question,
