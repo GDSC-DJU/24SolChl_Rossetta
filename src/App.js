@@ -7,6 +7,7 @@ import Situation from "./components/Situation";
 import Pronunciation from "./components/Pronunciation";
 import Signup from "./pages/Signup";
 import styled from "styled-components";
+import Introduction from "./pages/Introduction";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 			<Route path="login" element={<Login/>}/>
 			<Route path="signup" element={<Signup/>}/>
       		<Route path="pronunciation" element={<Pronunciation/>}/>
+      		<Route path="introduction" element={<Introduction/>}/>
 		</Routes>
     </Container>
 

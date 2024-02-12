@@ -1,23 +1,12 @@
 import React from 'react'
 import styled from 'styled-components';
+import PageLayout from '../components/PageLayout';
 
 const Introduction = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+return (
+    <PageLayout location="/introduction" name="소개">
+
+    </PageLayout>        
+)
 }
-
 export default Introduction
-
-const IntroductionContainer = styled.div`
-    position: relative;
-    display: block;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 70px;
-    font-family: 'Korean-Font-bold';
-    z-index: 1;
-`;
