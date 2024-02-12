@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import styled from'styled-components'
+import '../styles/Nav.css'
 
 
 const Nav = () => {
@@ -25,14 +26,6 @@ const Nav = () => {
  
   return (
     <NavWrapper show={show}>
-      {/* 로고 삽입 보류.. 안 이쁨 */}
-      {/* <Logo>
-        <img
-          alt="Rossetta Logo" 
-          src="./assets/logo.png" //None background 로고
-          onClick={() => (window.location.href = "/")} //To main-page
-        />
-      </Logo> */}
       <NavInside>
         <MenuWrapper>
           <li>소개</li>
@@ -45,8 +38,8 @@ const Nav = () => {
           </div>
         </TitleWrapper>
         <UserMenuWrapper>
-          <Link to="login" className='link-to' >로그인</Link>
-          <Link to="signup" className='link-to' >회원가입</Link>
+          <Link to="login" className='link-to' id='link-to__login' >로그인</Link>
+          <Link to="signup" className='link-to' id='link-to__signup'>회원가입</Link>
         </UserMenuWrapper>
       </NavInside>
     </NavWrapper>
@@ -61,29 +54,15 @@ const NavWrapper = styled.nav`
   left: 0;
   right: 0;
   height: 70px;
-  background-color: ${props => props.show ? "#white" : "transparent"};
+  background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 36px;
   letter-spacing: 4px;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
-  z-index: 3;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 8px 12px 0px;
+  z-index: 4;
 `;
-
-// const Logo = styled.a`
-//   padding:0;
-//   width: 100px;
-//   margin-top: 4px;
-//   max-height: 70px;
-//   font-size: 0;
-//   diplay: inline-block;
-
-//   img {
-//     display: block;
-//     width: 100%;
-//   }
-// `;
 
 const NavInside = styled.div`
   display: flex;

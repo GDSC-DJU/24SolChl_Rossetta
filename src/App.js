@@ -1,16 +1,16 @@
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Nav from "./components/Nav";
-// import Main from "./components/Main";
 import "./App.css";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Situation from "./components/Situation";
 import Pronunciation from "./components/Pronunciation";
 import Signup from "./pages/Signup";
+import styled from "styled-components";
 
 function App() {
   return (
-    <>
+    <Container>
 		<Nav />
       	<Routes>
 			<Route path="/" element={<Main/>}/>
@@ -19,11 +19,20 @@ function App() {
 			<Route path="signup" element={<Signup/>}/>
       		<Route path="pronunciation" element={<Pronunciation/>}/>
 		</Routes>
-    </>
+    </Container>
 
   );
 }
 
 export default App;
+
+
+const Container = styled.div`
+	position: relative;
+	height: 3000px;
+  	min-height: calc(100vh - 250px);
+	overflow-x: hidden; 
+	display: block;
+`;
 
 
