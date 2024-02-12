@@ -19,6 +19,7 @@ a{
   display: grid;
   grid-template-columns: 70% 30%;
   overflow: hidden;
+  
 }
 .graph-container .test-graph-data{
   background-color: #fff;
@@ -27,6 +28,7 @@ a{
   border-radius: 10px;
   box-sizing : border-box;
   overflow: hidden;
+  font-weight: 600;
 }
 .wchsler-graph-data .wchsler-graph-title{
   display: flex;
@@ -60,7 +62,8 @@ a{
   /* grid-template-rows: 33% 33% 33%; */
   overflow: hidden;
 }
-.menu-container a{
+.menu-container div{
+  cursor: pointer;
   margin: 5px;
   font-size: 1.0em;
   font-weight:600;
@@ -87,12 +90,35 @@ a{
   box-shadow:1px 1px 1px #adb5bd;
   border-radius: 10px;
   display: grid;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 12% 88%;
   box-sizing : border-box;
   /* margin: 10px; */
 }
 .list-top-container{
   text-align: left;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  font-weight: 500;
+}
+.list-top-right{
+  display: grid;
+  grid-template-columns: 40% 30% 30%;
+  overflow: hidden;
+}
+.list-top-right div:nth-child(1){
+
+  font-weight: 500;
+  border-radius: 10px;
+  text-align: center;
+  border: 0.5px solid #adb5bd;
+  margin-right: 10%;
+}
+.list-top-right div:nth-child(1):hover{
+  background-color: rgba(	173, 181, 189, 0.2);
+  cursor: pointer;
+}
+.list-top-right select{
+  width: 80%;
 }
 .list-second-container{
   display: grid;

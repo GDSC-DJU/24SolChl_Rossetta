@@ -6,13 +6,14 @@ import {
   RadialLinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Filler,
   Title,
   ArcElement,
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Line,Radar,Doughnut } from 'react-chartjs-2';
+import { Line,Radar,Doughnut,Bar } from 'react-chartjs-2';
 import '../styles/myPage.css'
 // import { debounce } from 'lodash'
 import img from '../img/images.jpeg'
@@ -22,7 +23,7 @@ import axios from 'axios'
 
 
 const MyPage = () =>{
-  ChartJS.register(CategoryScale,RadialLinearScale, LinearScale, PointElement, LineElement,ArcElement,Filler, Title, Tooltip, Legend);
+  ChartJS.register(CategoryScale,RadialLinearScale, LinearScale, PointElement,BarElement, LineElement,ArcElement,Filler, Title, Tooltip, Legend);
   //웩슬러 정보
   const [wchslerInfo,setWchslerInfo] = useState({
     lang:0,
@@ -37,18 +38,94 @@ const MyPage = () =>{
     idNum:'',
     age:0
   })
-  
+  //학습 날짜
+  const [pDate,setPDate] = useState(1);
+  //학습 레벨
+  const [level,setLevel] = useState(1);
+  //학습 점수 종합 리스트
+  const [practiceList,setPracticeList] = useState([]);
+  //학습 점수 리스트
+  const [scoreList,setScoreList] = useState([]);
+  //chart 전환
+  const [chartChange,setChartChange] = useState("날짜별 발음");
+
   useEffect(()=>{
-    
     childDB();
-    // wchslerDB();
-    
   },[])
 
 
+
+  //문장 반복말하기
+  const pronunciationScore = () =>{
+    axios.get(`http://localhost:8000/pronunciation/info/score/${pDate}/${level}`,{
+      headers: {
+        "Content-Type":'application/json',
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
+      }
+    })
+    .then((res)=>{
+      console.log(level)
+      if(pDate === 1){
+        let score = [];
+        let date = 0;
+        let min = 0;
+        let max = 0.0;
+        let num = 0.0;
+        let sum = 0.0;
+        res.data.response.forEach((item,index) => {
+          //
+          num += 1;
+          if(min > item.score || min == 0){
+            min = item.score;
+          }
+          if(max < item.data || max == 0){
+            max = item.score;
+          }
+          sum += item.score;
+          if(item.date !== date || index+1 == res.data.response.length){
+            if(date != 0){
+              score.push({
+                title:"문장 반복 말하기",
+                date:date,
+                max:Math.ceil(max*20),
+                min:Math.ceil(min*20),
+                avg:Math.ceil((sum*20)/num)
+              })
+            }
+            date = item.date;
+            num = 0;
+            min = 0.0;
+            max = 0.0;
+            sum = 0.0;
+          }
+        });
+        setPracticeList(score);
+        console.log(score)
+      }else{
+        setScoreList(res.data.response);
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
+  useEffect(()=>{
+    console.log(pDate)
+    pronunciationScore();
+  },[pDate])
+  useEffect(()=>{
+    console.log(level)
+    setChartChange("날짜별 발음");
+    setPDate(1);
+    setTimeout(()=>{
+      pronunciationScore();
+    },150)
+  },[level])
+
   // 아이 정보 불러오기
   const childDB = async () => {
-    await axios.get('http://localhost:8000/get/info/child',{
+    await axios.get('http://localhost:8000/member/child/info',{
       headers: {
         "Content-Type":'application/json',
         Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
@@ -64,7 +141,7 @@ const MyPage = () =>{
   }
   useEffect(()=>{
     console.log(childInfo)
-    axios.get(`http://localhost:8000/get/info/wechsler/${childInfo.idNum}`,{
+    axios.get(`http://localhost:8000/wechsler/info/${childInfo.idNum}`,{
       headers: {
         "Content-Type":'application/json',
         Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
@@ -205,7 +282,7 @@ const MyPage = () =>{
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        display: false
       },
       title: {
         display: false,
@@ -218,24 +295,78 @@ const MyPage = () =>{
   const [testData,setTestData] = useState({
     datasets: [
       {
-        label: '점수',
-        data: [{x:"11:30",y: 1},{x:"11:32",y:2},{x:"11:34",y:40}],
+        data: [],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ],
+  });
+  
+  useEffect(()=>{
+    const list = [];
+    practiceList.map((item)=>{
+      list.push({
+        x: item.date,
+        y:item.avg
+      })
+    })
+    setTestData({
+      datasets: [
+        {
+          data: list.reverse(),
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+      ],
+    })
+
+  },[practiceList])
+
+  const chartRef = useRef();
+  const chartRef2 = useRef();
+  // 점수 막대 그래프
+  const [scoreData,setScoreData] = useState({
+    labels:[],
+    datasets: [
+      {
+        data: [],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
     ],
   });
 
-  const chartRef = useRef();
-  const chartRef2 = useRef();
+  useEffect(()=>{
+    let labels = [];
+    let data = [];
+    console.log(scoreList);
+    scoreList.map((item)=>{
+      labels.push(item.sentence);
+      data.push(item.score*20);
+    })
+    setScoreData({
+      labels:labels,
+      datasets: [
+        {
+          data: data,
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+      ],
+    })
+  },[scoreList])
   
+  
+
   return (
     <div className='my-page-container'>
       
       <div className="training-info-container">
         <div className="graph-container">
-          <div className="test-graph-data">
-            <Line  ref={chartRef} options={testOptions} data={testData}/>
+          <div className="test-graph-data" >
+            {chartChange + ' 학습'}
+            <Line style={{display:`${chartChange !== '날짜별 발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
+            <Bar style={{display:`${chartChange !== '발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={scoreData}/>
           </div>
           <div className="wchsler-graph-data">
             <div className="wchsler-graph-title"><div>wchsler</div></div>
@@ -284,9 +415,25 @@ const MyPage = () =>{
         </div>
         <div className="list-container">
           <div className="list-top-container">
-            <div>
-              날짜별 학습
+            <div className="list-top-left">
+              날짜별 {chartChange === '발음' || chartChange === '날짜별 발음' ? '발음' : '패턴'} 학습 리스트
             </div>
+            <div className="list-top-right">
+              <div onClick={()=>{chartChange === '발음' || chartChange === '날짜별 발음'  ?  setChartChange("날짜별 발음") : setChartChange("날짜별 패턴")}}>
+                전체 날짜 그래프 보기
+              </div>
+              <select onChange={(e)=>setLevel(e.target.value)}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              <select onChange={(e)=>setChartChange(e.target.value)}>
+                <option value="날짜별 발음">발음 학습</option>
+                <option value="날짜별 패턴">패턴 그리기</option>
+              </select>
+            </div>
+
+            
           </div>
           <div className="list-second-container">
             <div className="list-title-columns">
@@ -307,146 +454,30 @@ const MyPage = () =>{
               </div>
             </div>
             <div className="list-item-continer">
-              <div href="" className="list-columns">
-                <div className="list-columns-item">
-                  반복 문장 말하기
-                </div>
-                <div className="list-columns-item">
-                  80
-                </div>
-                <div className="list-columns-item">
-                  30
-                </div>
-                <div className="list-columns-item">
-                  55
-                </div>
-                <div className="list-columns-item">
-                  2024-02-03
-                </div>
-              </div>  
-
-              <div className="list-columns">
-                <div className="list-columns-item">
-                  반복 문장 말하기
-                </div>
-                <div className="list-columns-item">
-                  80
-                </div>
-                <div className="list-columns-item">
-                  30
-                </div>
-                <div className="list-columns-item">
-                  55
-                </div>
-                <div className="list-columns-item">
-                  2024-02-03
-                </div>
-              </div>  
-
-              <div className="list-columns">
-                <div className="list-columns-item">
-                  반복 문장 말하기
-                </div>
-                <div className="list-columns-item">
-                  80
-                </div>
-                <div className="list-columns-item">
-                  30
-                </div>
-                <div className="list-columns-item">
-                  55
-                </div>
-                <div className="list-columns-item">
-                  2024-02-03
-                </div>
-              </div>  
-
-              <div className="list-columns">
-                <div className="list-columns-item">
-                  반복 문장 말하기
-                </div>
-                <div className="list-columns-item">
-                  80
-                </div>
-                <div className="list-columns-item">
-                  30
-                </div>
-                <div className="list-columns-item">
-                  55
-                </div>
-                <div className="list-columns-item">
-                  2024-02-03
-                </div>
-              </div>  
-
-              <div className="list-columns">
-                <div className="list-columns-item">
-                  반복 문장 말하기
-                </div>
-                <div className="list-columns-item">
-                  80
-                </div>
-                <div className="list-columns-item">
-                  30
-                </div>
-                <div className="list-columns-item">
-                  55
-                </div>
-                <div className="list-columns-item">
-                  2024-02-03
-                </div>
-              </div>  
-              <div className="list-columns">
-                <div className="list-columns-item">
-                  반복 문장 말하기
-                </div>
-                <div className="list-columns-item">
-                  80
-                </div>
-                <div className="list-columns-item">
-                  30
-                </div>
-                <div className="list-columns-item">
-                  55
-                </div>
-                <div className="list-columns-item">
-                  2024-02-03
-                </div>
-              </div> 
-              <div className="list-columns">
-                <div className="list-columns-item">
-                  반복 문장 말하기
-                </div>
-                <div className="list-columns-item">
-                  80
-                </div>
-                <div className="list-columns-item">
-                  30
-                </div>
-                <div className="list-columns-item">
-                  55
-                </div>
-                <div className="list-columns-item">
-                  2024-02-03
-                </div>
-              </div> 
-              <div className="list-columns">
-                <div className="list-columns-item">
-                  반복 문장 말하기
-                </div>
-                <div className="list-columns-item">
-                  80
-                </div>
-                <div className="list-columns-item">
-                  30
-                </div>
-                <div className="list-columns-item">
-                  55
-                </div>
-                <div className="list-columns-item">
-                  2024-02-03
-                </div>
-              </div> 
+              {
+                practiceList.map((item, index)=>{
+                  return(
+                    <div className="list-columns" onClick={()=>{setPDate(item.date);  setChartChange("발음")}}>
+                      <div className="list-columns-item">
+                        {item.title}
+                      </div>
+                      <div className="list-columns-item">
+                        {item.max}
+                      </div>
+                      <div className="list-columns-item">
+                        {item.min}
+                      </div>
+                      <div className="list-columns-item">
+                        {item.avg}
+                      </div>
+                      <div className="list-columns-item">
+                        {item.date}
+                      </div>
+                    </div>    
+                  )
+                })
+              }
+              
             </div>
           </div>
           
@@ -472,9 +503,8 @@ const MyPage = () =>{
 
         </div>
         <div className="menu-container">
-          <a>회원 정보 수정</a>
-          <a>내가 그린 그림들</a>
-          <a>공지사항</a>
+          <div>회원 정보 수정</div>
+          <div>내가 그린 그림들</div>
         </div>
         <div className="sign-out">
           로그아웃
