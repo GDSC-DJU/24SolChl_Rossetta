@@ -9,10 +9,10 @@ const router = express.Router();
 router.delete('/delete/:situationNum',verifyToken,deleteSituationInfo);
 
 //상황판단 정보 get router
-router.get('/info',verifyToken,situationInfo);
+router.get('/info/:level',verifyToken,situationInfo);
 
 //상황판단 정보 입력 router
-router.post('/sign-up/wechsler',verifyToken,insertSituationInfo);
+router.post('/post',verifyToken,insertSituationInfo);
 
 //상황판단 정보 수정 router
 router.put('/update/:situationNum',verifyToken,situationInfoUpdate);
@@ -21,7 +21,7 @@ router.put('/update/:situationNum',verifyToken,situationInfoUpdate);
 router.delete('/delete/:situationSelectNum',verifyToken,deleteSituationSelectInfo);
 
 //상황판단 선택 정보 입력 router
-router.post('/sign-up/wechsler',verifyToken,insertSituationSelectInfo);
+router.post('/post/select',verifyToken,insertSituationSelectInfo);
 
 //상황판단 선택 정보 수정 router
 router.put('/update/:situationSelectNum',verifyToken,situationSelectInfoUpdate);

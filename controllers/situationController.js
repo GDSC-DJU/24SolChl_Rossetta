@@ -6,7 +6,11 @@ const {insertSituation,deleteSituation,updateSituation,selectSituation,insertSit
 exports.insertSituationInfo = async(req,res,next) => { 
     try{
         const body = req.body;
-        await insertSituation(body);
+        const num = Math.floor(Math.random() * 10000000000000000000000);
+        const {situation,select} = body
+        await insertSituation(situation,num);
+        await insertSituationSelect(select,num);
+
         res.status(200).json({
             code:200,
             massage:'success Insert',
@@ -41,7 +45,7 @@ exports.situationInfoUpdate = async(req,res,next) => {
     try{
         const {situationNum} = req.params;
         const info = req.body;
-        await updateSituation(id,info);
+        await updateSituation(situationNum,info);
         res.status(200).json({
             code:200,
             massage:'success Update',
@@ -56,23 +60,31 @@ exports.situationInfoUpdate = async(req,res,next) => {
 
 //상황 가져오기
 exports.situationInfo = async(req,res,next) => { 
+    const {level} = req.params;
+    let situation = [];
+
     try{
-        let situation = []
-        const info = await selectSituation();
-        info.forEach(async(item) => {
+        const info = await selectSituation(level);
+        info.forEach(async(item,index) => {
             const select = await selectSituationSelect(item.num);
             situation.push({
-                info:item,
-                select:select
+                index:select.num,
+                image:item.image,
+                question:item.question,
+                choice:[select.firstNum,select.secondNum,select.thirdNum,select.fourthNum],
+                answer:item.answer,
+                level:item.level
             })
+            if(info.length === index+1){
+                res.status(200).json({
+                    code:200,
+                    massage:'success selecte',
+                    response:situation.reverse()
+                });
+            }
         });
         
-        console.log(situation)
-        res.status(200).json({
-            code:200,
-            massage:'success selecte',
-            response:situation
-        });
+        
     }catch(err){
         res.status(400).json({
             code:400,
@@ -88,7 +100,10 @@ exports.situationInfo = async(req,res,next) => {
 exports.insertSituationSelectInfo = async(req,res,next) => { 
     try{
         const body = req.body;
-        await insertSituationSelect(body);
+        const num = Math.floor(Math.random() * 10000000000000000000000);
+
+        await insertSituationSelect(body,num);
+        
         res.status(200).json({
             code:200,
             massage:'success Insert',
