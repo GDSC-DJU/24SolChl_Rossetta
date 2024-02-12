@@ -47,7 +47,7 @@ const MyPage = () =>{
   //학습 점수 리스트
   const [scoreList,setScoreList] = useState([]);
   //chart 전환
-  const [chartChange,setChartChange] = useState(false);
+  const [chartChange,setChartChange] = useState("날짜별 발음");
 
   useEffect(()=>{
     childDB();
@@ -116,11 +116,11 @@ const MyPage = () =>{
   },[pDate])
   useEffect(()=>{
     console.log(level)
-    setChartChange(false);
+    setChartChange("날짜별 발음");
     setPDate(1);
     setTimeout(()=>{
       pronunciationScore();
-    },300)
+    },150)
   },[level])
 
   // 아이 정보 불러오기
@@ -356,14 +356,17 @@ const MyPage = () =>{
     })
   },[scoreList])
   
+  
+
   return (
     <div className='my-page-container'>
       
       <div className="training-info-container">
         <div className="graph-container">
           <div className="test-graph-data" >
-            <Line style={{display:`${chartChange ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
-            <Bar style={{display:`${!chartChange ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={scoreData}/>
+            {chartChange + ' 학습'}
+            <Line style={{display:`${chartChange !== '날짜별 발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
+            <Bar style={{display:`${chartChange !== '발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={scoreData}/>
           </div>
           <div className="wchsler-graph-data">
             <div className="wchsler-graph-title"><div>wchsler</div></div>
@@ -412,19 +415,25 @@ const MyPage = () =>{
         </div>
         <div className="list-container">
           <div className="list-top-container">
-            <div>
-              날짜별 학습
+            <div className="list-top-left">
+              날짜별 {chartChange === '발음' || chartChange === '날짜별 발음' ? '발음' : '패턴'} 학습 리스트
             </div>
-            <div onClick={()=>{setChartChange(false)}}>
-              전체 날짜 그래프
+            <div className="list-top-right">
+              <div onClick={()=>{chartChange === '발음' || chartChange === '날짜별 발음'  ?  setChartChange("날짜별 발음") : setChartChange("날짜별 패턴")}}>
+                전체 날짜 그래프 보기
+              </div>
+              <select onChange={(e)=>setLevel(e.target.value)}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              <select onChange={(e)=>setChartChange(e.target.value)}>
+                <option value="날짜별 발음">발음 학습</option>
+                <option value="날짜별 패턴">패턴 그리기</option>
+              </select>
             </div>
-            <div>
-            <select onChange={(e)=>setLevel(e.target.value)}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-            </div>
+
+            
           </div>
           <div className="list-second-container">
             <div className="list-title-columns">
@@ -448,7 +457,7 @@ const MyPage = () =>{
               {
                 practiceList.map((item, index)=>{
                   return(
-                    <div className="list-columns" onClick={()=>{setPDate(item.date);  setChartChange(true)}}>
+                    <div className="list-columns" onClick={()=>{setPDate(item.date);  setChartChange("발음")}}>
                       <div className="list-columns-item">
                         {item.title}
                       </div>
@@ -494,8 +503,8 @@ const MyPage = () =>{
 
         </div>
         <div className="menu-container">
-          <a>회원 정보 수정</a>
-          <a>내가 그린 그림들</a>
+          <div>회원 정보 수정</div>
+          <div>내가 그린 그림들</div>
         </div>
         <div className="sign-out">
           로그아웃
