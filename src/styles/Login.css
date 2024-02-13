@@ -3,12 +3,14 @@
     top: 100px;
     bottom: 0;
     width: 100%;
+    height: auto;
+    min-height: 100vh;
     max-width: 380px;
     padding: 0 20px;
     left: 50%;
     transform: translate(-50%, 0);
     background-color: white;
-    overflow: hidden;
+    overflow-y: hidden;
     display: flex;
     flex-direction: column;
   }
@@ -57,7 +59,7 @@
     font-family: 'Korean-Font';
   }
   .inputWrap:focus-within {
-      border: 1px solid #36BC9B ;
+    border: 1px solid #36BC9B ;
   }
   
   .input {

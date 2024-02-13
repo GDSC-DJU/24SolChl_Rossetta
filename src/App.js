@@ -28,11 +28,12 @@ export default App;
 
 
 const Container = styled.div`
-	position: relative;
-	height: 3000px;
-  	min-height: calc(100vh - 250px);
-	overflow-x: hidden; 
 	display: block;
+	position: relative;
+	height: auto;
+  	min-height: 100vh
+	display: block;
+	z-index: 1;
 `;
 
 
