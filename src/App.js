@@ -19,8 +19,8 @@ function App() {
 			<Route path="/" element={<Main/>}/>
 			<Route path="situation-quiz" element={<Situation/>}/>
 			<Route path="login" element={<Login/>}/>
+      <Route path="pronunciation" element={<Pronunciation/>}/>
 			<Route path="signup" element={<Signup/>}/>
-      		<Route path="pronunciation" element={<Pronunciation/>}/>
 			<Route path="pattern1" element={<Pattern1/>}/>
 			<Route path="pattern2" element={<Pattern2/>}/>
 			<Route path="pattern3" element={<Pattern3/>}/>

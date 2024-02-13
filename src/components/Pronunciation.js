@@ -14,7 +14,7 @@ const Pronunciation = () =>{
   const [result,setResult] = useState(true);
   const [text, setText] = useState('');
   const [level,setLevel] = useState(1);
-
+  const [sentence,setSentence] = useState([]);
   const onRecAudio = async() => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -117,9 +117,6 @@ const onSubmitAudioFile = useCallback(async () => {
     setWait(false);
 
     setRecordedData(base64);
-    
-      
-      
     } else {
       console.log('no audio');
     }
@@ -132,6 +129,23 @@ const onSubmitAudioFile = useCallback(async () => {
   },[audioUrl])
 
   const [wait,setWait] = useState(true);
+
+  // 문장 api
+  useEffect(()=>{
+    axios.get('http://localhost:8000/pronunciation/info/1',{
+      headers: {
+        "Content-Type":'application/json',
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
+      }
+  })
+  .then((res)=>{
+    console.log(res);
+    setSentence(res.data.response);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+  },[])
 
 
   useEffect(()=>{
@@ -164,27 +178,41 @@ const onSubmitAudioFile = useCallback(async () => {
   },[recordedData])
 
   const levelClick = () =>{
-    const one = ['안녕하세요','반갑습니다','안녕히가세요','감사합니다','사랑해요'];
-    const two = ['밥을 먹어요','사이좋게 지내자', '집에 가자', '동물원에 가요','공을 던져요'];
-    const three = ['사이좋게 지내자','재미있게 놀았습니다','공놀이를 하였습니다.','친구들이 많았습니다','고구마 하나 더 주세요'];
     let num = Math.floor(Math.random() * 5);
     console.log(num)
-    if(level === 1){
-      setText(one[num]);
-    }else if(level === 2){
-      setText(two[num]);
-    }else if(level === 3){
-      setText(three[num]);
-    }
+    setText(sentence[num].sentence);
   }
   useEffect(()=>{
-    console.log(text)
-  },[text])
+    if(score !== 0.0){
+      axios.post('http://localhost:8000/pronunciation/insert/score', 
+      {
+        sentence:text,
+        level:level,
+        score:score
+      },{
+        headers: {
+          // "Content-Type":'application/json',
+          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
+      }},)
+      .then((res)=>{
+        console.log(res);
+        setScore(res.data.return_object.score);
+        setTimeout(()=>{
+          setWait(true);
+
+        },1000)
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
+    
+  },[score])
 
   return (
     <div className='pronunciation-page-container'>
       <div className='pronunciation-container'>
-        <div className='level-container'>
+        {/* <div className='level-container'>
           <button onClick={()=>{setLevel(1); setText('')}} className='level-button'>
             1
           </button>
@@ -194,16 +222,26 @@ const onSubmitAudioFile = useCallback(async () => {
           <button onClick={()=>{setLevel(3); setText('')}} className='level-button'>
             3
           </button>
+        </div> */}
+        <div className='level-container'>
+            LEVEL {level}
         </div>
         <div className='pronunciation-funtion-container'>
+
+      
           <div className='audio-container'>
             <audio src={url} controls/>
           </div>
           <div className='example-text'>
-            LEVEL {level} : {text}
+            <div>
+              {text !== '' ? text : '따라 말해보세요!'}
+            </div>
           </div>
           <div className='score'>
-            점수 : {wait ? score*20 : '잠시만 기다려 주세요!'}
+            <div>
+              점수 : 
+            </div>
+            <div> {wait ? score*20+'점' : '잠시만 기다려 주세요!'}</div>
           </div>
           <div className='pronunciation-button-container'>
             <button onClick={levelClick}> 랜덤 문장</button>

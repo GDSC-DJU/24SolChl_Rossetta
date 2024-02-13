@@ -1,57 +1,72 @@
-/* .App{
-  padding: 30px;
-} */
+*{
+  /* padding: 30px; */
+  text-align: center;
+  font-size: 1.01em;
+}
 .pronunciation-page-container{
   display: flex;
   justify-content: center;
   height: 100vh;
+  background-color: #f8f9fa;
 
 }
 .pronunciation-container{
   margin-top: 5%;
   margin-bottom: 5%;
   display: grid;
-  grid-template-rows: 10% 70%;
-  grid-row-gap: 20%;
+  grid-template-rows: 10% 90%;
+  /* grid-row-gap: 20%; */
   width: 50%;
-  background-color: #F7F7F7;
+
+  background-color: #fff;
+  box-shadow:1px 1px 1px #adb5bd;
+  border-radius: 10px;
+  box-sizing : border-box;
+  overflow: hidden;
 
 }
 .level-container{
-  display: grid;
-  grid-template-columns: 30% 30% 30%;
-  border-radius: 5px;
-  grid-column-gap: 5%;
-  padding: 5%;
-
-}
-.level-container .level-button{
-  background-color: #36BC9B ;
-  border-radius: 10px;
-  padding: 10%;
-}
-.level-container .level-button:active{
-  background-color: #2d9f82 ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: 600;
 }
 .pronunciation-funtion-container{
   display: grid;
-  grid-template-rows: 25% 25% 25% 25%;
+  grid-template-rows:28% 28% 20% 20%;
+}
+.pronunciation-funtion-container div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .pronunciation-funtion-container .audio-container{
-  padding-top: 10%;
+  /* padding-top: 10%; */
 }
 .pronunciation-funtion-container .example-text{
-  padding-top: 10%;
+  /* padding-top: 15%; */
+  font-size: 130%;
 }
 .pronunciation-funtion-container .score{
-  padding-top: 10%;
+  /* padding-top: 10%; */
+  font-size: 130%;
 }
 .pronunciation-button-container{
   display: grid;
   grid-template-columns: 33% 33% 33%;
 }
 .pronunciation-button-container button{
-  margin: 10%;
+  margin: 2%;
+  background-color: rgba(173, 181, 189, 0.5);
+  border: 1px solid rgba(173, 181, 189, 1);
+  box-shadow:1px 1px 1px #adb5bd;
+  border-radius: 10px;
+  width: 30%;
+  height: 50%;
+}
+.pronunciation-button-container button:hover{
+  background-color: rgba(173, 181, 189, 0.2);
 }
 .audio-container audio{
   width: 90%;
