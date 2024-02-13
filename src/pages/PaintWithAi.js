@@ -287,24 +287,28 @@ const PaintWithAi = () => {
           <img id="img" src={"img/puppy.png"} />
         </div>
       </div>
-        <ColorPicker
-          color={drawColorRef.current}
-          onChangeComplete={handleColorChange}
+      <div className="color-picker-container">
+
+      <ColorPicker
+        color={drawColorRef.current}
+        onChangeComplete={handleColorChange}
+      />
+      <div className="slidecontainer">
+        <p>
+          선 두께: <span>{value}</span>
+        </p>
+        <input
+          type="range"
+          min="10"
+          max="30"
+          value={value}
+          className="slider"
+          id="myRange"
+          onChange={(e) => setValue(e.target.value)}
         />
-        <div className="slidecontainer">
-          <p>
-            선 두께: <span>{value}</span>
-          </p>
-          <input
-            type="range"
-            min="10"
-            max="30"
-            value={value}
-            className="slider"
-            id="myRange"
-            onChange={(e) => setValue(e.target.value)}
-          />
-        </div>
+      </div>
+      </div>
+      
     </div>
   );
 };

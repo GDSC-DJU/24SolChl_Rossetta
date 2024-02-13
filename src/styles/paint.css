@@ -43,6 +43,8 @@
 }
 /* ColorPicker.css */
 .color-picker-container {
+    display: flex;
+    justify-content: center;
     position: relative;
     left: 0;
 
@@ -53,6 +55,7 @@
     z-index: 2;
     right: 1; /* 화면 크기에 따라 위치 조정이 필요할 수 있음 */
 }
+
 
 @media (max-width: 768px) {
     .color-picker-dropdown {
