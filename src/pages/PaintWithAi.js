@@ -288,11 +288,6 @@ const PaintWithAi = () => {
         </div>
       </div>
       <div className="color-picker-container">
-
-      <ColorPicker
-        color={drawColorRef.current}
-        onChangeComplete={handleColorChange}
-      />
       <div className="slidecontainer">
         <p>
           선 두께: <span>{value}</span>
@@ -307,6 +302,10 @@ const PaintWithAi = () => {
           onChange={(e) => setValue(e.target.value)}
         />
       </div>
+      <ColorPicker
+        color={drawColorRef.current}
+        onChangeComplete={handleColorChange}
+      />
       </div>
       
     </div>

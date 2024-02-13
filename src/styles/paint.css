@@ -1,9 +1,5 @@
 
 .paint-with-ai-page-container{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
     text-align: left;
 }
 #container{
@@ -44,16 +40,13 @@
 /* ColorPicker.css */
 .color-picker-container {
     display: flex;
-    justify-content: center;
     position: relative;
-    left: 0;
-
 }
 
 .color-picker-dropdown {
-    position: absolute;
-    z-index: 2;
-    right: 1; /* 화면 크기에 따라 위치 조정이 필요할 수 있음 */
+    position: relative;
+    z-index: 1;
+    left: 1; /* 화면 크기에 따라 위치 조정이 필요할 수 있음 */
 }
 
 
