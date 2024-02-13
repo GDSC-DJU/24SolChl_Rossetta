@@ -1,23 +1,21 @@
 .page {
     position: relative;
-    top: 100px;
     bottom: 0;
-    width: 100%;
+    width: 100vw;
+    top: 20px;
     height: auto;
-    min-height: 100vh;
     max-width: 380px;
     padding: 0 20px;
     left: 50%;
     transform: translate(-50%, 0);
     background-color: white;
-    overflow-y: hidden;
     display: flex;
     flex-direction: column;
   }
   
   .titleWrap {
     text-align: center;
-    margin-top: 87px;
+    padding-top: 87px;
     font-size: 26px;
     font-weight: bold;
     color: #262626;
