@@ -1,0 +1,91 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.canvas-container {
+  margin-right: 20px;
+}
+
+.grid-canvas {
+  border: 1px solid #000;
+  width: 200px;
+  height: 200px;
+}
+
+.pattern-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pattern-grid {
+  display: grid;
+}
+
+.pattern-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.pattern-grid-5 {
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.pattern-grid-10 {
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.grid-row {
+  display: flex;
+}
+
+.grid-cell {
+  width: calc(400px / var(--grid-size));
+  height: calc(400px / var(--grid-size));
+  border: 1px solid lightgray;
+  box-sizing: border-box;
+}
+
+.grid-cell.active {
+  background-color: black;
+}
+
+.grid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-button, .next-button {
+  width: 100px;  /* 버튼의 너비 */
+  height: 50px;  /* 버튼의 높이 */
+}
+
+.submit-button {
+  background-color: #36BC98;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.next-button {
+  margin-left: 4px;  /* 다음 문제 버튼의 왼쪽에 간격 추가 */
+}
+
+.error-message {
+  color: red;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

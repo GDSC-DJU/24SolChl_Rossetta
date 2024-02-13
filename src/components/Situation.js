@@ -19,9 +19,7 @@ const PageContainer = styled.div`
 	width: 100vw;
     align-items: center;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
+	padding: 50px 0;
 `;
 
 const PageTitle = styled.h1`
