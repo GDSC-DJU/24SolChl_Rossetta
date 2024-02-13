@@ -62,6 +62,7 @@ const NavWrapper = styled.nav`
   padding: 0 36px;
   letter-spacing: 4px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 8px 12px 0px;
+  border-bottom: solid 1px #ddd;
   z-index: 4;
 `;
 
