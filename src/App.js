@@ -38,7 +38,6 @@ const Container = styled.div`
 	position: relative;
 	height: auto;
   	min-height: 100vh
-	display: block;
 	z-index: 1;
 `;
 
