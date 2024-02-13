@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
 
 const User = {
   email: 'test@example.com',
@@ -8,33 +9,31 @@ const User = {
 
 
 const Login = () => {
-    const [email, setEmail] = useState(''); //input tag email value
+    const [username, setUsername] = useState(''); //input tag id value
     const [pw, setPw] = useState(''); //input tag pw value
 
-    const [emailValid, setEmailValid] = useState(false); //입력값과 정규표현식 비교 판단 state
+    const [usernameValid, setUsernameValid] = useState(false);
     const [pwValid, setPwValid] = useState(false); //입력값과 정규표현식 비교 판단 state
     const [notAllow, setNotAllow] = useState(true); //로그인 버튼 활성화 판단 state
 
+    const signupNavigate = useNavigate();
 
     // Email, Pw 정규표현식 검사 통과 -> 로그인 버튼 활성화
     useEffect(() => {
-      if(emailValid && pwValid) {
+      if(usernameValid && pwValid) {
         setNotAllow(false);
         return;
       }
       setNotAllow(true);
-    }, [emailValid, pwValid]);
+    }, [usernameValid, pwValid]);
 
-    const handleEmail = (e) => {
-      setEmail(e.target.value);
-      const regex = //이메일 정규표현식( {...}@{...}.{...} 형식)
-        /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-      if (regex.test(e.target.value)) {
-        setEmailValid(true);
-      } else {
-        setEmailValid(false);
-      }
+    const handleUsername = (e) => {
+      const value = e.target.value.toLowerCase(); // 입력값을 소문자로 변환
+      setUsername(value);
+      const regex = /^[a-z0-9]+$/; // 영어 소문자와 숫자만
+      setUsernameValid(regex.test(value));
     };
+
     const handlePw = (e) => {
       setPw(e.target.value);
       const regex = //패스워드 정규표현식(영문, 숫자, 특수문자 포함 8자 이상으로 설정)
@@ -55,19 +54,19 @@ const Login = () => {
           로그인
         </div>
         <div className="contentWrap">
-          <div className="inputTitle">이메일 주소</div>
+          <div className="inputTitle">아이디</div>
           <div className="inputWrap">
             <input
               className="input"
               type="text"
-              placeholder="test@gmail.com"
-              value={email}
-              onChange={handleEmail}
+              placeholder="아이디 (영문과 숫자만)"
+              value={username}
+              onChange={handleUsername}
             />
           </div>
           <div className="errorMessageWrap">
-            {!emailValid && email.length > 0 && (
-              <div>올바른 이메일을 입력해주세요.</div>
+            {!usernameValid && usernameValid.length > 0 && (
+              <div>올바른 아이디를 입력해주세요.</div>
             )}
           </div>
 
@@ -100,7 +99,7 @@ const Login = () => {
           <button onClick={onClickConfirmButton} disabled={notAllow} className="loginButton">
             로그인
           </button>
-          <button className="signUpButton">
+          <button onClick={() => signupNavigate(`/signup`)} className="toSignUpButton">
             회원가입
           </button>
         </div>

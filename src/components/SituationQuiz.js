@@ -41,13 +41,15 @@ const SituationQuiz = () => {
         else{
             setTotalAnswer([...totalAnswer, 'X']);
         }
-        document.getElementById('choice').checked = false;
         if(count < 3){
             let remainingQuiz = JSON.parse(JSON.stringify(quiz));
             let filteredQuiz= remainingQuiz.filter(qz => qz.index !== currentQuiz.index);
             console.log(filteredQuiz);
             setQuiz(filteredQuiz);
         }
+
+        const radioButtons = document.getElementsByName('choice');
+        radioButtons.forEach(button => {button.checked = false;});
     };
 
     // 결과화면 반환
