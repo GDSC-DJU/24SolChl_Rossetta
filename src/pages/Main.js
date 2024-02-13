@@ -20,7 +20,6 @@ const MainContainer = styled.main`
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 70px;
     font-family: 'News-Font-bold';
-    z-index: 1;
+    z-index: 3;
 `;
