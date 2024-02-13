@@ -26,7 +26,6 @@ function App() {
 			<Route path="pattern3" element={<Pattern3/>}/>
 		</Routes>
     </Container>
-
   );
 }
 
