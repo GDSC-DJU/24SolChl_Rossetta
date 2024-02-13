@@ -6,6 +6,7 @@ import { Outlet, Routes, BrowserRouter as Router, Switch, Route } from "react-ro
 import Situation from "./components/Situation";
 import Pronunciation from "./components/Pronunciation";
 import Signup from "./pages/Signup";
+import Learning from "./pages/Learning";
 import Pattern1 from "./patterns/pattern";
 import Pattern2 from "./patterns/pattern";
 import Pattern3 from "./patterns/pattern";
