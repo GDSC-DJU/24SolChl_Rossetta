@@ -1,5 +1,6 @@
 import React from 'react'
 import CardItem from '../components/CardItem';
+import '../styles/Cards.css'
 
 function Cards() {
     return (
@@ -10,29 +11,29 @@ function Cards() {
                     <ul className="cards__items">
                         <CardItem 
                          src = "img/paintwithai.jpg"
-                         text = "손가락을 사용하여 그림을 그려보세요!"
-                         label = '따라 그리기'
-                         path='situation-quiz'
+                         text = "손가락으로 그림을 그려보세요!"
+                         label = '그림 그리기'
+                         path='paintwithai'
                         />    
                         <CardItem 
-                         src = "images/img-2.jpg"
-                         text = "패턴 따라 그리기"
-                         label = 'Luxury'
-                         path='/services'
+                         src = "img/pronunciation.webp"
+                         text = "문장을 읽은 후 발음을 교정해 보세요!"
+                         label = '발음 교정'
+                         path='pronunciation'
                         />    
                     </ul>    
                     <ul className='cards__items'>
                         <CardItem
-                        src='images/img-3.jpg'
-                        text='Set Sail in the Atlantic Ocean visiting Uncharted Waters'
-                        label='Mystery'
-                        path='/services'
+                        src='img/Situation.PNG'
+                        text='그림을 보고 상황을 인지해 보세요!'
+                        label='상황 인지'
+                        path='situation-quiz'
                         />
                         <CardItem
-                        src='images/img-4.jpg'
-                        text='Experience Football on Top of the Himilayan Mountains'
-                        label='Adventure'
-                        path='/products'
+                        src='img/pattern.PNG'
+                        text='패턴을 똑같이 따라 체크해 보세요!'
+                        label='패턴 그리기'
+                        path='pattern1'
                         />
   
                     </ul>    

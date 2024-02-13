@@ -2,9 +2,10 @@ import { lazy, useCallback, useEffect, useRef, useState } from "react";
 import { Camera } from "@mediapipe/camera_utils";
 import { Hands, Results } from "@mediapipe/hands";
 import React from "react";
-import ColorPicker from "../components/ColorPicker";
+import ColorPicker from "./ColorPicker";
 import "../styles/paint.css";
 import "../styles/RangeSlider.css";
+
 
 // const videoElement = document.getElementById('video');
 // const canvasElement = document.getElementById('canvas');
