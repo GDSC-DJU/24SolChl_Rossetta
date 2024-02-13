@@ -11,6 +11,8 @@ import Pattern1 from "./patterns/pattern";
 import Pattern2 from "./patterns/pattern";
 import Pattern3 from "./patterns/pattern";
 import styled from "styled-components";
+import PaintWithAi from './pages/PaintWithAi';
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
           <Route path="pattern1" element={<Pattern1/>}/>
           <Route path="pattern2" element={<Pattern2/>}/>
           <Route path="pattern3" element={<Pattern3/>}/>
+          <Route path="paintwithai" element={<PaintWithAi/>}/>
 		    </Routes>
     </Container>
   );
