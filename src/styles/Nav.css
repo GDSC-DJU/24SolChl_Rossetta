@@ -1,0 +1,26 @@
+.link-to{
+    color: black;
+    text-decoration: none;
+  }
+
+#link-to__login::before{
+    content: "";
+    background-image: url('../../public/assets/unlock.png');
+    display: inline-block;
+    background-size: 12px 13px;
+    width: 12px;
+    height: 13px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#link-to__signup::before{
+    content: "";
+    background-image: url('../../public/assets/profile-user.png');
+    display: inline-block;
+    background-size: 12px 13px;
+    width: 12px;
+    height: 13px;
+    vertical-align: middle;
+    margin-right: 10px;
+}

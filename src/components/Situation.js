@@ -19,7 +19,7 @@ const PageContainer = styled.div`
 	width: 100vw;
     align-items: center;
     position: absolute;
-    top: 50%;
+    top: 50vh;
     transform: translateY(-50%);
 
 `;
