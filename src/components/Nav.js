@@ -29,7 +29,7 @@ const Nav = () => {
       <NavInside>
         <MenuWrapper>
           <li>소개</li>
-          <Link to="situation-quiz" className='link-to'>학습</Link>
+          <Link to="learning" className='link-to'>학습</Link>
           <li>검사</li>
         </MenuWrapper>
         <TitleWrapper>
@@ -49,11 +49,12 @@ export default Nav
 
 
 const NavWrapper = styled.nav`
-  position: fixed;  //스크롤내려도 고정
+  // position: fixed;  //스크롤내려도 고정
   top: 0;
   left: 0;
   right: 0;
   height: 70px;
+  width: 100vw;
   background-color: #ffffff;
   display: flex;
   justify-content: space-between;
@@ -61,6 +62,7 @@ const NavWrapper = styled.nav`
   padding: 0 36px;
   letter-spacing: 4px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 8px 12px 0px;
+  border-bottom: solid 1px #ddd;
   z-index: 4;
 `;
 
