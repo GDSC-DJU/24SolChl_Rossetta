@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import styled from 'styled-components';
 
-const PageLayout = ({current, name}) => {
+const PageLayout = ({name}) => {
     //Props 양식 => current: 현재 주소 "/learning/situation" / name: 주소 이름 "상황판단"
-    const [location, setLocation] = useState(current);
-    const [locationName, setLocationName] = useState(name);
     const [traceLocation, setTraceLocation] = useState({});
+    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(current){
-            if(current.includes("education")){
-                setTraceLocation({위치:"/learning", 이름: "학습"});
-            }
-            else if(current.includes("introduction")){
-                setTraceLocation({위치:"/introduction", 이름: "소개"});
-            }
+        if(location.pathname.includes("education")){
+            setTraceLocation({위치:"/learning", 이름: "학습"});
         }
-    }, [current, name])
+        else if(location.pathname.includes("introduction")){
+            setTraceLocation({위치:"/introduction", 이름: "소개"});
+        }
+    }, [])
     
     const SubNavigator = () => {
         return(
@@ -26,10 +23,16 @@ const PageLayout = ({current, name}) => {
                 <ToHome src="./assets/home.png" onClick={() => navigate("/")}/>
                 <span> &gt; </span>
                 {Object.keys(traceLocation).length > 0 ? 
-                (<ToPage onClick={() => navigate(Object.values(traceLocation)[0])}>{Object.values(traceLocation)[1]}</ToPage>)
-                (<span> &gt; </span>)
+                <>
+                <ToPage onClick={() => navigate(Object.values(traceLocation)[0])}>{Object.values(traceLocation)[1]}</ToPage>
+                </>
                 : null}
-                <ToPage onClick={() => navigate({location})}>{locationName}</ToPage>
+                {name ?
+                <>
+                <span> &gt; </span>
+                <ToPage onClick={() => navigate(location.pathname)}>{name}</ToPage>
+                </> 
+                : null}
             </SubNavigatorWrapper>
         )
     }
@@ -38,11 +41,13 @@ const PageLayout = ({current, name}) => {
     return (
     <PageContainer>
         <PageTitleWrapper>
-        
+            {name}
         </PageTitleWrapper>
         <PageWrapper>
             <SubNavigator/>
+            <ContentWrapper>
 
+            </ContentWrapper>
         </PageWrapper>
     </PageContainer>
     )
@@ -57,8 +62,7 @@ const PageContainer = styled.div`
     position: relative;
     font-family: 'Korean-Font-bold';
     z-index: 300;
-    width: 100%;
-    // padding: 0 294px;
+    width: 100%;    
 `;
 
 const PageTitleWrapper = styled.div`
@@ -68,6 +72,8 @@ const PageTitleWrapper = styled.div`
     align-items: center;
     width: 100%;
     height: 100px;
+    font-size: 36px;
+    color: #474747;
 `;
 
 const PageWrapper = styled.div`
@@ -75,20 +81,20 @@ const PageWrapper = styled.div`
     width: 100%;
     height: auto;
     min-height: 550px;
+    justify-content: center;
 `;
-
 
 const SubNavigatorWrapper = styled.nav`
     position: relative;
     display: flex;
-    padding-top: 50px;
-    padding-right: 20px;
+    padding-right: 70px;
     width: 100%;
     height: 24px;
     justify-content: flex-end;
     align-items: center;
     font-size: 13px;
     color: #474747;
+    margin-bottom: 10px;
 `;
 
 const ToHome = styled.img`
@@ -103,4 +109,13 @@ const ToHome = styled.img`
 const ToPage = styled.span`
     cursor: pointer;
     margin: 0 20px;
+`;
+
+const ContentWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid #474747;
+    min-height: 300px;
+    margin: 0 70px;
 `;

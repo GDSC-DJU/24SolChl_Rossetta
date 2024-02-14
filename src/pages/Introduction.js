@@ -4,7 +4,7 @@ import PageLayout from '../components/PageLayout';
 
 const Introduction = () => {
 return (
-    <PageLayout location="/introduction" name="소개">
+    <PageLayout name='상황퀴즈'>
 
     </PageLayout>        
 )

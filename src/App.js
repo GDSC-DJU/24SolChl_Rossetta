@@ -26,7 +26,7 @@ function App() {
           <Route path="pattern1" element={<Pattern1/>}/>
           <Route path="pattern2" element={<Pattern2/>}/>
           <Route path="pattern3" element={<Pattern3/>}/>
-          <Route path="introduciton" element={<Introduction/>}/>
+          <Route path="introduction" element={<Introduction/>}/>
 		</Routes>
     </Container>
   );
