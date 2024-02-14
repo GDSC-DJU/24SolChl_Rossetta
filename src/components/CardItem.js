@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import  '../styles/Cards.css';
 import '../styles/button.css'
-import { useLocation } from 'react-router';
 
 
 function CardItem(props) {
@@ -19,16 +18,13 @@ function CardItem(props) {
             />
           </figure>
           <div className='container'>
-            <Link to={{ 
-              pathname: props.path,
-              state: {},
-              }}>
+            <Link to={props.path} state={{level: 1}}>
             <button className='btn-hover color-5'>LV.1</button>
             </Link>
-            <Link to={props.path}>
+            <Link to={props.path} state={{level: 2}}>
             <button className='btn-hover color-5'>LV.2</button>
             </Link>
-            <Link to={props.path}>
+            <Link to={props.path} state={{level: 3}}>
             <button className='btn-hover color-5'>LV.3</button>
             </Link>
           </div>
