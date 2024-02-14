@@ -40,11 +40,13 @@ const ButtonIcon = styled.svg`
 
 // 이미지 경로를 동적으로 생성
 const images = [
-  "/img/Doraemon.png",
-  "/img/paintwithai.jpg",
-  "/img/puppy.png",
-  "/img/hani.avif",
-  "/img/11.png",
+  "/paintwithai/LV.1/1.webp",
+  "/paintwithai/LV.1/2.webp",
+  "/paintwithai/LV.1/3.webp",
+  "/paintwithai/LV.1/4.webp",
+  "/paintwithai/LV.1/5.webp",
+  "/paintwithai/LV.1/6.webp",
+  "/paintwithai/LV.1/7.png",
 ].map((src) => ({ source: src }));
 
 const ImageContent = () => {
