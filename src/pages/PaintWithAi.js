@@ -5,6 +5,7 @@ import React from "react";
 import ColorPicker from "../components/ColorPicker";
 import "../styles/PaintWithAi.css";
 import "../styles/RangeSlider.css";
+import Gallery from "../components/Gallery";
 
 // const videoElement = document.getElementById('video');
 // const canvasElement = document.getElementById('canvas');
@@ -295,8 +296,8 @@ const PaintWithAi = () => {
           ref={eraserIndicator}
           style={eraserStyle}
         ></div>
-        <img id="img" src={"img/puppy.png"} />
-        
+        {/* <img id="img" src={"img/puppy.png"} /> */}
+        <Gallery />        
       </div>
       <div className="setting-container">
           <div className="slidecontainer">

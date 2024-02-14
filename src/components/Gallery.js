@@ -1,27 +1,26 @@
-import styled from "styled-components";
 import { useState } from "react";
-import FestivalImage from "../img/11.png";
-import FestivalImage2 from "../img/hani.avif";
-import FestivalImage3 from "../img/images.jpeg";
+import styled from "styled-components";
 
 const ImageContentWrap = styled.div`
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: left;
+`;
+
+const ImageContentRow = styled.div`
+  flex-direction: row;
+  margin-left: 40px;
 `;
 
 const FestivalMainImage = styled.img`
-  width: 800px;
-  height: 450px;
-  margin-top: 50px;
+  width: 300px;
+  height: 380px;
   border-radius: 30px;
 `;
 
 const FestivalMainImageWrap = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
   margin-bottom: 10px;
 `;
 
@@ -30,28 +29,23 @@ const PreviewImage = styled.img`
   height: 80px;
   object-fit: cover;
   margin-right: 10px;
+  border-radius: 30px;
   cursor: pointer;
 `;
 
 const ButtonIcon = styled.svg`
   cursor: pointer;
-  margin-top: 21%;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-bottom: 20%;
 `;
-const images = [
-  /* 이미지 경로를 리스트로 저장 */
 
-  {
-    source: FestivalImage,
-  },
-  {
-    source: FestivalImage2,
-  },
-  {
-    source: FestivalImage3,
-  },
-];
+// 이미지 경로를 동적으로 생성
+const images = [
+  "/img/Doraemon.png",
+  "/img/paintwithai.jpg",
+  "/img/puppy.png",
+  "/img/hani.avif",
+  "/img/11.png",
+].map((src) => ({ source: src }));
 
 const ImageContent = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -59,17 +53,31 @@ const ImageContent = () => {
   const onClickImage = (index) => {
     setSelectedImageIndex(index);
   };
+
   const onNextImage = () => {
-    /* next버튼을 눌렀을 때 실행되는 함수 */
     setSelectedImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }; /* 이미지 Index가 하나 늘어나도록 구현 */
+  };
 
   const onPrevImage = () => {
-    /* prev버튼을 눌렀을 때 실행되는 함수 */
     setSelectedImageIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    ); /* 이미지 Index가 하나 줄어들도록 구현 */
+    );
   };
+
+  // 현재 선택된 이미지를 중심으로 전, 후 이미지 배열 생성
+  const getVisibleImages = () => {
+    const totalImages = images.length;
+    const prevIndex = (selectedImageIndex - 1 + totalImages) % totalImages;
+    const nextIndex = (selectedImageIndex + 1) % totalImages;
+
+    return [
+      images[prevIndex],
+      images[selectedImageIndex],
+      images[nextIndex],
+    ];
+  };
+
+  const visibleImages = getVisibleImages();
 
   return (
     <ImageContentWrap>
@@ -93,7 +101,7 @@ const ImageContent = () => {
         <FestivalMainImage
           src={images[selectedImageIndex].source}
           alt="Festival Image"
-        ></FestivalMainImage>
+        />
         <ButtonIcon
           xmlns="http://www.w3.org/2000/svg"
           width="40"
@@ -111,14 +119,16 @@ const ImageContent = () => {
           />
         </ButtonIcon>
       </FestivalMainImageWrap>
-      {images.map((image, index) => (
-        <PreviewImage
-          key={index}
-          src={image.source}
-          alt={`Image ${index}`}
-          onClick={() => onClickImage(index)} // 수정된 부분
-        />
-      ))}
+      <ImageContentRow>
+        {visibleImages.map((image, index) => (
+          <PreviewImage
+            key={index}
+            src={image.source}
+            alt={`Preview Image ${index}`}
+            onClick={() => onClickImage(images.indexOf(image))} // 이미지 클릭 시 해당 이미지로 변경
+          />
+        ))}
+      </ImageContentRow>
     </ImageContentWrap>
   );
 };
