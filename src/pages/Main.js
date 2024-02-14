@@ -1,12 +1,25 @@
 import React from 'react'
-import Banner from '../components/Banner'
+import MainBanner from '../components/MainBanner'
+import styled from 'styled-components'
+import SubBanner from '../components/SubBanner'
 
 const Main = () => {
-  return (
-    <div className='main'>
-        {/* <Banner/> */}
-    </div>
-  )
-}
+    return (
+        <MainContainer>
+            <MainBanner/>
+            <SubBanner/>
+        </MainContainer>
+        )
+    }
 
 export default Main
+
+const MainContainer = styled.main`
+    position: relative;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: 'News-Font-bold';
+    z-index: 3;
+`;

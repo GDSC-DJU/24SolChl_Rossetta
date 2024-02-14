@@ -82,7 +82,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="page">
+    <div className="page" style={{top: "10px"}}>
       <div className="titleWrap">회원가입</div>
       <div className="contentWrap">
         {/* 아이디 입력 필드 */}
