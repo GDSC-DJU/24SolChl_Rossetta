@@ -26,10 +26,10 @@ const PageLayout = ({current, name}) => {
                 <ToHome src="./assets/home.png" onClick={() => navigate("/")}/>
                 <span> &gt; </span>
                 {Object.keys(traceLocation).length > 0 ? 
-                (<ToPage onClick={() => navigate(Object.values(traceLocation)[0])}>{Object.values(traceLocation)[1]}</ToPage>) 
+                (<ToPage onClick={() => navigate(Object.values(traceLocation)[0])}>{Object.values(traceLocation)[1]}</ToPage>)
+                (<span> &gt; </span>)
                 : null}
                 <ToPage onClick={() => navigate({location})}>{locationName}</ToPage>
-                <span> &gt; </span>
             </SubNavigatorWrapper>
         )
     }
@@ -37,7 +37,13 @@ const PageLayout = ({current, name}) => {
 
     return (
     <PageContainer>
-        <SubNavigator/>
+        <PageTitleWrapper>
+        
+        </PageTitleWrapper>
+        <PageWrapper>
+            <SubNavigator/>
+
+        </PageWrapper>
     </PageContainer>
     )
 }
@@ -49,28 +55,46 @@ const PageContainer = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 70px;
     font-family: 'Korean-Font-bold';
-    z-index: 1;
-    padding: 0 294px;
+    z-index: 300;
+    width: 100%;
+    // padding: 0 294px;
 `;
 
+const PageTitleWrapper = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+`;
+
+const PageWrapper = styled.div`
+    postition: relative;
+    width: 100%;
+    height: auto;
+    min-height: 550px;
+`;
+
+
 const SubNavigatorWrapper = styled.nav`
+    position: relative;
     display: flex;
     padding-top: 50px;
+    padding-right: 20px;
     width: 100%;
     height: 24px;
     justify-content: flex-end;
     align-items: center;
     font-size: 13px;
-    color: #999999;
+    color: #474747;
 `;
 
 const ToHome = styled.img`
     position: relative;
     bottom: 2px;
     cursor: pointer;
-    display: inline-block;
     width: 16px;
     height: 16px;
     margin-right: 20px;
