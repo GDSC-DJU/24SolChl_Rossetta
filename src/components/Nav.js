@@ -29,7 +29,7 @@ const Nav = () => {
       <NavInside>
         <MenuWrapper>
           <Link to="introduction" className='link-to'>소개</Link>
-          <Link to="learning" className='link-to'>학습</Link>
+          <Link to="situation-quiz" className='link-to'>학습</Link>
           <li>검사</li>
         </MenuWrapper>
         <TitleWrapper>

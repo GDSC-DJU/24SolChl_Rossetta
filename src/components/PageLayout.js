@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router';
+import { useNavigate, useLocation, Outlet } from 'react-router';
 import styled from 'styled-components';
 
-const PageLayout = ({name}) => {
+const PageLayout = ({name, children }) => {
     //Props 양식 => current: 현재 주소 "/learning/situation" / name: 주소 이름 "상황판단"
     const [traceLocation, setTraceLocation] = useState({});
     const location = useLocation();
@@ -46,7 +46,7 @@ const PageLayout = ({name}) => {
         <PageWrapper>
             <SubNavigator/>
             <ContentWrapper>
-
+                {children}
             </ContentWrapper>
         </PageWrapper>
     </PageContainer>
