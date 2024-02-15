@@ -14,6 +14,7 @@ import Pattern3 from "./patterns/pattern";
 import styled from "styled-components";
 import MyPage from "./components/MyPage"
 import Introduction from "./pages/Introduction";
+import SituationQuiz from "./components/Situation";
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
 		<Nav />
       	<Routes>
           <Route path="/" element={<Main/>}/>
-          <Route path="learning/situation-quiz" element={<Situation/>}/>
+          <Route path="learning/situation" element={<Situation/>}/>
           <Route path="learning/pronunciation" element={<Pronunciation/>}/>
           <Route path="learning/paintwithai" element={<PaintWithAi />} />
           <Route path="learning/pattern1" element={<Pattern1/>}/>
