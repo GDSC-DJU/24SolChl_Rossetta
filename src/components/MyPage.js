@@ -49,18 +49,83 @@ const MyPage = () =>{
   //chart 전환
   const [chartChange,setChartChange] = useState("날짜별 발음");
 
-  useEffect(()=>{
-    childDB();
-  },[])
 
 
 
   //문장 반복말하기
   const pronunciationScore = () =>{
+    console.log("adsf")
     axios.get(`http://localhost:8000/pronunciation/info/score/${pDate}/${level}`,{
       headers: {
         "Content-Type":'application/json',
-        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }
+    })
+    .then((res)=>{
+      console.log(level)
+      if(pDate === 1){
+        let score = [];
+        let date = 0;
+        let min = 0;
+        let max = 0.0;
+        let num = 0.0;
+        let sum = 0.0;
+        res.data.response.forEach((item,index) => {
+          //
+          num += 1;
+          if(min > item.score || min == 0){
+            min = item.score;
+          }
+          if(max < item.data || max == 0){
+            max = item.score;
+          }
+          sum += item.score;
+          if(item.date !== date || index+1 == res.data.response.length){
+            if(date != 0){
+              score.push({
+                title:"문장 반복 말하기",
+                date:date,
+                max:Math.ceil(max*20),
+                min:Math.ceil(min*20),
+                avg:Math.ceil((sum*20)/num)
+              })
+            }
+            date = item.date;
+            num = 0;
+            min = 0.0;
+            max = 0.0;
+            sum = 0.0;
+          }
+        });
+        setPracticeList(score);
+        console.log(score)
+      }else{
+        setScoreList(res.data.response);
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+  useEffect(()=>{
+    // axios.post('http://localhost:8000/member/sign-in', 
+    //   {
+    //     id:'minseok0338',
+    //     pw:'tjrdl1651!'
+    //   })
+    //   .then((res)=>{
+    //     console.log(res);
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err);
+    //   })
+  },[])
+
+  const patternScore = () =>{
+    axios.get(`http://localhost:8000/pronunciation/info/score/${pDate}/${level}`,{
+      headers: {
+        "Content-Type":'application/json',
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
       }
     })
     .then((res)=>{
@@ -123,42 +188,26 @@ const MyPage = () =>{
     },150)
   },[level])
 
-  // 아이 정보 불러오기
-  const childDB = async () => {
-    await axios.get('http://localhost:8000/member/child/info',{
-      headers: {
-        "Content-Type":'application/json',
-        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
-      }
-    })
-    .then((res)=>{
-      console.log(res);
-      setChildInfo(res.data.response);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
-  useEffect(()=>{
-    console.log(childInfo)
-    axios.get(`http://localhost:8000/wechsler/info/${childInfo.idNum}`,{
-      headers: {
-        "Content-Type":'application/json',
-        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
-      }
-    })
-    .then((res)=>{
-      console.log(res);
-      setWchslerInfo(res.data.response);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  },[childInfo])
   //웩슬러 정보 불러오기
-  const wchslerDB = async () => {
-    
-  }
+  useEffect(()=>{
+    axios.get(`http://localhost:8000/wechsler/info`,{
+      headers: {
+        "Content-Type":'application/json',
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }
+    })
+    .then((res)=>{
+      console.log(res);
+      if(res.data.response !== undefined){
+        setWchslerInfo(res.data.response);
+
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  },[])
+
 
   //웩슬러 언어 그래프
   const [wchslerData1,setWechslerData1] = useState({
@@ -288,7 +337,10 @@ const MyPage = () =>{
         display: false,
       },
     },layout: {
-      padding: 30
+      padding: {
+        top:10,
+        bottom:35
+      }
     },
   };
   // const [labels,setLabels] = useState(["2024-02-04","2024-02-05"]);
@@ -355,8 +407,20 @@ const MyPage = () =>{
       ],
     })
   },[scoreList])
+  //패턴 그래프 데이터
+  const [patternData,setPtternData] = useState({
+    datasets: [
+      {
+        data: [],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ],
+  });
   
-  
+  useEffect(()=>{
+    console.log(chartChange)
+  },[chartChange])
 
   return (
     <div className='my-page-container'>
@@ -364,9 +428,11 @@ const MyPage = () =>{
       <div className="training-info-container">
         <div className="graph-container">
           <div className="test-graph-data" >
-            {chartChange + ' 학습'}
+            <div className="test-graph-data-title">{chartChange + ' 학습'}</div>
             <Line style={{display:`${chartChange !== '날짜별 발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
             <Bar style={{display:`${chartChange !== '발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={scoreData}/>
+            <Line style={{display:`${chartChange !== '날짜별 패턴' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={patternData}/>
+            <Line style={{display:`${chartChange !== '패턴' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={patternData}/>
           </div>
           <div className="wchsler-graph-data">
             <div className="wchsler-graph-title"><div>wchsler</div></div>

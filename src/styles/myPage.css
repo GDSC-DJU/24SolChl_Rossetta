@@ -1,14 +1,15 @@
-.App{
-  width: 100vw;
-  height: 100vh;
-}
+/* {
+
+} */
 a{
   text-decoration-line: none;
   color: black;
 }
 .my-page-container{
-  width: 100%;
-  height: 100%;
+  all: initial;
+  text-align: center;
+  width: 100vw;
+  height: 90vh;
   display: grid;
   grid-template-columns: 85% 15%;
   background-color: #f8f9fa;
@@ -30,6 +31,9 @@ a{
   overflow: hidden;
   font-weight: 600;
 }
+.test-graph-data .test-graph-data-title{
+  margin: 10px;
+}
 .wchsler-graph-data .wchsler-graph-title{
   display: flex;
   align-items: center;
@@ -38,7 +42,9 @@ a{
   font-weight: 600;
 }
 .test-graph-data{
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .child-info-container{
   background-color: #fff;
@@ -90,7 +96,7 @@ a{
   box-shadow:1px 1px 1px #adb5bd;
   border-radius: 10px;
   display: grid;
-  grid-template-rows: 12% 88%;
+  grid-template-rows: 12.8% 87.2%;
   box-sizing : border-box;
   /* margin: 10px; */
 }
@@ -123,7 +129,7 @@ a{
 .list-second-container{
   display: grid;
   grid-template-rows: 15% 85%;
-  margin: 20px;
+  margin: 9px 20px;
   border-radius: 10px;
 
   border: 1px solid #adb5bd;
