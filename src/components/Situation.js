@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import quizData from './SituationQuizData';
 import '../styles/Situation.css';
+import '../styles/Button.css';
 import PageLayout from './PageLayout';
 
 const Situation = () => {
@@ -71,8 +72,8 @@ const Situation = () => {
                     </div>
                     <div className='answer-wrapper'>
                         
-                        <p className='quiz-title'>{count}번| {Object.keys(currentQuiz).length > 0 ? currentQuiz.question : 'X'}</p>
-                        <p>
+                        <p className='quiz-title'>&#40;{count}번&#41; {Object.keys(currentQuiz).length > 0 ? currentQuiz.question : 'X'}</p>
+                        <p className='choice-wrapper'>
                             <label htmlFor="choice1">
                                 <input type="radio" id="choice" name="choice" value="1"
                                 onChange={() => ChoiceSelected('1')}/>
@@ -81,7 +82,7 @@ const Situation = () => {
                                 </span>
                             </label>
                         </p>
-                        <p>
+                        <p className='choice-wrapper'>
                             <label htmlFor="choice2">
                                 <input type="radio" id="choice" name="choice" value="2"
                                 onChange={() => ChoiceSelected('2')}/>
@@ -90,7 +91,7 @@ const Situation = () => {
                                 </span>
                             </label>
                         </p>
-                        <p>
+                        <p className='choice-wrapper'>
                             <label htmlFor="choice3">
                                 <input type="radio" id="choice" name="choice" value="3"
                                 onChange={() => ChoiceSelected('3')}/>
@@ -99,7 +100,7 @@ const Situation = () => {
                                 </span>
                         </label>
                         </p>
-                        <p>
+                        <p className='choice-wrapper'>
                             <label htmlFor="choice4">
                                 <input type="radio" id="choice" name="choice" value="4"
                                 onChange={() => ChoiceSelected('4')}/>
@@ -108,10 +109,10 @@ const Situation = () => {
                                 </span>
                             </label>
                         </p>
-                        <div class="quiz-answer">
+                        <div class="button-wrapper">
                             {checkedAnswer ? 
-                            <button class="next-button" onClick={NextQuiz}>다음 문제</button>
-                            : <button class="hidden-next-button" >정답을 고르세요</button> }
+                            <button class="btnFloat" onClick={NextQuiz}>다음 문제</button>
+                            : <button class="btnFloat" >정답을 고르세요</button> }
                         </div>
                         <div class="quiz-desc"></div>
                     </div>
