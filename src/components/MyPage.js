@@ -33,9 +33,8 @@ const MyPage = () =>{
     iq:0
   })
   //아이 정보
-  const [childInfo,setChildInfo] = useState({
+  const [userInfo,setUserInfo] = useState({
     name:'',
-    idNum:'',
     age:0
   })
   //학습 날짜
@@ -119,17 +118,36 @@ const MyPage = () =>{
     //   .catch((err)=>{
     //     console.log(err);
     //   })
-  },[])
-
-  const patternScore = () =>{
-    axios.get(`http://localhost:8000/pronunciation/info/score/${pDate}/${level}`,{
+    axios.get(`http://localhost:8000/member/parents/info`,{
       headers: {
         "Content-Type":'application/json',
         Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
       }
     })
     .then((res)=>{
-      console.log(level)
+      console.log(res);
+      const date = new Date();
+      const age = date.getFullYear() - res.data.response.birth.slice(0,4) +1;
+      console.log(age)
+      setUserInfo({
+        name:res.data.response.name,
+        age:age
+      })
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  },[])
+
+  const patternScore = () =>{
+    axios.get(`http://localhost:8000/pattern/${level}/${pDate}`,{
+      headers: {
+        "Content-Type":'application/json',
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }
+    })
+    .then((res)=>{
+      console.log(res)
       if(pDate === 1){
         let score = [];
         let date = 0;
@@ -140,21 +158,22 @@ const MyPage = () =>{
         res.data.response.forEach((item,index) => {
           //
           num += 1;
-          if(min > item.score || min == 0){
-            min = item.score;
+          if(min > item.time || min == 0){
+            min = item.time;
           }
-          if(max < item.data || max == 0){
-            max = item.score;
+          if(max < item.time || max == 0){
+            max = item.time;
           }
-          sum += item.score;
+          sum += parseInt(item.time);
           if(item.date !== date || index+1 == res.data.response.length){
             if(date != 0){
+              console.log(date.set);
               score.push({
-                title:"문장 반복 말하기",
-                date:date,
-                max:Math.ceil(max*20),
-                min:Math.ceil(min*20),
-                avg:Math.ceil((sum*20)/num)
+                title:"패턴 그리기",
+                date:date.slice(0,10),
+                max:max,
+                min:min,
+                avg:Math.ceil(sum/num)
               })
             }
             date = item.date;
@@ -165,6 +184,7 @@ const MyPage = () =>{
           }
         });
         setPracticeList(score);
+        console.log("Asdfasfasf")
         console.log(score)
       }else{
         setScoreList(res.data.response);
@@ -177,16 +197,29 @@ const MyPage = () =>{
 
   useEffect(()=>{
     console.log(pDate)
-    pronunciationScore();
-  },[pDate])
+    if(chartChange === '날짜별 패턴' || chartChange === '패턴'){
+      patternScore();
+    }else{
+      pronunciationScore();
+    }
+  },[pDate,chartChange])
   useEffect(()=>{
     console.log(level)
-    setChartChange("날짜별 발음");
     setPDate(1);
+    
     setTimeout(()=>{
-      pronunciationScore();
-    },150)
-  },[level])
+      if(chartChange === '날짜별 패턴' || chartChange === '패턴'){
+        patternScore();
+      }else{
+        pronunciationScore();
+      }
+    },500)
+  },[level,chartChange])
+
+  useEffect(()=>{
+    console.log(chartChange)
+    
+  },[chartChange])
 
   //웩슬러 정보 불러오기
   useEffect(()=>{
@@ -206,6 +239,7 @@ const MyPage = () =>{
     .catch((err)=>{
       console.log(err);
     })
+    
   },[])
 
 
@@ -362,17 +396,32 @@ const MyPage = () =>{
         y:item.avg
       })
     })
-    setTestData({
-      datasets: [
-        {
-          data: list.reverse(),
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-      ],
-    })
-
+    console.log(list)
+    if(chartChange === '날짜별 발음'){
+      setTestData({
+        datasets: [
+          {
+            data: list.reverse(),
+            borderColor: 'rgba(	128, 0, 128, 0.7)',
+            backgroundColor: 'rgba(	128, 0, 128, 0.5)',
+          },
+        ],
+      })
+    }else{
+      setTestData({
+        datasets: [
+          {
+            data: list.reverse(),
+            borderColor: 'rgba(0, 128, 47, 0.7)',
+            backgroundColor: 'rgba(0, 128, 47, 0.5)',
+          },
+        ],
+      })
+    }
+    
   },[practiceList])
+
+  
 
   const chartRef = useRef();
   const chartRef2 = useRef();
@@ -382,45 +431,65 @@ const MyPage = () =>{
     datasets: [
       {
         data: [],
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: 'rgba(	128, 0, 128, 0.7)',
+        backgroundColor: 'rgba(	128, 0, 128, 0.5)',
       },
     ],
   });
+    //패턴 그래프 데이터
+    const [patternData,setPtternData] = useState({
+      datasets: [
+        {
+          data: [],
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+      ],
+    });
 
   useEffect(()=>{
     let labels = [];
     let data = [];
     console.log(scoreList);
-    scoreList.map((item)=>{
-      labels.push(item.sentence);
-      data.push(item.score*20);
-    })
-    setScoreData({
-      labels:labels,
-      datasets: [
-        {
-          data: data,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-      ],
-    })
+
+    if(chartChange === '발음'){
+
+      scoreList.map((item)=>{
+        console.log(item)
+        labels.push(item.sentence);
+        data.push(item.score*20);
+      })
+      setScoreData({
+        labels:labels,
+        datasets: [
+          {
+            data: data,
+            borderColor: 'rgba(	128, 0, 128, 0.7)',
+            backgroundColor: 'rgba(	128, 0, 128, 0.5)',
+          },
+        ],
+      })
+    }else{
+      scoreList.map((item,index)=>{
+        labels.push(index+1);
+        data.push(item.time);
+      })
+      setPtternData({
+        labels:labels,
+        datasets: [
+          {
+            data: data,
+            borderColor: 'rgba(0, 128, 47, 0.7)',
+            backgroundColor: 'rgba(0, 128, 47, 0.5)',
+          },
+        ],
+      })
+    }
+    
   },[scoreList])
-  //패턴 그래프 데이터
-  const [patternData,setPtternData] = useState({
-    datasets: [
-      {
-        data: [],
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-    ],
-  });
+
   
-  useEffect(()=>{
-    console.log(chartChange)
-  },[chartChange])
+
 
   return (
     <div className='my-page-container'>
@@ -431,7 +500,7 @@ const MyPage = () =>{
             <div className="test-graph-data-title">{chartChange + ' 학습'}</div>
             <Line style={{display:`${chartChange !== '날짜별 발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
             <Bar style={{display:`${chartChange !== '발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={scoreData}/>
-            <Line style={{display:`${chartChange !== '날짜별 패턴' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={patternData}/>
+            <Line style={{display:`${chartChange !== '날짜별 패턴' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
             <Line style={{display:`${chartChange !== '패턴' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={patternData}/>
           </div>
           <div className="wchsler-graph-data">
@@ -523,7 +592,7 @@ const MyPage = () =>{
               {
                 practiceList.map((item, index)=>{
                   return(
-                    <div className="list-columns" onClick={()=>{setPDate(item.date);  setChartChange("발음")}}>
+                    <div className="list-columns" onClick={()=>{setPDate(item.date);  item.title === "문장 반복 말하기" ? setChartChange("발음") : setChartChange("패턴")}}>
                       <div className="list-columns-item">
                         {item.title}
                       </div>
@@ -557,10 +626,10 @@ const MyPage = () =>{
           </div>
           <div className="child-info-item-container">
             <div className="child-info-item">
-              {childInfo.name}
+              {userInfo.name}
             </div>
             <div className="child-info-item">
-              {childInfo.age}
+              {userInfo.age}
             </div>
             <div className="child-info-item">
               {wchslerInfo.iq}
