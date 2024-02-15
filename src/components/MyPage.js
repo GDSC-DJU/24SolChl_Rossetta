@@ -33,9 +33,8 @@ const MyPage = () =>{
     iq:0
   })
   //아이 정보
-  const [childInfo,setChildInfo] = useState({
+  const [userInfo,setUserInfo] = useState({
     name:'',
-    idNum:'',
     age:0
   })
   //학습 날짜
@@ -49,18 +48,16 @@ const MyPage = () =>{
   //chart 전환
   const [chartChange,setChartChange] = useState("날짜별 발음");
 
-  useEffect(()=>{
-    childDB();
-  },[])
 
 
 
   //문장 반복말하기
   const pronunciationScore = () =>{
+    console.log("adsf")
     axios.get(`http://localhost:8000/pronunciation/info/score/${pDate}/${level}`,{
       headers: {
         "Content-Type":'application/json',
-        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
       }
     })
     .then((res)=>{
@@ -109,56 +106,142 @@ const MyPage = () =>{
       console.log(err);
     })
   }
+  useEffect(()=>{
+    // axios.post('http://localhost:8000/member/sign-in', 
+    //   {
+    //     id:'minseok0338',
+    //     pw:'tjrdl1651!'
+    //   })
+    //   .then((res)=>{
+    //     console.log(res);
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err);
+    //   })
+    axios.get(`http://localhost:8000/member/parents/info`,{
+      headers: {
+        "Content-Type":'application/json',
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }
+    })
+    .then((res)=>{
+      console.log(res);
+      const date = new Date();
+      const age = date.getFullYear() - res.data.response.birth.slice(0,4) +1;
+      console.log(age)
+      setUserInfo({
+        name:res.data.response.name,
+        age:age
+      })
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  },[])
+
+  const patternScore = () =>{
+    axios.get(`http://localhost:8000/pattern/${level}/${pDate}`,{
+      headers: {
+        "Content-Type":'application/json',
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }
+    })
+    .then((res)=>{
+      console.log(res)
+      if(pDate === 1){
+        let score = [];
+        let date = 0;
+        let min = 0;
+        let max = 0.0;
+        let num = 0.0;
+        let sum = 0.0;
+        res.data.response.forEach((item,index) => {
+          //
+          num += 1;
+          if(min > item.time || min == 0){
+            min = item.time;
+          }
+          if(max < item.time || max == 0){
+            max = item.time;
+          }
+          sum += parseInt(item.time);
+          if(item.date !== date || index+1 == res.data.response.length){
+            if(date != 0){
+              console.log(date.set);
+              score.push({
+                title:"패턴 그리기",
+                date:date.slice(0,10),
+                max:max,
+                min:min,
+                avg:Math.ceil(sum/num)
+              })
+            }
+            date = item.date;
+            num = 0;
+            min = 0.0;
+            max = 0.0;
+            sum = 0.0;
+          }
+        });
+        setPracticeList(score);
+        console.log("Asdfasfasf")
+        console.log(score)
+      }else{
+        setScoreList(res.data.response);
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
 
   useEffect(()=>{
     console.log(pDate)
-    pronunciationScore();
-  },[pDate])
+    if(chartChange === '날짜별 패턴' || chartChange === '패턴'){
+      patternScore();
+    }else{
+      pronunciationScore();
+    }
+  },[pDate,chartChange])
   useEffect(()=>{
     console.log(level)
-    setChartChange("날짜별 발음");
     setPDate(1);
-    setTimeout(()=>{
-      pronunciationScore();
-    },150)
-  },[level])
-
-  // 아이 정보 불러오기
-  const childDB = async () => {
-    await axios.get('http://localhost:8000/member/child/info',{
-      headers: {
-        "Content-Type":'application/json',
-        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
-      }
-    })
-    .then((res)=>{
-      console.log(res);
-      setChildInfo(res.data.response);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
-  useEffect(()=>{
-    console.log(childInfo)
-    axios.get(`http://localhost:8000/wechsler/info/${childInfo.idNum}`,{
-      headers: {
-        "Content-Type":'application/json',
-        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
-      }
-    })
-    .then((res)=>{
-      console.log(res);
-      setWchslerInfo(res.data.response);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  },[childInfo])
-  //웩슬러 정보 불러오기
-  const wchslerDB = async () => {
     
-  }
+    setTimeout(()=>{
+      if(chartChange === '날짜별 패턴' || chartChange === '패턴'){
+        patternScore();
+      }else{
+        pronunciationScore();
+      }
+    },150)
+  },[level,chartChange])
+
+  useEffect(()=>{
+    console.log(chartChange)
+    
+  },[chartChange])
+
+  //웩슬러 정보 불러오기
+  useEffect(()=>{
+    axios.get(`http://localhost:8000/wechsler/info`,{
+      headers: {
+        "Content-Type":'application/json',
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }
+    })
+    .then((res)=>{
+      console.log(res);
+      if(res.data.response !== undefined){
+        setWchslerInfo(res.data.response);
+
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+    
+  },[])
+
 
   //웩슬러 언어 그래프
   const [wchslerData1,setWechslerData1] = useState({
@@ -288,10 +371,12 @@ const MyPage = () =>{
         display: false,
       },
     },layout: {
-      padding: 30
+      padding: {
+        top:10,
+        bottom:35
+      }
     },
   };
-  // const [labels,setLabels] = useState(["2024-02-04","2024-02-05"]);
   const [testData,setTestData] = useState({
     datasets: [
       {
@@ -310,53 +395,96 @@ const MyPage = () =>{
         y:item.avg
       })
     })
-    setTestData({
-      datasets: [
-        {
-          data: list.reverse(),
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-      ],
-    })
-
+    console.log(list)
+    if(chartChange === '날짜별 발음'){
+      setTestData({
+        datasets: [
+          {
+            data: list.reverse(),
+            borderColor: 'rgba(	128, 0, 128, 0.7)',
+            backgroundColor: 'rgba(	128, 0, 128, 0.5)',
+          },
+        ],
+      })
+    }else{
+      setTestData({
+        datasets: [
+          {
+            data: list.reverse(),
+            borderColor: 'rgba(0, 128, 47, 0.7)',
+            backgroundColor: 'rgba(0, 128, 47, 0.5)',
+          },
+        ],
+      })
+    }
+    
   },[practiceList])
 
-  const chartRef = useRef();
-  const chartRef2 = useRef();
+  
+
   // 점수 막대 그래프
   const [scoreData,setScoreData] = useState({
     labels:[],
     datasets: [
       {
         data: [],
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+
       },
     ],
   });
+    //패턴 그래프 데이터
+    const [patternData,setPtternData] = useState({
+      datasets: [
+        {
+          data: [],
+
+        },
+      ],
+    });
 
   useEffect(()=>{
     let labels = [];
     let data = [];
     console.log(scoreList);
-    scoreList.map((item)=>{
-      labels.push(item.sentence);
-      data.push(item.score*20);
-    })
-    setScoreData({
-      labels:labels,
-      datasets: [
-        {
-          data: data,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-      ],
-    })
+
+    if(chartChange === '발음'){
+
+      scoreList.map((item)=>{
+        console.log(item)
+        labels.push(item.sentence);
+        data.push(item.score*20);
+      })
+      setScoreData({
+        labels:labels,
+        datasets: [
+          {
+            data: data,
+            borderColor: 'rgba(	128, 0, 128, 0.7)',
+            backgroundColor: 'rgba(	128, 0, 128, 0.5)',
+          },
+        ],
+      })
+    }else{
+      scoreList.map((item,index)=>{
+        labels.push(index+1);
+        data.push(item.time);
+      })
+      setPtternData({
+        labels:labels,
+        datasets: [
+          {
+            data: data,
+            borderColor: 'rgba(0, 128, 47, 0.7)',
+            backgroundColor: 'rgba(0, 128, 47, 0.5)',
+          },
+        ],
+      })
+    }
+    
   },[scoreList])
+
   
-  
+
 
   return (
     <div className='my-page-container'>
@@ -364,9 +492,11 @@ const MyPage = () =>{
       <div className="training-info-container">
         <div className="graph-container">
           <div className="test-graph-data" >
-            {chartChange + ' 학습'}
-            <Line style={{display:`${chartChange !== '날짜별 발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
-            <Bar style={{display:`${chartChange !== '발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={scoreData}/>
+            <div className="test-graph-data-title">{chartChange + ' 학습'}</div>
+            <Line style={{display:`${chartChange !== '날짜별 발음' ? 'none' : ''}`}}  options={testOptions} data={testData}/>
+            <Bar style={{display:`${chartChange !== '발음' ? 'none' : ''}`}} options={testOptions} data={scoreData}/>
+            <Line style={{display:`${chartChange !== '날짜별 패턴' ? 'none' : ''}`}} options={testOptions} data={testData}/>
+            <Line style={{display:`${chartChange !== '패턴' ? 'none' : ''}`}} options={testOptions} data={patternData}/>
           </div>
           <div className="wchsler-graph-data">
             <div className="wchsler-graph-title"><div>wchsler</div></div>
@@ -410,7 +540,6 @@ const MyPage = () =>{
               <div className="data">{wchslerInfo.ps}점</div>
             </div>
             
-            {/* // <Radar ref={chartRef2} options={wchslerOptions} data={wchslerData}/> */}
         </div>
         </div>
         <div className="list-container">
@@ -457,7 +586,7 @@ const MyPage = () =>{
               {
                 practiceList.map((item, index)=>{
                   return(
-                    <div className="list-columns" onClick={()=>{setPDate(item.date);  setChartChange("발음")}}>
+                    <div className="list-columns" onClick={()=>{setPDate(item.date);  item.title === "문장 반복 말하기" ? setChartChange("발음") : setChartChange("패턴")}}>
                       <div className="list-columns-item">
                         {item.title}
                       </div>
@@ -485,23 +614,16 @@ const MyPage = () =>{
         </div>
       </div>
       <div className="child-info-container">
-        <div className="child-info">
-          <div className="child-info-ficture">
-            <img src={img}/>
+        <div className="child-info-item-container">
+          <div className="child-info-name">
+            {userInfo.name}
           </div>
-          <div className="child-info-item-container">
-            <div className="child-info-item">
-              {childInfo.name}
-            </div>
-            <div className="child-info-item">
-              {childInfo.age}
-            </div>
-            <div className="child-info-item">
-              {wchslerInfo.iq}
-            </div>
+          <div className="child-info-age-ip">
+            
           </div>
 
         </div>
+
         <div className="menu-container">
           <div>회원 정보 수정</div>
           <div>내가 그린 그림들</div>

@@ -13,7 +13,7 @@
     margin-left: 300px;
 }
 
-#video, canvas {
+#container #video,#container canvas {
     position: absolute;
 
 }

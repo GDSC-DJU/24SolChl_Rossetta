@@ -12,6 +12,7 @@ import Pattern1 from "./patterns/pattern";
 import Pattern2 from "./patterns/pattern";
 import Pattern3 from "./patterns/pattern";
 import styled from "styled-components";
+import MyPage from "./components/MyPage"
 import Introduction from "./pages/Introduction";
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="learning/pattern1" element={<Pattern1/>}/>
           <Route path="pattern2" element={<Pattern2/>}/>
           <Route path="pattern3" element={<Pattern3/>}/>
+		      <Route path="mypage" element={<MyPage/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Signup/>}/>
           <Route path="learning" element={<Learning />}/>
