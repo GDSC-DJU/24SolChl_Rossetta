@@ -9,11 +9,8 @@ exports.insertPaint = async(req, res, next) => {
         console.log("asdfasdf")
         const body = req.body;
         const {id} = req.decoded;
-        let {img,name} = body;
-        const date = new Date();
-
-        console.log(__dirname);
-        const url = __dirname + `/../img/${date}.jpeg`;
+        let {img,name,fileName} = body;
+        const url = __dirname + `/../img/${fileName}.jpeg`;
 
         fs.writeFile(url, img, 'base64', function(err) {
             console.log(err)
@@ -23,6 +20,7 @@ exports.insertPaint = async(req, res, next) => {
                 console.log("success");
             }
         });
+        console.log("adsf")
         
         await insertMyPicPaint(body,id,url);
         res.status(200).json({
