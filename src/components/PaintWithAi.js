@@ -348,12 +348,11 @@ const PaintWithAi = () => {
           ref={eraserIndicator}
           style={eraserStyle}
         ></div>
-        {/* <img id="img" src={"img/puppy.png"} /> */}
         <Gallery />        
       </div>
       <div className="setting-container">
           <div className="slidecontainer">
-            <p>
+            <p className="linewidth">
               선 두께: <span>{value}</span>
             </p>
             <input

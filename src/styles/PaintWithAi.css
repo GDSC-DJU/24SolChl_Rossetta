@@ -44,7 +44,6 @@
 #eraserIndicator {
     height: 450px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 1);
 }
 
 /* ColorPicker.css */
@@ -72,6 +71,9 @@
     margin-left: 20px;
 }
 
+.linewidth {
+    font-family: 'Korean-Font-bold';
+}
 
 
 @media (max-width: 768px) {
