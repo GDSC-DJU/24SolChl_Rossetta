@@ -7,12 +7,14 @@ import { useParams } from 'react-router-dom';
 
 const Situation = () => {
     const [currentQuiz, setCurrentQuiz] = useState({});             // 현재 문제 번호
-    const [userAnswer, setUserAnswer] = useState('X');               // 유저가 선택한 선지
+    const [userAnswer, setUserAnswer] = useState('X');              // 유저가 선택한 선지
     const [totalAnswer, setTotalAnswer] = useState([]);             // 전체 문제 오답 체크
     const [count, setCount] = useState(0);                          // 푼 문제 카운트
     const [checkedAnswer, setCheckedAnswer] = useState(false);      // 선지 선택 유무
     const [finish, setFinish] = useState(false);                    // 모든 문제 풀이 완료
     const [quiz, setQuiz] = useState(quizData);                     // 남아있는 문제
+    const [correct, setCorrect] = useState(0);
+    
     let { level } = useParams();
 
     useEffect(() => {
@@ -38,6 +40,7 @@ const Situation = () => {
     const NextQuiz = () => {      
         if(userAnswer === currentQuiz.answer){            // 정답,오답 기록
             setTotalAnswer([...totalAnswer, 'O']);
+            setCorrect((pre) => ++pre);
         }
         else{
             setTotalAnswer([...totalAnswer, 'X']);
@@ -57,11 +60,19 @@ const Situation = () => {
         let resultScreen = [];
         for (let i = 1; i <= count; i++) {
             resultScreen.push(
-                <p key={i} style={{margin: "30px"}}>
-                    {i}번 문제: {totalAnswer[i-1]}
-                </p>
+                <>
+                    <p key={i} style={{margin: "20px"}}>
+                        {i}번 문제: {totalAnswer[i-1]}
+                    </p>
+                </>
             );
         }
+        resultScreen.push(
+            <p style={{magin: "200px 0"}}>
+                총 {count}문제 중 {correct}개 정답입니다!
+                {correct > count/2 ? "  잘했어요!" : "  조금 더 분발해 보아요!"}
+            </p>
+        )
         return resultScreen;
     };
 
