@@ -21,11 +21,11 @@ exports.selectPattern = async (level, id, date) => {
         let list;
         
         if(date != 1){
-            list = await conn.query(`SELECT * FROM pattern WHERE level="${level}" AND id="${id}" AND date="${date}" ORDER BY date DESC`);
+            list = await conn.query(`SELECT * FROM pattern WHERE level="${level}" AND id="${id}" AND date="${date}"`);
         }else{
-            list = await conn.query(`SELECT * FROM pattern WHERE id="${id}" AND level="${level}" ORDER BY date DESC`);
+            list = await conn.query(`SELECT num,id,level,time,date FROM pattern WHERE id="${id}" AND level="${level}" ORDER BY date DESC`);
         }
-
+        console.log(list)
         conn.release();
         return list[0];
     } catch(err) {
