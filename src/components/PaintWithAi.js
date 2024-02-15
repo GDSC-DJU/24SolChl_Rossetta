@@ -8,7 +8,7 @@ import "../styles/RangeSlider.css";
 import Gallery from "../components/Gallery";
 import { useLocation } from 'react-router-dom';
 import html2canvas from "html2canvas";
-
+import axios from 'axios'
 
 
 
@@ -302,6 +302,24 @@ const PaintWithAi = () => {
       const minutes= now.getMinutes() < 10 ? "0"+now.getMinutes() : now.getMinutes();
       const seconds = now.getSeconds() < 10 ? "0"+now.getSeconds() : now.getSeconds();
       const time = hour+""+minutes+""+seconds;
+      let img = canvas.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
+      axios.post('http://localhost:8000/paint/mypicpaint', 
+      {
+        name:'안녕',
+        img:JSON.stringify(img),
+
+      },{
+        headers: {
+          // "Content-Type":'application/json',
+          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }},)
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
+    
 
       onSaveAs(canvas.toDataURL('image/jpeg'),`_${YMD}_${time}.jpeg`,);
     });
