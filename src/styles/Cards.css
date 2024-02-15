@@ -120,16 +120,6 @@
   }
 }
 
-.button {
-  font-size: 25px;
-  background-color: #36BC9B;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  height: 40px;
-  width: 70px;
-}
-
 .container {
   display: flex;
   flex: 1;
