@@ -3,11 +3,11 @@ const {pool} = require('./db');
 // myPicPaint 테이블 관련 함수
 
 // myPicPaint 테이블에 데이터를 삽입
-exports.insertMyPicPaint = async (body) => {
+exports.insertMyPicPaint = async (body,id,img) => {
     try {
         const conn = await pool.getConnection(async(conn) => conn);
-        const {id, Picname, image} = body;
-        await conn.query(`INSERT INTO myPicPaint (id, Picname, image) VALUES ("${id}", "${Picname}", "${image}")`);
+        const {Picname} = body;
+        await conn.query(`INSERT INTO myPicPaint (id, Picname, image) VALUES ("${id}", "${Picname}", "${img}")`);
         conn.release();
     } catch(err) {
         console.log(err);

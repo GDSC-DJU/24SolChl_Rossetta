@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const  cors = require('cors');
+const multer = require('multer');
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(cors());
+app.use(express.static(__dirname + '/img'));
 
 // 구동방식 변경 http://35.208.138.116:3000 GCP 외부 주소 접속 / localhost:3000 로컬 상 구동
 app.use(cors({ origin: 'http://localhost:3000'}));

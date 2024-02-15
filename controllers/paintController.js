@@ -1,18 +1,36 @@
 const {insertMyPicPaint, selectMyPicPaint, deleteMyPicPaint} = require('../models/paintDB');
 const {insertPaintEx, selectPaintEx, deletePaintEx} = require('../models/paintDB');
-
+const fs = require('fs')
 // myPicPaint 테이블 관련 함수
 
 //myPicPaint 테이블에 데이터를 삽입
 exports.insertPaint = async(req, res, next) => {
     try {
+        console.log("asdfasdf")
         const body = req.body;
-        await insertMyPicPaint(body);
+        const {id} = req.decoded;
+        let {img,name} = body;
+        const date = new Date();
+
+        console.log(__dirname);
+        const url = __dirname + `/../img/${date}.jpeg`;
+
+        fs.writeFile(url, img, 'base64', function(err) {
+            console.log(err)
+            if(err) {
+                console.log(err);
+            } else {
+                console.log("success");
+            }
+        });
+        
+        await insertMyPicPaint(body,id,url);
         res.status(200).json({
             code: 200,
             message: 'success insert'
         });
     } catch(err) {
+        console.log(err);
         res.status(400).json({
             code: 400,
             message: 'failed insert'
@@ -24,6 +42,7 @@ exports.insertPaint = async(req, res, next) => {
 exports.getPaint = async(req, res, next) => {
     try {
         const {id} = req.decoded;
+
         const data = await selectMyPicPaint(id);
         res.status(200).json({
             code: 200,
@@ -36,6 +55,7 @@ exports.getPaint = async(req, res, next) => {
             message: 'failed get'
         });
     }
+
 }
 
 //myPicPaint 테이블에서 특정 num의 데이터를 삭제
@@ -108,3 +128,4 @@ exports.deleteExample = async(req, res, next) => {
         });
     }
 }
+
