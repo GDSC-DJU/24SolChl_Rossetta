@@ -16,19 +16,19 @@ const ChangeUserInfo = () =>{
     const [birthdate, setBirthdate] = useState('');
   
     // 버튼 활성화를 위한 버튼 입력값 판단
-    const [usernameValid, setUsernameValid] = useState(false);
     const [pwValid, setPwValid] = useState(false);
     const [pwConfirmValid, setPwConfirmValid] = useState(false);
     const [emailValid, setEmailValid] = useState(false);
     const [mobileValid, setMobileValid] = useState(false);
     const [birthdateValid, setBirthdateValid] = useState(false);
     const [formValid, setFormValid] = useState(false);
+    const [pwCompareValid,setPwCompareValid] = useState(true);
 
     useEffect(()=>{
       axios.get('http://localhost:8000/member/parents/info',{
         headers: {
           "Content-Type":'application/json',
-          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
+          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
         }
       })
       .then((res)=>{
@@ -37,10 +37,10 @@ const ChangeUserInfo = () =>{
         setPwCompare(data.pw);
         setUsername(data.id);
         setName(data.name);
-        setEmail(data.id);
+        setEmail(data.email);
         setMobile("0"+data.phoneNum);
-        setGender();
-        setBirthdate();
+        setGender(data.gender);
+        setBirthdate(data.birth);
       })
       .catch((err)=>{
         console.log(err);
@@ -49,9 +49,10 @@ const ChangeUserInfo = () =>{
   
     useEffect(() => {
       setFormValid(
-        usernameValid && pwValid && pwConfirmValid && emailValid && mobileValid && birthdateValid && name !== '' && gender !== ''
+        !pwCompareValid && pwValid && pwConfirmValid && mobileValid
       );
-    }, [usernameValid, pw, pwConfirm, pwValid, pwConfirmValid, emailValid, mobileValid, birthdateValid, name, gender]);
+      console.log(pwCompare)
+    }, [ pw, pwConfirm, pwValid, pwConfirmValid, mobileValid,pwCompareValid]);
     
     useEffect(()=>{
       console.log(formValid)
@@ -60,18 +61,13 @@ const ChangeUserInfo = () =>{
     useEffect(()=>{
       // 비밀번호 확인 유효성 검사 추가
       setPwConfirmValid(pw === pwConfirm);
+      setPwCompareValid(pwCompare === pw);
       // 핸드폰 번호 유효성 검사 추가
       setMobileValid(/^\d{11}$/.test(mobile));
       // 생년월일 유효성 검사 추가
       setBirthdateValid(/^\d{8}$/.test(birthdate));
     },[pw,birthdate,pwConfirm])
     
-    const handleUsername = (e) => {
-      const value = e.target.value.toLowerCase(); // 입력값을 소문자로 변환
-      setUsername(value);
-      const regex = /^[a-z0-9]+$/; // 영어 소문자와 숫자만
-      setUsernameValid(regex.test(value));
-    };
     
     const handlePw = (e) => {
       const value = e.target.value;
@@ -103,8 +99,22 @@ const ChangeUserInfo = () =>{
       }
     };
   
-    const onClickRegisterButton = () => {
-      // 여기에 회원가입 로직을 추가합니다.
+    const onClickUpdateButton = () => {
+      axios.put('http://localhost:8000/member/parents/update',{
+        pw:pw,
+        phoneNum:mobile,
+      },{
+        headers: {
+          "Content-Type":'application/json',
+          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        }
+      })
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     };
   
     return (
@@ -121,11 +131,9 @@ const ChangeUserInfo = () =>{
               type="text"
               placeholder="아이디 (영문과 숫자만)"
               value={username}
-              onChange={handleUsername}
             />
           </div>
           <div className="errorMessageWrap">
-            {!usernameValid && username.length > 0 && <div>아이디는 영문 소문자와 숫자만 사용할 수 있습니다.</div>}
           </div>
   
           {/* 비밀번호 입력 필드 */}
@@ -141,6 +149,7 @@ const ChangeUserInfo = () =>{
           </div>
           <div className="errorMessageWrap">
             {!pwValid && pw.length > 0 && <div>비밀번호 조건을 만족해주세요.</div>}
+            {!pwCompareValid ? '':<div>이전 비밀번호와 같습니다.</div>}
           </div>
   
           {/* 비밀번호 확인 입력 필드 */}
@@ -186,7 +195,7 @@ const ChangeUserInfo = () =>{
             />
           </div>
           <div className="errorMessageWrap">
-            {!emailValid && email.length > 0 && <div>올바른 이메일을 입력해주세요.</div>}
+            
           </div>
   
           {/* 휴대폰 번호 입력 필드 */}
@@ -241,7 +250,7 @@ const ChangeUserInfo = () =>{
           </div>
   
         </div>
-        <button onClick={onClickRegisterButton} disabled={!formValid} className="signupButton">
+        <button onClick={onClickUpdateButton} disabled={!formValid} className="signupButton">
           가입하기
         </button>
       </div>
