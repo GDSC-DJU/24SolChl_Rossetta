@@ -18,13 +18,13 @@ function CardItem(props) {
             />
           </figure>
           <div className='container'>
-            <Link to={props.path} state={{level: 1}}>
+            <Link to={`${props.path}/1`}>
             <button className='btn-hover color-5'>LV.1</button>
             </Link>
-            <Link to={props.path} state={{level: 2}}>
+            <Link to={`${props.path}/2`}>
             <button className='btn-hover color-5'>LV.2</button>
             </Link>
-            <Link to={props.path} state={{level: 3}}>
+            <Link to={`${props.path}/3`}>
             <button className='btn-hover color-5'>LV.3</button>
             </Link>
           </div>

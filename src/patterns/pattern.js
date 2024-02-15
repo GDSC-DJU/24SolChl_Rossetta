@@ -22,6 +22,7 @@ const Pattern = () => {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [timerID, setTimerID] = useState(null);
   const [isPatternMatching, setIsPatternMatching] = useState(false);
+  let { level } = useParams();
 
   useEffect(() => {
     document.documentElement.style.setProperty('--grid-size', gridSize);
