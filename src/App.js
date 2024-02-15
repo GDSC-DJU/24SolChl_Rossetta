@@ -12,6 +12,7 @@ import Pattern1 from "./patterns/pattern";
 import Pattern2 from "./patterns/pattern";
 import Pattern3 from "./patterns/pattern";
 import styled from "styled-components";
+import Introduction from "./pages/Introduction";
 
 
 function App() {
@@ -41,7 +42,7 @@ const Container = styled.div`
 	display: block;
 	position: relative;
 	height: auto;
-  	min-height: 100vh
+  min-height: 100vh
 	z-index: 1;
 `;
 
