@@ -20,10 +20,10 @@ exports.insertPaint = async(req, res, next) => {
     }
 }
 
-//myPicPaint 테이블에서 특정 id의 데이터를 조회
+//myPicPaint 테이블에서 특정 id의 데이터를 조회 수정
 exports.getPaint = async(req, res, next) => {
     try {
-        const id = req.params.id;
+        const {id} = req.decoded;
         const data = await selectMyPicPaint(id);
         res.status(200).json({
             code: 200,

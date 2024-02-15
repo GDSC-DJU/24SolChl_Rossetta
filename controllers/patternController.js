@@ -19,11 +19,15 @@ exports.insertPatternData = async(req, res, next) => {
     }
 }
 
-//pattern 테이블에서 특정 id의 데이터를 조회
+//pattern 테이블에서 특정 id의 데이터를 조회 수정
 exports.getPatternData = async(req, res, next) => {
     try {
-        const id = req.params.id;
-        const data = await selectPattern(id);
+        const {id} = req.decoded;
+        const level = req.params.level;
+        const date = req.params.date;
+
+        //파라미터로 level를 가져오기
+        const data = await selectPattern(level, id, date);
         res.status(200).json({
             code: 200,
             message: 'success get',

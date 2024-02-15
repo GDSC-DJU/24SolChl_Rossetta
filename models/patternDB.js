@@ -14,11 +14,18 @@ exports.insertPattern = async (body) => {
     }
 }
 
-//pattern 테이블에서 특정 id의 데이터를 조회하는 함수
-exports.selectPattern = async (id) => {
+//pattern 테이블에서 특정 id의 데이터를 조회하는 함수 - 수정
+exports.selectPattern = async (level, id, date) => {
     try {
         const conn = await pool.getConnection(async(conn) => conn);
-        const list = await conn.query(`SELECT * FROM pattern WHERE id="${id}"`);
+        let list;
+        
+        if(date != 1){
+            list = await conn.query(`SELECT * FROM pattern WHERE level="${level}" AND id="${id}" AND date="${date}" ORDER BY date DESC`);
+        }else{
+            list = await conn.query(`SELECT * FROM pattern WHERE id="${id}" AND level="${level}" ORDER BY date DESC`);
+        }
+
         conn.release();
         return list[0];
     } catch(err) {
