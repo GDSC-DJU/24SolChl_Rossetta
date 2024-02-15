@@ -3,6 +3,7 @@ import quizData from './SituationQuizData';
 import '../styles/Situation.css';
 import '../styles/Button.css';
 import PageLayout from './PageLayout';
+import { useParams } from 'react-router-dom';
 
 const Situation = () => {
     const [currentQuiz, setCurrentQuiz] = useState({});             // 현재 문제 번호
@@ -14,6 +15,8 @@ const Situation = () => {
     const [quiz, setQuiz] = useState(quizData);                     // 남아있는 문제
     const [correct, setCorrect] = useState(0);
     
+    let { level } = useParams();
+
     useEffect(() => {
         if(count === 3){
             setFinish(true);
