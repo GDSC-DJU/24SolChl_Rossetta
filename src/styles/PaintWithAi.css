@@ -10,7 +10,8 @@
     /* 비율 설정 */
     text-align: center;
     grid-template-columns: 800px 50%;
-    margin-left: 300px;
+    margin-left: 150px;
+    margin-top: 50px;
 }
 
 #container #video,#container canvas {
@@ -37,14 +38,12 @@
     /* 기본적으로 숨겨진 상태 */
     transition: width 0.2s ease;
     /* 선의 너비 변화에 애니메이션 적용 */
-    margin-left: 300px;
     margin-top: 70px;
 }
 
 #eraserIndicator {
     height: 450px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 1);
 }
 
 /* ColorPicker.css */
@@ -72,6 +71,9 @@
     margin-left: 20px;
 }
 
+.linewidth {
+    font-family: 'Korean-Font-bold';
+}
 
 
 @media (max-width: 768px) {

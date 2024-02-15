@@ -33,7 +33,7 @@ function Cards() {
                         src='img/pattern.PNG'
                         text='패턴을 똑같이 따라 체크해 보세요!'
                         label='패턴 그리기'
-                        path='pattern1'
+                        path='pattern'
                         />
   
                     </ul>    

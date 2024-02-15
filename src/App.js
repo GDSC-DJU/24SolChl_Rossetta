@@ -8,9 +8,7 @@ import Pronunciation from "./components/Pronunciation";
 import PaintWithAi from './components/PaintWithAi';
 import Signup from "./pages/Signup";
 import Learning from "./pages/Learning";
-import Pattern1 from "./patterns/pattern";
-import Pattern2 from "./patterns/pattern";
-import Pattern3 from "./patterns/pattern";
+import Pattern from "./patterns/pattern";
 import styled from "styled-components";
 import MyPage from "./components/MyPage"
 import Introduction from "./pages/Introduction";
@@ -23,12 +21,10 @@ function App() {
 		<Nav />
       	<Routes>
           <Route path="/" element={<Main/>}/>
-          <Route path="learning/situation" element={<Situation/>}/>
-          <Route path="learning/pronunciation" element={<Pronunciation/>}/>
-          <Route path="learning/paintwithai" element={<PaintWithAi />} />
-          <Route path="learning/pattern1" element={<Pattern1/>}/>
-          <Route path="pattern2" element={<Pattern2/>}/>
-          <Route path="pattern3" element={<Pattern3/>}/>
+          <Route path="learning/situation/:level" element={<Situation/>}/>
+          <Route path="learning/pronunciation/:level" element={<Pronunciation/>}/>
+          <Route path="learning/paintwithai/:level" element={<PaintWithAi />} />
+          <Route path="learning/pattern/:level" element={<Pattern/>}/>
 		      <Route path="mypage" element={<MyPage/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Signup/>}/>

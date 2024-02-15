@@ -1,6 +1,8 @@
 import React,{ useState, useRef, useEffect,useCallback} from 'react';
 import '../styles/pronunciation.css';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 
 const Pronunciation = () =>{
   const [stream, setStream] = useState();
@@ -13,8 +15,10 @@ const Pronunciation = () =>{
   const [score, setScore] = useState(0.0);
   const [result,setResult] = useState(true);
   const [text, setText] = useState('');
-  const [level,setLevel] = useState(1);
   const [sentence,setSentence] = useState([]);
+  let { level } = useParams();
+
+
   const onRecAudio = async() => {
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
