@@ -20,14 +20,15 @@ function App() {
 		<Nav />
       	<Routes>
           <Route path="/" element={<Main/>}/>
-          <Route path="situation-quiz" element={<Situation/>}/>
-          <Route path="login" element={<Login/>}/>
-          <Route path="pronunciation" element={<Pronunciation/>}/>
-          <Route path="signup" element={<Signup/>}/>
-          <Route path="pattern1" element={<Pattern1/>}/>
+          <Route path="learning/situation-quiz" element={<Situation/>}/>
+          <Route path="learning/pronunciation" element={<Pronunciation/>}/>
+          <Route path="learning/paintwithai" element={<PaintWithAi />} />
+          <Route path="learning/pattern1" element={<Pattern1/>}/>
           <Route path="pattern2" element={<Pattern2/>}/>
           <Route path="pattern3" element={<Pattern3/>}/>
-          <Route path="paintwithai" element={<PaintWithAi/>}/>
+          <Route path="login" element={<Login/>}/>
+          <Route path="signup" element={<Signup/>}/>
+          <Route path="learning" element={<Learning />}/>
 		    </Routes>
     </Container>
   );

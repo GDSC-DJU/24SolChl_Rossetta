@@ -6,6 +6,10 @@ import ColorPicker from "../components/ColorPicker";
 import "../styles/PaintWithAi.css";
 import "../styles/RangeSlider.css";
 import Gallery from "../components/Gallery";
+import { useLocation } from 'react-router-dom';
+
+
+
 
 // const videoElement = document.getElementById('video');
 // const canvasElement = document.getElementById('canvas');
@@ -26,6 +30,8 @@ const PaintWithAi = () => {
   const [eraserStyle, setEarerStyle] = useState([]);
   const drawColorRef = useRef("#000"); // drawColor를 useRef로 선언
   const [value, setValue] = useState(20); // Slider 값 설정
+  const location = useLocation();
+
 
 
   // 색상 선택기에서 색상을 선택할 때 호출될 함수
@@ -46,6 +52,7 @@ const PaintWithAi = () => {
     canvasRef.current.height = 450;
     console.log(canvasRef.current);
     canvasCtx = canvasRef.current.getContext("2d");
+    console.log(location.state);
   }, []);
 
 
