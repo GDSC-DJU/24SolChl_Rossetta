@@ -213,7 +213,7 @@ const MyPage = () =>{
       }else{
         pronunciationScore();
       }
-    },500)
+    },150)
   },[level,chartChange])
 
   useEffect(()=>{
@@ -377,7 +377,6 @@ const MyPage = () =>{
       }
     },
   };
-  // const [labels,setLabels] = useState(["2024-02-04","2024-02-05"]);
   const [testData,setTestData] = useState({
     datasets: [
       {
@@ -423,16 +422,13 @@ const MyPage = () =>{
 
   
 
-  const chartRef = useRef();
-  const chartRef2 = useRef();
   // 점수 막대 그래프
   const [scoreData,setScoreData] = useState({
     labels:[],
     datasets: [
       {
         data: [],
-        borderColor: 'rgba(	128, 0, 128, 0.7)',
-        backgroundColor: 'rgba(	128, 0, 128, 0.5)',
+
       },
     ],
   });
@@ -441,8 +437,7 @@ const MyPage = () =>{
       datasets: [
         {
           data: [],
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+
         },
       ],
     });
@@ -498,10 +493,10 @@ const MyPage = () =>{
         <div className="graph-container">
           <div className="test-graph-data" >
             <div className="test-graph-data-title">{chartChange + ' 학습'}</div>
-            <Line style={{display:`${chartChange !== '날짜별 발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
-            <Bar style={{display:`${chartChange !== '발음' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={scoreData}/>
-            <Line style={{display:`${chartChange !== '날짜별 패턴' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={testData}/>
-            <Line style={{display:`${chartChange !== '패턴' ? 'none' : ''}`}} ref={chartRef} options={testOptions} data={patternData}/>
+            <Line style={{display:`${chartChange !== '날짜별 발음' ? 'none' : ''}`}}  options={testOptions} data={testData}/>
+            <Bar style={{display:`${chartChange !== '발음' ? 'none' : ''}`}} options={testOptions} data={scoreData}/>
+            <Line style={{display:`${chartChange !== '날짜별 패턴' ? 'none' : ''}`}} options={testOptions} data={testData}/>
+            <Line style={{display:`${chartChange !== '패턴' ? 'none' : ''}`}} options={testOptions} data={patternData}/>
           </div>
           <div className="wchsler-graph-data">
             <div className="wchsler-graph-title"><div>wchsler</div></div>
@@ -545,7 +540,6 @@ const MyPage = () =>{
               <div className="data">{wchslerInfo.ps}점</div>
             </div>
             
-            {/* // <Radar ref={chartRef2} options={wchslerOptions} data={wchslerData}/> */}
         </div>
         </div>
         <div className="list-container">
@@ -620,23 +614,16 @@ const MyPage = () =>{
         </div>
       </div>
       <div className="child-info-container">
-        <div className="child-info">
-          <div className="child-info-ficture">
-            <img src={img}/>
+        <div className="child-info-item-container">
+          <div className="child-info-name">
+            {userInfo.name}
           </div>
-          <div className="child-info-item-container">
-            <div className="child-info-item">
-              {userInfo.name}
-            </div>
-            <div className="child-info-item">
-              {userInfo.age}
-            </div>
-            <div className="child-info-item">
-              {wchslerInfo.iq}
-            </div>
+          <div className="child-info-age-ip">
+            
           </div>
 
         </div>
+
         <div className="menu-container">
           <div>회원 정보 수정</div>
           <div>내가 그린 그림들</div>

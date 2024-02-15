@@ -56,10 +56,22 @@ a{
   grid-template-rows: 30% 60% 10%;
   overflow: hidden;
 }
-.child-info-container .child-info{
+.child-info-item-container{
   display: grid;
-  grid-template-rows: 80% 20%;
+  grid-template-rows: 50% 20%;
   overflow: hidden;
+}
+.child-info-item-container .child-info-name{
+  margin: auto;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.child-info-age-ip{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 }
 .menu-container{
   margin: 50% 5%;
