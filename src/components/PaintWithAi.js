@@ -9,6 +9,7 @@ import Gallery from "../components/Gallery";
 import html2canvas from "html2canvas";
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
+import PageLayout from "./PageLayout";
 
 
 
@@ -291,40 +292,41 @@ const PaintWithAi = () => {
     console.log(fingerLine.current);
   }
 
-  const onCapture = () =>{
-    html2canvas(canvasRef.current,{scale:4}).then((canvas)=>{
+  const onCapture = () => {
+    html2canvas(canvasRef.current, { scale: 4 }).then((canvas) => {
       let now = new Date();
-      const month = now.getMonth()+1 < 10 ? "0"+(now.getMonth()+1) : now.getMonth()+1;
-      const date = now.getDate() < 10 ? "0"+now.getDate() : now.getDate();
-      const YMD = now.getFullYear()+""+month+""+date;
-      const hour = now.getHours() < 10 ? "0"+now.getHours() : now.getHours();
-      const minutes= now.getMinutes() < 10 ? "0"+now.getMinutes() : now.getMinutes();
-      const seconds = now.getSeconds() < 10 ? "0"+now.getSeconds() : now.getSeconds();
-      const time = hour+""+minutes+""+seconds;
+      const month = now.getMonth() + 1 < 10 ? "0" + (now.getMonth() + 1) : now.getMonth() + 1;
+      const date = now.getDate() < 10 ? "0" + now.getDate() : now.getDate();
+      const YMD = now.getFullYear() + "" + month + "" + date;
+      const hour = now.getHours() < 10 ? "0" + now.getHours() : now.getHours();
+      const minutes = now.getMinutes() < 10 ? "0" + now.getMinutes() : now.getMinutes();
+      const seconds = now.getSeconds() < 10 ? "0" + now.getSeconds() : now.getSeconds();
+      const time = hour + "" + minutes + "" + seconds;
       let img = canvas.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
-      axios.post('http://localhost:8000/paint/mypicpaint', 
-      {
-        Picname:'안녕',
-        img:JSON.stringify(img),
-        fileName:`${YMD}${time}`
-      },{
+      axios.post('http://localhost:8000/paint/mypicpaint',
+        {
+          Picname: '안녕',
+          img: JSON.stringify(img),
+          fileName: `${YMD}${time}`
+        }, {
         headers: {
           // "Content-Type":'application/json',
-          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
-      }},)
-      .then((res)=>{
-        console.log(res);
-      })
-      .catch((err)=>{
-        console.log(err);
-      });
-    
+          Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        }
+      },)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
-      onSaveAs(canvas.toDataURL('image/jpeg'),`_${YMD}_${time}.jpeg`,);
+
+      onSaveAs(canvas.toDataURL('image/jpeg'), `_${YMD}_${time}.jpeg`,);
     });
-    
+
   };
-  const onSaveAs = (uri,filename)=>{
+  const onSaveAs = (uri, filename) => {
     var link = document.createElement('a');
     document.body.appendChild(link);
     link.href = uri;
@@ -332,24 +334,25 @@ const PaintWithAi = () => {
     link.click();
     document.body.removeChild(link);
     // navigatorR(-1);
-  
+
   };
 
 
   return (
-    <div className="paint-with-ai-page-container">
-      <div id="container">
-        <video ref={videoRef} id="video"></video>
-        <canvas ref={canvasRef} id="canvas"></canvas>
-        <div id="fingerLine" ref={fingerLine} style={fingerLineStlye}></div>
-        <div
-          id="eraserIndicator"
-          ref={eraserIndicator}
-          style={eraserStyle}
-        ></div>
-        <Gallery />        
-      </div>
-      <div className="setting-container">
+    <PageLayout name="따라 그리기">
+      <div className="paint-with-ai-page-container">
+        <div id="container">
+          <video ref={videoRef} id="video"></video>
+          <canvas ref={canvasRef} id="canvas"></canvas>
+          <div id="fingerLine" ref={fingerLine} style={fingerLineStlye}></div>
+          <div
+            id="eraserIndicator"
+            ref={eraserIndicator}
+            style={eraserStyle}
+          ></div>
+          <Gallery />
+        </div>
+        <div className="setting-container">
           <div className="slidecontainer">
             <p className="linewidth">
               선 두께: <span>{value}</span>
@@ -371,9 +374,8 @@ const PaintWithAi = () => {
             onChangeComplete={handleColorChange}
           />
         </div>
-
-
-    </div>
+      </div>
+    </PageLayout>
   );
 };
 
