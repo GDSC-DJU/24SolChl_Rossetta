@@ -2,9 +2,10 @@ import { lazy, useCallback, useEffect, useRef, useState } from "react";
 import { Camera } from "@mediapipe/camera_utils";
 import { Hands, Results } from "@mediapipe/hands";
 import React from "react";
-import ColorPicker from "./ColorPicker";
-import "../styles/paint.css";
+import ColorPicker from "../components/ColorPicker";
+import "../styles/PaintWithAi.css";
 import "../styles/RangeSlider.css";
+import Gallery from "../components/Gallery";
 import { useLocation } from 'react-router-dom';
 
 
@@ -26,6 +27,7 @@ const PaintWithAi = () => {
   const fingerLine = useRef();
   const [display, setDisplay] = useState(false);
   const [fingerLineStlye, setFingerLineStlye] = useState([]);
+  const [eraserStyle, setEarerStyle] = useState([]);
   const drawColorRef = useRef("#000"); // drawColor를 useRef로 선언
   const [value, setValue] = useState(20); // Slider 값 설정
   const location = useLocation();
@@ -52,6 +54,13 @@ const PaintWithAi = () => {
     canvasCtx = canvasRef.current.getContext("2d");
     console.log(location.state);
   }, []);
+
+
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
 
   const hands = new Hands({
     locateFile: (file) =>
@@ -95,6 +104,7 @@ const PaintWithAi = () => {
 
     return fingersUp;
   }
+
 
   const onResults = (results) => {
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
@@ -151,6 +161,7 @@ const PaintWithAi = () => {
         if (xp !== 0 && yp !== 0) {
           drawLine(xp, yp, indexFingerTipX, indexFingerTipY);
         }
+        setFingerLineStlye({ display: "none" });
         xp = indexFingerTipX;
         yp = indexFingerTipY;
       } else if (isEraserMode) {
@@ -164,7 +175,7 @@ const PaintWithAi = () => {
           canvasCtx.globalCompositeOperation = "destination-out"; // 지우개 모드 설정
           earseLine(xp, yp, indexFingerTipX, indexFingerTipY);
         }
-
+        setFingerLineStlye({ display: "none" });
         xp = indexFingerTipX;
         yp = indexFingerTipY;
       } else {
@@ -272,50 +283,52 @@ const PaintWithAi = () => {
       display: "block",
     });
 
+
+
     // 선을 보이게 함
     // fingerLine.current.display = 'block';
     setDisplay(true);
     console.log(fingerLine.current);
   }
 
+
   return (
     <div className="paint-with-ai-page-container">
       <div id="container">
-        <div>
-          <video ref={videoRef} id="video"></video>
-          <canvas ref={canvasRef} id="canvas"></canvas>
-          <div id="fingerLine" ref={fingerLine} style={fingerLineStlye}></div>
-          <div
-            id="eraserIndicator"
-            ref={eraserIndicator}
-            //  style={"position: absolute; display: none; border-radius: 50%; background: rgba(0,0,0,0.2);"}
-          ></div>
+        <video ref={videoRef} id="video"></video>
+        <canvas ref={canvasRef} id="canvas"></canvas>
+        <div id="fingerLine" ref={fingerLine} style={fingerLineStlye}></div>
+        <div
+          id="eraserIndicator"
+          ref={eraserIndicator}
+          style={eraserStyle}
+        ></div>
+        {/* <img id="img" src={"img/puppy.png"} /> */}
+        <Gallery />        
+      </div>
+      <div className="setting-container">
+          <div className="slidecontainer">
+            <p>
+              선 두께: <span>{value}</span>
+            </p>
+            <input
+              type="range"
+              min="10"
+              max="30"
+              value={value}
+              className="slider"
+              id="myRange"
+              onChange={(e) => setValue(e.target.value)}
+            />
+          </div>
+          <button className="btn-hover color-5" onClick={clearCanvas}>지우기</button>
+          <ColorPicker
+            color={drawColorRef.current}
+            onChangeComplete={handleColorChange}
+          />
         </div>
-        <div>
-          <img id="img" src={"img/puppy.png"} />
-        </div>
-      </div>
-      <div className="color-picker-container">
-      <div className="slidecontainer">
-        <p>
-          선 두께: <span>{value}</span>
-        </p>
-        <input
-          type="range"
-          min="10"
-          max="30"
-          value={value}
-          className="slider"
-          id="myRange"
-          onChange={(e) => setValue(e.target.value)}
-        />
-      </div>
-      <ColorPicker
-        color={drawColorRef.current}
-        onChangeComplete={handleColorChange}
-      />
-      </div>
-      
+
+
     </div>
   );
 };
