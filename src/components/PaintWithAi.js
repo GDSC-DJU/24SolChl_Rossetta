@@ -7,7 +7,8 @@ import "../styles/PaintWithAi.css";
 import "../styles/RangeSlider.css";
 import Gallery from "../components/Gallery";
 import { useLocation } from 'react-router-dom';
-
+import html2canvas from "html2canvas";
+import axios from 'axios'
 
 
 
@@ -291,6 +292,50 @@ const PaintWithAi = () => {
     console.log(fingerLine.current);
   }
 
+  const onCapture = () =>{
+    html2canvas(canvasRef.current,{scale:4}).then((canvas)=>{
+      let now = new Date();
+      const month = now.getMonth()+1 < 10 ? "0"+(now.getMonth()+1) : now.getMonth()+1;
+      const date = now.getDate() < 10 ? "0"+now.getDate() : now.getDate();
+      const YMD = now.getFullYear()+""+month+""+date;
+      const hour = now.getHours() < 10 ? "0"+now.getHours() : now.getHours();
+      const minutes= now.getMinutes() < 10 ? "0"+now.getMinutes() : now.getMinutes();
+      const seconds = now.getSeconds() < 10 ? "0"+now.getSeconds() : now.getSeconds();
+      const time = hour+""+minutes+""+seconds;
+      let img = canvas.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
+      axios.post('http://localhost:8000/paint/mypicpaint', 
+      {
+        Picname:'안녕',
+        img:JSON.stringify(img),
+        fileName:`${YMD}${time}`
+      },{
+        headers: {
+          // "Content-Type":'application/json',
+          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }},)
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
+    
+
+      onSaveAs(canvas.toDataURL('image/jpeg'),`_${YMD}_${time}.jpeg`,);
+    });
+    
+  };
+  const onSaveAs = (uri,filename)=>{
+    var link = document.createElement('a');
+    document.body.appendChild(link);
+    link.href = uri;
+    link.download = filename;
+    link.click();
+    document.body.removeChild(link);
+    // navigatorR(-1);
+  
+  };
+
 
   return (
     <div className="paint-with-ai-page-container">
@@ -322,6 +367,7 @@ const PaintWithAi = () => {
             />
           </div>
           <button className="btn-hover color-5" onClick={clearCanvas}>지우기</button>
+          <button className="btn-hover color-5" onClick={onCapture}>사진저장</button>
           <ColorPicker
             color={drawColorRef.current}
             onChangeComplete={handleColorChange}
