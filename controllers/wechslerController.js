@@ -21,9 +21,9 @@ exports.deleteWechslerInfo = async(req,res,next) => {
 exports.wechslerInfo = async(req,res,next) => { 
     try{
         // const {id} = req.decoded;
-        const {childNum} = req.params;
+        const {id} = req.decoded;
         console.log("asdf")
-        const data = await selectWechsler(childNum);
+        const data = await selectWechsler(id);
         console.log(data);
         res.status(200).json({
             code:200,

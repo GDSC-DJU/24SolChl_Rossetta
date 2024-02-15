@@ -1,7 +1,7 @@
-const {deleteParents,deleteChild} = require('../models/memberDB');
-const {selectParents,selectChild} = require('../models/memberDB');
-const {insertParents,insertChild} = require('../models/memberDB');
-const {updateParents,updateChild} = require('../models/memberDB');
+const {deleteParents} = require('../models/memberDB');
+const {selectParents} = require('../models/memberDB');
+const {insertParents} = require('../models/memberDB');
+const {updateParents} = require('../models/memberDB');
 const jwt = require('jsonwebtoken');
 
 //delete-------------------------------------------------------------------------
@@ -22,22 +22,6 @@ exports.deleteParentsInfo = async(req,res,next) => {
     }
 }
 
-//자식 정보 삭제
-exports.deleteChildInfo = async(req,res,next) => { 
-    try{
-        const {id} = req.decoded;
-        await deleteChild(id);
-        res.status(200).json({
-            code:200,
-            massage:'success Delete',
-        });
-    }catch(err){
-        res.status(400).json({
-            code:400,
-            massage:'failed Delete',
-        });
-    }
-}
 
 
 //get-------------------------------------------------------------------------
@@ -60,26 +44,6 @@ exports.parentsInfo = async(req,res,next) => {
     }
 }
 
-//자식 정보 가져오기
-exports.childInfo = async(req,res,next) => { 
-    try{
-        const {id} = req.decoded;
-        const data = await selectChild(id);
-        const date = new Date()
-        data.age = date.getFullYear() - Number(20+data.idNum.substr(0,2)) + 1;
-        console.log(data)
-        res.status(200).json({
-            code:200,
-            massage:'success selecte',
-            response:data
-        });
-    }catch(err){
-        res.status(400).json({
-            code:400,
-            massage:'failed selecte',
-        });
-    }
-}
 
 
 
@@ -104,22 +68,6 @@ exports.parentsSignUp = async(req,res,next) => {
     }
 }
 
-//회원가입 자식
-exports.childSignUp = async(req,res,next) => { 
-    try{
-        const info = req.body;
-        await insertChild(info);
-        res.status(200).json({
-            code:200,
-            massage:'success signUp',
-        });
-    }catch(err){
-        res.status(400).json({
-            code:400,
-            massage:'failed signUp',
-        });
-    }
-}
 
 
 
@@ -182,21 +130,4 @@ exports.parentsInfoUpdate = async(req,res,next) => {
     }
 }
 
-//자식 정보 수정
-exports.childInfoUpdate = async(req,res,next) => { 
-    try{
-        const {id} = req.decoded;
-        const info = req.body;
-        await updateChild(id,info);
-        res.status(200).json({
-            code:200,
-            massage:'success Update',
-        });
-    }catch(err){
-        res.status(400).json({
-            code:400,
-            massage:'failed Update',
-        });
-    }
-}
 

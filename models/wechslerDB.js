@@ -7,9 +7,9 @@ exports.insertWechsler = async (body)=> {
     try{
         console.log(body)
         const conn = await pool.getConnection(async(conn) => conn);
-        const {chilIddNum,lang,pr,wm,ps,iq} = body;
+        const {id,lang,pr,wm,ps,iq} = body;
         // console.log(pwd)
-        await conn.query(`INSERT INTO wechsler (childIdNum,lang,pr,wm,ps,iq) VALUES ("${chilIddNum}","${lang}","${pr}","${wm}","${ps}","${iq}")`);
+        await conn.query(`INSERT INTO wechsler (id,lang,pr,wm,ps,iq) VALUES ("${id}","${lang}","${pr}","${wm}","${ps}","${iq}")`);
         conn.release();
 
     }catch(err){
@@ -42,10 +42,10 @@ exports.updateWechsler = async (num,body)=> {
 }
 
 //웩슬러 정보 가져오기
-exports.selectWechsler = async (childIdNum)=> {
+exports.selectWechsler = async (id)=> {
     try{
         const conn = await pool.getConnection(async(conn) => conn);
-        const list = await conn.query(`SELECT * FROM wechsler WHERE childIdNum="${childIdNum}"`);
+        const list = await conn.query(`SELECT * FROM wechsler WHERE id="${id}"`);
         conn.release();
         return list[0][0];
     }catch(err){

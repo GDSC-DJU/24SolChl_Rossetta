@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(cors());
 
 // 구동방식 변경 http://35.208.138.116:3000 GCP 외부 주소 접속 / localhost:3000 로컬 상 구동
-app.use(cors({ origin: 'http://35.208.138.116:3000'}));
+app.use(cors({ origin: 'http://localhost:3000'}));
 
 app.use('/wechsler',wechslerRouter);
 app.use('/member',memberRouter);
@@ -37,7 +37,7 @@ app.use((req,res,next)=>{
     const err = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
     res.status(404).json({
         code:404,
-        massage:'failed Update',
+        massage:'Not Found',
     });
 
     next(err);
