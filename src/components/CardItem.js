@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import  '../styles/Cards.css';
-import '../styles/button.css'
+import '../styles/Button.css'
 
 
 function CardItem(props) {

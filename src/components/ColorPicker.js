@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { SketchPicker } from 'react-color';
 import '../styles/PaintWithAi.css'
-import '../styles/button.css'
+import '../styles/Button.css'
 
 
 const ColorPicker = ({ color, onChangeComplete }) => {

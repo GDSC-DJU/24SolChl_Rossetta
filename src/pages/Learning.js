@@ -27,7 +27,7 @@ function Cards() {
                         src='img/Situation.PNG'
                         text='그림을 보고 상황을 인지해 보세요!'
                         label='상황 인지'
-                        path='situation-quiz'
+                        path='situation'
                         />
                         <CardItem
                         src='img/pattern.PNG'

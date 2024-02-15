@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation, Outlet } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import styled from 'styled-components';
 
-const PageLayout = ({name, children }) => {
+const PageLayout = ({ name, children }) => {
     //Props 양식 => current: 현재 주소 "/learning/situation" / name: 주소 이름 "상황판단"
     const [traceLocation, setTraceLocation] = useState({});
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(location.pathname.includes("education")){
+        if(location.pathname.includes("learning")){
             setTraceLocation({위치:"/learning", 이름: "학습"});
         }
         else if(location.pathname.includes("introduction")){
@@ -20,7 +20,7 @@ const PageLayout = ({name, children }) => {
     const SubNavigator = () => {
         return(
             <SubNavigatorWrapper>
-                <ToHome src="./assets/home.png" onClick={() => navigate("/")}/>
+                <ToHome src="../../assets/home.png" onClick={() => navigate("/")}/>
                 <span> &gt; </span>
                 {Object.keys(traceLocation).length > 0 ? 
                 <>
@@ -71,17 +71,18 @@ const PageTitleWrapper = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100px;
-    font-size: 36px;
+    height: auto;
+    font-size: 40px;
     color: #474747;
+    margin-top: 35px;
 `;
 
 const PageWrapper = styled.div`
     postition: relative;
-    width: 100%;
     height: auto;
     min-height: 550px;
     justify-content: center;
+    margin: 0 70px;
 `;
 
 const SubNavigatorWrapper = styled.nav`
@@ -117,5 +118,4 @@ const ContentWrapper = styled.div`
     align-items: center;
     border-top: 2px solid #474747;
     min-height: 300px;
-    margin: 0 70px;
 `;
