@@ -1,3 +1,4 @@
+/* used: CardItems.js 레벨 선택 버튼 */
 .buttons {
     margin: 10%;
     text-align: center;
@@ -88,3 +89,27 @@
     background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
     box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
 }
+
+ /* Used: 상황 판단 퀴즈 버튼 */
+ .btnFloat {
+    background: #36BC9B;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    transition: all 0.2s ;
+    background-color: #36BC9B;
+    width: 380px;
+    height: 50px;
+    margin-top: 150px;
+    font-size: 22px;
+    transition: all 0.2s ease-in;
+    font-family: 'Korean-Font-Bold';
+  }
+  
+  .btnFloat:hover {
+    margin-top: 147px;
+    margin-left: 0px;
+    transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    -webkit-transform: scale(1.1,1.1);
+    box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+  }
