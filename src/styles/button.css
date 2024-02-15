@@ -58,6 +58,10 @@
     box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
     margin-left: 20px;
 }
+.btn-hover.gallery {
+    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+}
 
 .btn-hover.color-6 {
     background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);

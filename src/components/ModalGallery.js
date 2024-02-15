@@ -4,7 +4,6 @@ import styled from "styled-components";
 const ImageContentWrap = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: left;
 `;
 
 const ImageContentRow = styled.div`
@@ -13,12 +12,15 @@ const ImageContentRow = styled.div`
 `;
 
 const FestivalMainImage = styled.img`
-  width: 300px;
+  width: 100%;
   height: 100%;
+  border-style:solid;
+  border-width: 2px;
   border-radius: 30px;
 `;
 
 const FestivalMainImageWrap = styled.div`
+  display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   margin-bottom: 10px;
@@ -29,7 +31,7 @@ const PreviewImage = styled.img`
   height: 80px;
   object-fit: cover;
   margin-right: 10px;
-  border-radius: 30px;
+  border-radius: 50px;
   cursor: pointer;
   border-style:solid;
   border-width: 0.5px;
@@ -37,18 +39,11 @@ const PreviewImage = styled.img`
 
 const ButtonIcon = styled.svg`
   cursor: pointer;
-  margin-bottom: 20%;
 `;
 
 // 이미지 경로를 동적으로 생성
 const images = [
-  "/paintwithai/LV.1/1.webp",
-  "/paintwithai/LV.1/2.webp",
-  "/paintwithai/LV.1/3.webp",
-  "/paintwithai/LV.1/4.webp",
-  "/paintwithai/LV.1/5.webp",
-  "/paintwithai/LV.1/6.webp",
-  "/paintwithai/LV.1/7.png",
+  "/myGallery/tree.jpg"
 ].map((src) => ({ source: src }));
 
 const ImageContent = () => {
@@ -86,42 +81,10 @@ const ImageContent = () => {
   return (
     <ImageContentWrap>
       <FestivalMainImageWrap>
-        <ButtonIcon
-          xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          onClick={onPrevImage}
-        >
-          <path
-            d="M25 30L15 20L25 10"
-            stroke="#949494"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </ButtonIcon>
         <FestivalMainImage
           src={images[selectedImageIndex].source}
           alt="Festival Image"
         />
-        <ButtonIcon
-          xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          onClick={onNextImage}
-        >
-          <path
-            d="M15 30L25 20L15 10"
-            stroke="#949494"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </ButtonIcon>
       </FestivalMainImageWrap>
       <ImageContentRow>
         {visibleImages.map((image, index) => (
