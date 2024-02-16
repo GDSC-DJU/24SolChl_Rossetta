@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import axios from 'axios'
 const ImageContentWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,24 +75,38 @@ const ImageContent = () => {
       images[nextIndex],
     ];
   };
+  const [visibleImages,setVisibleImages] = useState([]);
 
-  const visibleImages = getVisibleImages();
+  useEffect(()=>{
+    axios.get(`http://localhost:8000/paint/mypicpaint/info`, {
+      headers: {
+        "Content-Type": 'application/json',
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }
+    }).then((res) => {
+        console.log(res.data.response);
+        setVisibleImages(res.data.response);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  },[])
 
   return (
     <ImageContentWrap>
       <FestivalMainImageWrap>
         <FestivalMainImage
-          src={images[selectedImageIndex].source}
+          src={visibleImages.length !== 0 ? visibleImages[selectedImageIndex].image : ''}
           alt="Festival Image"
         />
       </FestivalMainImageWrap>
       <ImageContentRow>
-        {visibleImages.map((image, index) => (
+        {visibleImages.map((item, index) => (
           <PreviewImage
             key={index}
-            src={image.source}
+            src={visibleImages.length !== 0 ? item.image : ''}
             alt={`Preview Image ${index}`}
-            onClick={() => onClickImage(images.indexOf(image))} // 이미지 클릭 시 해당 이미지로 변경
+            onClick={() => onClickImage(index)} // 이미지 클릭 시 해당 이미지로 변경
           />
         ))}
       </ImageContentRow>
