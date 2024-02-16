@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/pattern.css';
+import '../styles/Pattern.css';
 import { useParams } from 'react-router-dom';
 import PageLayout from './PageLayout';
+import axios from 'axios';
 
 const generateRandomPattern = (size) => {
   const pattern = [];
@@ -16,13 +17,15 @@ const generateRandomPattern = (size) => {
 };
 
 const Pattern = () => {
-  const { patternId } = useParams();
+  //const { patternId } = useParams();
   const [gridSize, setGridSize] = useState(10);
   const [gridPattern, setGridPattern] = useState(generateRandomPattern(10));
   const [userPattern, setUserPattern] = useState(Array(10).fill(0).map(() => Array(10).fill(false)));
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [timerID, setTimerID] = useState(null);
   const [isPatternMatching, setIsPatternMatching] = useState(false);
+  const [level, setLevel] = useState(useParams().level);
+  const [time, setTime] = useState(useParams().time); 
 
   useEffect(() => {
     document.documentElement.style.setProperty('--grid-size', gridSize);
@@ -30,11 +33,11 @@ const Pattern = () => {
 
   useEffect(() => {
     let size;
-    switch (patternId) {
-      case 'pattern1':
+    switch (level) {
+      case '1':
         size = 3;
         break;
-      case 'pattern2':
+      case '2':
         size = 5;
         break;
       default:
@@ -43,7 +46,7 @@ const Pattern = () => {
     setGridSize(size);
     setGridPattern(generateRandomPattern(size));
     setUserPattern(Array(size).fill(0).map(() => Array(size).fill(false)));
-  }, [patternId]);
+  }, [level]);
 
   useEffect(() => {
     const grid = document.querySelector('.pattern-grid');
@@ -76,10 +79,30 @@ const Pattern = () => {
 
   const handleSubmit = () => {
     clearInterval(timerID);
-    setTimerID(null);
+    setTime(time);
+    setLevel(level);
 
     const isMatching = checkPatternMatching();
     setIsPatternMatching(isMatching);
+
+    axios.post('http://localhost:8000/pattern/submit', {
+      time: timeElapsed,
+      level: level,
+    }, {
+      headers: {
+        //"Content-Type": 'application/json',
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+      }
+    })
+    .then((res) => {
+      console.log(res);
+      setTimerID(res.data.time);
+      setLevel(res.data.level);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
   };
 
   const nextPattern = () => {
@@ -174,4 +197,3 @@ const Pattern = () => {
 };
 
 export default Pattern;
-

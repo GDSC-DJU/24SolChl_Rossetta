@@ -18,6 +18,10 @@
   transform: translateY(-20px);
 }
 
+canvas#gridCanvas.grid-c {
+  border: 1px solid #000000;
+}
+
 .pattern-container {
   display: flex;
   flex-direction: column;
