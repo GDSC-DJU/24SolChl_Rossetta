@@ -245,7 +245,7 @@ const Signup = () => {
         </div>
         <div className='wecsler'>
           <button className="btn-hover gallery" onClick={openModalHandler}> 웩슬러 지능 검사 점수 입력 </button>
-          <div style={{marginTop: "10px", fontSize: "16px", fontWeight: "bold", color: "red"  }}>웩슬러 지능 검사 점수 입력은 필수 입력이 아닙니다 :)</div>
+          <div style={{marginTop: "14px", fontSize: "13px", fontWeight: "bold", color: "red"  }}>웩슬러 점수는 필수 입력이 아닙니다.</div>
         </div>
         {isModalOpen && (
           <>

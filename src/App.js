@@ -8,12 +8,9 @@ import Pronunciation from "./components/Pronunciation";
 import PaintWithAi from './components/PaintWithAi';
 import Signup from "./pages/Signup";
 import Learning from "./pages/Learning";
-import Pattern from "./patterns/pattern";
+import Pattern from "./components/pattern";
 import styled from "styled-components";
 import MyPage from "./components/MyPage"
-import Introduction from "./pages/Introduction";
-import SituationQuiz from "./components/Situation";
-
 import ChangeUserInfo from "./pages/ChangeUserInfo";
 import Footer from "./components/Footer";
 
