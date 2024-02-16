@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import styled from 'styled-components';
+import Footer from './Footer';
 
 const PageLayout = ({ name, children }) => {
     //Props 양식 => current: 현재 주소 "/learning/situation" / name: 주소 이름 "상황판단"
@@ -39,17 +40,20 @@ const PageLayout = ({ name, children }) => {
 
 
     return (
-    <PageContainer>
-        <PageTitleWrapper>
-            {name}
-        </PageTitleWrapper>
-        <PageWrapper>
-            <SubNavigator/>
-            <ContentWrapper>
-                {children}
-            </ContentWrapper>
-        </PageWrapper>
-    </PageContainer>
+        <>
+            <PageContainer>
+                <PageTitleWrapper>
+                    {name}
+                </PageTitleWrapper>
+                <PageWrapper>
+                    <SubNavigator/>
+                    <ContentWrapper>
+                        {children}
+                    </ContentWrapper>
+                </PageWrapper>
+            </PageContainer>
+            <Footer/>
+        </>
     )
 }
 export default PageLayout;

@@ -33,7 +33,7 @@ const Nav = () => {
           <li>검사</li>
         </MenuWrapper>
         <TitleWrapper style={{cursor:"pointer"}}onClick={() => (window.location.href = "/")}>
-            <img src="../../assets/rossetta-title.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
+            <img src="../../assets/title1.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
         </TitleWrapper>
         <UserMenuWrapper>
           <Link to="login" className='link-to' id='link-to__login' >로그인</Link>
@@ -91,7 +91,7 @@ const TitleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: auto;
-  height: 50%;
+  height: 75%;
   font-Size: 44px;
   font-Family: 'English-Font'; 
   letter-Spacing: 0px;
