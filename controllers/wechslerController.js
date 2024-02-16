@@ -60,6 +60,7 @@ exports.insertWechslerInfo = async(req,res,next) => {
 exports.wechslerInfoUpdate = async(req,res,next) => { 
     try{
         const {wechslerNum} = req.params
+        console.log(wechslerNum)
         const info = req.body;
         await updateWechsler(wechslerNum,info);
         res.status(200).json({

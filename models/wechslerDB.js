@@ -13,7 +13,10 @@ exports.insertWechsler = async (body)=> {
         conn.release();
 
     }catch(err){
-        console.log(err);
+        res.status(400).json({
+            code:400,
+            massage:'failed Insert',
+        });
     }
 }
 
@@ -31,13 +34,16 @@ exports.deleteWechsler = async (num)=> {
 //웩슬러 정보 업데이트
 exports.updateWechsler = async (num,body)=> {
     try{
-        console.log(body)
         const conn = await pool.getConnection(async(conn) => conn);
         const {lang,pr,wm,ps,iq} = body;
         await conn.query(`UPDATE wechsler SET lang="${lang}",pr="${pr}",wm="${wm}",ps="${ps}",iq="${iq}" WHERE num="${num}"`);
         conn.release();
     }catch(err){
         console.log(err);
+        res.status(400).json({
+            code:400,
+            massage:'failed Update',
+        });
     }
 }
 
