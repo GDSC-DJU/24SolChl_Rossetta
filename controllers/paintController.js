@@ -1,6 +1,7 @@
 const {insertMyPicPaint, selectMyPicPaint, deleteMyPicPaint} = require('../models/paintDB');
 const {insertPaintEx, selectPaintEx, deletePaintEx} = require('../models/paintDB');
 const fs = require('fs')
+const path = require('path');
 // myPicPaint 테이블 관련 함수
 
 //myPicPaint 테이블에 데이터를 삽입
@@ -10,8 +11,8 @@ exports.insertPaint = async(req, res, next) => {
         const body = req.body;
         const {id} = req.decoded;
         let {img,name,fileName} = body;
-        const url = __dirname + `/../img/${fileName}.jpeg`;
-
+        const url = path.join(__dirname, `../`,`img/${fileName}.jpeg`);
+        const saveUrl = `http://localhost:8000/${fileName}.jpeg`;
         fs.writeFile(url, img, 'base64', function(err) {
             console.log(err)
             if(err) {
@@ -22,7 +23,7 @@ exports.insertPaint = async(req, res, next) => {
         });
         console.log("adsf")
         
-        await insertMyPicPaint(body,id,url);
+        await insertMyPicPaint(body,id,saveUrl);
         res.status(200).json({
             code: 200,
             message: 'success insert'
