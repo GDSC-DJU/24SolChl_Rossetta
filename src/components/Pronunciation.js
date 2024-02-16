@@ -1,8 +1,9 @@
 import React,{ useState, useRef, useEffect,useCallback} from 'react';
-import '../styles/pronunciation.css';
+import '../styles/Pronunciation.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import PageLayout from './PageLayout';
+import styled from 'styled-components';
 
 const Pronunciation = () =>{
   const [stream, setStream] = useState();
@@ -139,7 +140,7 @@ const onSubmitAudioFile = useCallback(async () => {
     axios.get('http://localhost:8000/pronunciation/info/1',{
       headers: {
         "Content-Type":'application/json',
-        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
+        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
       }
   })
   .then((res)=>{
@@ -196,7 +197,7 @@ const onSubmitAudioFile = useCallback(async () => {
       },{
         headers: {
           // "Content-Type":'application/json',
-          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOEBuYXZlci5jb20iLCJwdyI6InRqcmRsMTY1MSEiLCJpYXQiOjE3MDc1ODc1NDAsImV4cCI6MTcwODE4NzU0MCwiaXNzIjoic2VydmVyIn0.EfCvTA2T6rxHW-2CSGfN3l7NNWiIZofuPgZ_fnWtkDs"
+          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
       }},)
       .then((res)=>{
         console.log(res);
@@ -214,6 +215,7 @@ const onSubmitAudioFile = useCallback(async () => {
   },[score])
 
   return (
+    <PageLayout name="발음교정훈련">
     <div className='pronunciation-page-container'>
       <div className='pronunciation-container'>
         {/* <div className='level-container'>
@@ -257,6 +259,7 @@ const onSubmitAudioFile = useCallback(async () => {
       </div>
       
     </div>
+    </PageLayout>
   );
 }
 
