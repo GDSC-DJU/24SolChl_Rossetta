@@ -32,10 +32,8 @@ const Nav = () => {
           <Link to="learning" className='link-to'>학습</Link>
           <li>검사</li>
         </MenuWrapper>
-        <TitleWrapper>
-          <div onClick={() => (window.location.href = "/")}>
-            Rossetta
-          </div>
+        <TitleWrapper style={{cursor:"pointer"}}onClick={() => (window.location.href = "/")}>
+            <img src="../../assets/rossetta-title.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
         </TitleWrapper>
         <UserMenuWrapper>
           <Link to="login" className='link-to' id='link-to__login' >로그인</Link>
@@ -93,7 +91,7 @@ const TitleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: auto;
-  height: 100%;
+  height: 50%;
   font-Size: 44px;
   font-Family: 'English-Font'; 
   letter-Spacing: 0px;
@@ -111,4 +109,5 @@ const UserMenuWrapper = styled.div`
   font-Family: 'Korean-Font-bold';
   text-Decoration: "none"
 `;
+
 
