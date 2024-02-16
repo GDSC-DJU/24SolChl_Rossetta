@@ -1,8 +1,10 @@
 .pronunciation-page-container{
+  width: 100%;
   display: flex;
   justify-content: center;
   height: 100vh;
   background-color: #f8f9fa;
+  font-family: 'Korean-Font-bold';
 }
 
 .pronunciation-container{
@@ -59,6 +61,8 @@
   border-radius: 10px;
   width: 30%;
   height: 50%;
+  font-family: 'Korean-Font-bold';
+
 }
 .pronunciation-button-container button:hover{
   background-color: rgba(173, 181, 189, 0.2);
