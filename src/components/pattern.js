@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './pattern.css';
+import '../styles/pattern.css';
 import { useParams } from 'react-router-dom';
+import PageLayout from './PageLayout';
 
 const generateRandomPattern = (size) => {
   const pattern = [];
@@ -130,9 +131,10 @@ const Pattern = () => {
   }, [gridPattern, gridSize]);
   
   return (
-    <div className="App">
-      <div className="grid-container">
-        <div className="canvas-container">
+    <PageLayout name ="패턴따라 그리기">
+    <div className="all-pattern-container">
+      <div className="pattern-grid-container">
+        <div className="pattern-canvas-container">
           <canvas
             id="gridCanvas"
             className="grid-c"
@@ -156,17 +158,18 @@ const Pattern = () => {
           </div>
         </div>
       </div>
-      <div className="button-container">
-        <button className="submit-button" onClick={handleSubmit}>
+      <div className="pattern-button-container">
+        <button className="pattern-submit-button" onClick={handleSubmit}>
           제출
         </button>
-        <button className="next-button" onClick={nextPattern}>
+        <button className="pattern-next-button" onClick={nextPattern}>
           다음 문제
         </button>
       </div>
       <p>{isPatternMatching ? "잘했습니다." : "패턴이 일치하지 않습니다."}</p>
       <p>경과 시간: {timeElapsed}초</p>
     </div>
+    </PageLayout>
   );
 };
 
