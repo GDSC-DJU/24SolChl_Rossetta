@@ -26,6 +26,8 @@ const Signup = () => {
   const [wchslerData2, setWechslerData2] = useState();
   const [wchslerData3, setWechslerData3] = useState();
   const [wchslerData4, setWechslerData4] = useState();
+  const [wchslerData5, setWechslerData5] = useState();
+
 
   useEffect(() => {
     setFormValid(
@@ -283,6 +285,15 @@ const Signup = () => {
                   type="number"
                   placeholder="처리 속도 점수"
                   value={wchslerData4}
+                />
+              </div>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>IQ</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="IQ 점수"
+                  value={wchslerData5}
                 />
               </div>
               <div className='wecsler'>
