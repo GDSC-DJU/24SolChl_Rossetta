@@ -78,7 +78,7 @@ const Situation = () => {
 
     if(!finish){
         return (
-            <PageLayout name="상황판단퀴즈">
+            <PageLayout name="상황인지 훈련">
                 <div className='page-wrap'>
                     <div className='quiz-wrapper'>
                         <img className='quiz-image' src={Object.keys(currentQuiz).length > 0 ? currentQuiz.image : 'X'} alt='상황 이미지'/>
