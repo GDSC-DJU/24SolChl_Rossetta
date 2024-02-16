@@ -14,6 +14,7 @@ import MyPage from "./components/MyPage"
 import Introduction from "./pages/Introduction";
 import SituationQuiz from "./components/Situation";
 
+import ChangeUserInfo from "./pages/ChangeUserInfo";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Signup/>}/>
           <Route path="learning" element={<Learning />}/>
+		      <Route path="mypage/userinfo" element={<ChangeUserInfo/>}/>
 		    </Routes>
     </Container>
   );
