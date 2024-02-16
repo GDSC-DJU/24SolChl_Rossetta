@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import '../styles/Login.css'
-
+import styled from 'styled-components';
 
 const ChangeUserInfo = () =>{
     // input tage values
@@ -14,7 +14,10 @@ const ChangeUserInfo = () =>{
     const [mobile, setMobile] = useState('');
     const [gender, setGender] = useState('');
     const [birthdate, setBirthdate] = useState('');
-  
+    const [wchslerData1, setWechslerData1] = useState();
+    const [wchslerData2, setWechslerData2] = useState();
+    const [wchslerData3, setWechslerData3] = useState();
+    const [wchslerData4, setWechslerData4] = useState();
     // 버튼 활성화를 위한 버튼 입력값 판단
     const [pwValid, setPwValid] = useState(false);
     const [pwConfirmValid, setPwConfirmValid] = useState(false);
@@ -23,7 +26,39 @@ const ChangeUserInfo = () =>{
     const [birthdateValid, setBirthdateValid] = useState(false);
     const [formValid, setFormValid] = useState(false);
     const [pwCompareValid,setPwCompareValid] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+
+    const Modal = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    `;
+
+  const Overlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    `;
+    // 모달 열기
+    const openModalHandler = () => {
+      setIsModalOpen(true);
+    };
+  
+    // 모달 닫기
+    const closeModalHandler = () => {
+      setIsModalOpen(false);
+    };
     useEffect(()=>{
       axios.get('http://localhost:8000/member/parents/info',{
         headers: {
@@ -45,7 +80,24 @@ const ChangeUserInfo = () =>{
       .catch((err)=>{
         console.log(err);
       })
+      axios.get('http://localhost:8000/member/wechsler/info',{
+        headers: {
+          "Content-Type":'application/json',
+          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        }
+      })
+      .then((res)=>{
+        const wchslerIndo = res.data.response;
+        setWechslerData1(wchslerIndo.lang);
+        setWechslerData2(wchslerData2.pr);
+        setWechslerData3(wchslerIndo.wm);
+        setWechslerData4(wchslerIndo.ps);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     },[])
+
   
     useEffect(() => {
       setFormValid(
@@ -248,7 +300,60 @@ const ChangeUserInfo = () =>{
               style={{backgroundColor:'rgb(250,250,250)'}}
             />
           </div>
-  
+          <div className='wecsler'>
+          <button className="btn-hover gallery" onClick={openModalHandler}> 웩슬러 지능 검사 점수 입력 </button>
+          <div style={{marginTop: "10px", fontSize: "16px", fontWeight: "bold", color: "red"  }}>웩슬러 지능 검사 점수 입력은 필수 입력이 아닙니다 :)</div>
+        </div>
+          {isModalOpen && (
+          <>
+            <Overlay onClick={closeModalHandler} />
+            <Modal>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>언어 이해</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="언어 이해 점수"
+                  value={wchslerData1}
+                  onChange={(e)=>setWechslerData1(e.target.value)}
+                />
+              </div>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>지각 추론</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="지각 추론 점수"
+                  value={wchslerData2}
+                  onChange={(e)=>setWechslerData2(e.target.value)}
+                />
+              </div>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>작업 기억</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="작업 기억 점수"
+                  value={wchslerData3}
+                  onChange={(e)=>setWechslerData3(e.target.value)}
+                />
+              </div>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>처리 속도</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="처리 속도 점수"
+                  value={wchslerData4}
+                  onChange={(e)=>setWechslerData4(e.target.value)}
+                />
+              </div>
+              <div className='wecsler'>
+                <button className="btn-hover gallery" onClick={closeModalHandler}>닫기</button>
+              </div>
+            </Modal>
+          </>
+        )}
         </div>
         <button onClick={onClickUpdateButton} disabled={!formValid} className="signupButton">
           가입하기

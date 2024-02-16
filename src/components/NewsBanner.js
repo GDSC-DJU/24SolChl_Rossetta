@@ -1,17 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const SubBanner = () => {
-
-    const NewsClick = () => {
-
-    }
-
+const NewsBanner = () => {
     return (
         <NewsBannerContainer>
             <NewsBannerWrapper>
                 <h3>소식 뉴스</h3>
-                <NewsBanner>
+                <NewsBannerContent>
                     <NewsItem onClick={() => window.open('https://www.chemicalnews.co.kr/news/articleView.html?idxno=6027')}>
                         <NewsImageWrapper style={{height: "100%"}}>
                             <NewsImage src='./assets/news4.png' style={{height: "100%"}}>
@@ -57,13 +52,13 @@ const SubBanner = () => {
                             학습부진·따돌림 겪는 ‘경계선 지능 아동’…“맞춤형 서비스 필요”
                         </span>
                     </NewsItemSmall>
-                </NewsBanner>
+                </NewsBannerContent>
             </NewsBannerWrapper>
         </NewsBannerContainer>
     )
 }
 
-export default SubBanner
+export default NewsBanner
 
 const NewsBannerContainer = styled.div`
     display: flex;
@@ -84,7 +79,7 @@ const NewsBannerWrapper = styled.div`
     }
 `;
     
-const NewsBanner = styled.div`
+const NewsBannerContent = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
