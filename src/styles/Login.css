@@ -126,3 +126,11 @@
     background-color: #dadada;
     color: white;
   }
+
+  .wecsler {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 8px;
+    width: 100%;
+  }

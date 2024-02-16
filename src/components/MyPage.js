@@ -668,14 +668,14 @@ z-index: 999;
           로그아웃
         </div>
         {isModalOpen && (
-        <>
-          <Overlay onClick={closeModalHandler} />
-          <Modal>
-            <Gallery />
-            <button className="btn-hover gallery" onClick={closeModalHandler}>닫기</button>
-          </Modal>
-        </>
-      )}
+          <>
+            <Overlay onClick={closeModalHandler} />
+            <Modal>
+              <Gallery />
+              <button className="btn-hover gallery" onClick={closeModalHandler}>닫기</button>
+            </Modal>
+          </>
+        )}
       </div>
 
 

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Login.css';
+import styled from 'styled-components';
+
 
 const Signup = () => {
-    // input tage values
+  // input tage values
   const [username, setUsername] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState('');
@@ -20,33 +22,37 @@ const Signup = () => {
   const [mobileValid, setMobileValid] = useState(false);
   const [birthdateValid, setBirthdateValid] = useState(false);
   const [formValid, setFormValid] = useState(false);
+  const [wchslerData1, setWechslerData1] = useState();
+  const [wchslerData2, setWechslerData2] = useState();
+  const [wchslerData3, setWechslerData3] = useState();
+  const [wchslerData4, setWechslerData4] = useState();
 
   useEffect(() => {
     setFormValid(
       usernameValid && pwValid && pwConfirmValid && emailValid && mobileValid && birthdateValid && name !== '' && gender !== ''
     );
   }, [usernameValid, pw, pwConfirm, pwValid, pwConfirmValid, emailValid, mobileValid, birthdateValid, name, gender]);
-  
-  useEffect(()=>{
-    console.log(formValid)
-  },[formValid]);
 
-  useEffect(()=>{
+  useEffect(() => {
+    console.log(formValid)
+  }, [formValid]);
+
+  useEffect(() => {
     // 비밀번호 확인 유효성 검사 추가
     setPwConfirmValid(pw === pwConfirm);
     // 핸드폰 번호 유효성 검사 추가
     setMobileValid(/^\d{11}$/.test(mobile));
     // 생년월일 유효성 검사 추가
     setBirthdateValid(/^\d{8}$/.test(birthdate));
-  },[pw,birthdate,pwConfirm])
-  
+  }, [pw, birthdate, pwConfirm])
+
   const handleUsername = (e) => {
     const value = e.target.value.toLowerCase(); // 입력값을 소문자로 변환
     setUsername(value);
     const regex = /^[a-z0-9]+$/; // 영어 소문자와 숫자만
     setUsernameValid(regex.test(value));
   };
-  
+
   const handlePw = (e) => {
     const value = e.target.value;
     setPw(value);
@@ -81,8 +87,42 @@ const Signup = () => {
     // 여기에 회원가입 로직을 추가합니다.
   };
 
+  // 간단한 모달 컴포넌트 스타일
+  const Modal = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    `;
+
+  const Overlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    `;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 모달 열기
+  const openModalHandler = () => {
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기
+  const closeModalHandler = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="page" style={{top: "10px"}}>
+    <div className="page" style={{ top: "10px" }}>
       <div className="titleWrap">회원가입</div>
       <div className="contentWrap">
         {/* 아이디 입력 필드 */}
@@ -143,7 +183,7 @@ const Signup = () => {
         </div>
 
         {/* 이메일 입력 필드 */}
-        <div className="inputTitle" style={{marginTop: "8px"}}>이메일</div>
+        <div className="inputTitle" style={{ marginTop: "8px" }}>이메일</div>
         <div className="inputWrap">
           <input
             className="input"
@@ -170,8 +210,8 @@ const Signup = () => {
         </div>
 
         {/* 성별 입력 필드 */}
-        <div className="inputTitle" style={{marginTop: "8px"}}>성별</div>
-        <div className="inputWrap" style={{ flexDirection: 'row'}}>
+        <div className="inputTitle" style={{ marginTop: "8px" }}>성별</div>
+        <div className="inputWrap" style={{ flexDirection: 'row' }}>
           <label>
             <input
               type="radio"
@@ -191,7 +231,7 @@ const Signup = () => {
         </div>
 
         {/* 생년월일 입력 필드 */}
-        <div className="inputTitle" style={{marginTop: "8px"}}>생년월일</div>
+        <div className="inputTitle" style={{ marginTop: "8px" }}>생년월일</div>
         <div className="inputWrap">
           <input
             className="input"
@@ -201,7 +241,56 @@ const Signup = () => {
             onChange={handleBirthdate}
           />
         </div>
-
+        <div className='wecsler'>
+          <button className="btn-hover gallery" onClick={openModalHandler}> 웩슬러 지능 검사 점수 입력 </button>
+          <div style={{marginTop: "10px", fontSize: "16px", fontWeight: "bold", color: "red"  }}>웩슬러 지능 검사 점수 입력은 필수 입력이 아닙니다 :)</div>
+        </div>
+        {isModalOpen && (
+          <>
+            <Overlay onClick={closeModalHandler} />
+            <Modal>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>언어 이해</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="언어 이해 점수"
+                  value={wchslerData1}
+                />
+              </div>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>지각 추론</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="지각 추론 점수"
+                  value={wchslerData2}
+                />
+              </div>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>작업 기억</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="작업 기억 점수"
+                  value={wchslerData3}
+                />
+              </div>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>처리 속도</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="처리 속도 점수"
+                  value={wchslerData4}
+                />
+              </div>
+              <div className='wecsler'>
+                <button className="btn-hover gallery" onClick={closeModalHandler}>닫기</button>
+              </div>
+            </Modal>
+          </>
+        )}
       </div>
       <button onClick={onClickRegisterButton} disabled={!formValid} className="signupButton">
         가입하기
