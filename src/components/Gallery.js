@@ -51,7 +51,7 @@ const images = [
   "/paintwithai/LV.1/7.png",
 ].map((src) => ({ source: src }));
 
-const ImageContent = (props) => {
+const ImageContent = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const onClickImage = (index) => {

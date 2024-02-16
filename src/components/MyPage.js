@@ -55,7 +55,6 @@ const MyPage = () => {
 
   //문장 반복말하기
   const pronunciationScore = () => {
-    console.log("adsf")
     axios.get(`http://localhost:8000/pronunciation/info/score/${pDate}/${level}`, {
       headers: {
         "Content-Type": 'application/json',
@@ -63,7 +62,6 @@ const MyPage = () => {
       }
     })
       .then((res) => {
-        console.log(level)
         if (pDate === 1) {
           let score = [];
           let date = 0;
@@ -99,7 +97,6 @@ const MyPage = () => {
             }
           });
           setPracticeList(score);
-          console.log(score)
         } else {
           setScoreList(res.data.response);
         }
@@ -127,10 +124,8 @@ const MyPage = () => {
       }
     })
       .then((res) => {
-        console.log(res);
         const date = new Date();
         const age = date.getFullYear() - res.data.response.birth.slice(0, 4) + 1;
-        console.log(age)
         setUserInfo({
           name: res.data.response.name,
           age: age
@@ -149,7 +144,6 @@ const MyPage = () => {
       }
     })
       .then((res) => {
-        console.log(res)
         if (pDate === 1) {
           let score = [];
           let date = 0;
@@ -169,7 +163,6 @@ const MyPage = () => {
             sum += parseInt(item.time);
             if (item.date !== date || index + 1 == res.data.response.length) {
               if (date != 0) {
-                console.log(date.set);
                 score.push({
                   title: "패턴 그리기",
                   date: date.slice(0, 10),
@@ -186,8 +179,6 @@ const MyPage = () => {
             }
           });
           setPracticeList(score);
-          console.log("Asdfasfasf")
-          console.log(score)
         } else {
           setScoreList(res.data.response);
         }
@@ -198,7 +189,6 @@ const MyPage = () => {
   }
 
   useEffect(() => {
-    console.log(pDate)
     if (chartChange === '날짜별 패턴' || chartChange === '패턴') {
       patternScore();
     } else {
@@ -206,7 +196,6 @@ const MyPage = () => {
     }
   }, [pDate, chartChange])
   useEffect(() => {
-    console.log(level)
     setPDate(1);
 
     setTimeout(() => {
@@ -218,10 +207,6 @@ const MyPage = () => {
     }, 150)
   }, [level, chartChange])
 
-  useEffect(() => {
-    console.log(chartChange)
-
-  }, [chartChange])
 
   //웩슬러 정보 불러오기
   useEffect(() => {
@@ -232,7 +217,6 @@ const MyPage = () => {
       }
     })
       .then((res) => {
-        console.log(res);
         if (res.data.response !== undefined) {
           setWchslerInfo(res.data.response);
 
@@ -397,7 +381,6 @@ const MyPage = () => {
         y: item.avg
       })
     })
-    console.log(list)
     if (chartChange === '날짜별 발음') {
       setTestData({
         datasets: [
@@ -447,12 +430,10 @@ const MyPage = () => {
   useEffect(() => {
     let labels = [];
     let data = [];
-    console.log(scoreList);
 
     if (chartChange === '발음') {
 
       scoreList.map((item) => {
-        console.log(item)
         labels.push(item.sentence);
         data.push(item.score * 20);
       })
@@ -672,7 +653,7 @@ z-index: 999;
           <>
             <Overlay onClick={closeModalHandler} />
             <Modal>
-              <Gallery />
+              <Gallery bool={false}/>
               <button className="btn-hover gallery" onClick={closeModalHandler}>닫기</button>
             </Modal>
           </>
