@@ -8,7 +8,7 @@ import Pronunciation from "./components/Pronunciation";
 import PaintWithAi from './components/PaintWithAi';
 import Signup from "./pages/Signup";
 import Learning from "./pages/Learning";
-import Pattern from "./patterns/pattern";
+import Pattern from "./components/Pattern";
 import styled from "styled-components";
 import MyPage from "./components/MyPage"
 import Introduction from "./pages/Introduction";

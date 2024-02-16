@@ -46,14 +46,11 @@ const PaintWithAi = () => {
 
   // vedio, canvas 크기 설정
   useEffect(() => {
-    console.log(videoRef.current.width);
     videoRef.current.width = 800;
     videoRef.current.height = 450;
     canvasRef.current.width = 800;
     canvasRef.current.height = 450;
-    console.log(canvasRef.current);
     canvasCtx = canvasRef.current.getContext("2d");
-    console.log(level);
   }, []);
 
 
@@ -80,8 +77,8 @@ const PaintWithAi = () => {
       onFrame: async () => {
         await hands.send({ image: videoRef.current });
       },
-      width: 1280,
-      height: 720,
+      width: 800,
+      height: 450,
     });
 
     camera.start();
@@ -170,7 +167,6 @@ const PaintWithAi = () => {
           canvasRef.current.width - landmarks[8].x * canvasRef.current.width;
         const indexFingerTipY = landmarks[8].y * canvasRef.current.height;
         showEraserIndicator(landmarks, canvasRef, thickness);
-        console.log("hello");
         // 이전 위치가 있을 경우에만 선을 그림
         if (xp !== 0 && yp !== 0) {
           canvasCtx.globalCompositeOperation = "destination-out"; // 지우개 모드 설정
@@ -209,7 +205,6 @@ const PaintWithAi = () => {
     canvasCtx.lineCap = "round";
     canvasCtx.globalCompositeOperation = "source-over";
     canvasCtx.stroke();
-    console.log(thickness);
   }
 
   // 선 지우기
@@ -246,7 +241,6 @@ const PaintWithAi = () => {
   // 손가락 사이 선 긋기
   function updateFingerLine(indexFingerTip, pinkyFingerTip, canvasElement) {
     // const fingerLine = document.getElementById('fingerLine');
-    console.log(canvasRef.current.width);
     // 좌우 반전된 좌표를 화면에 맞게 조정
     const indexFingerTipX =
       canvasRef.current.width - indexFingerTip.x * canvasRef.current.width;
@@ -269,10 +263,8 @@ const PaintWithAi = () => {
 
     fingerLine.current.left = startX;
     fingerLine.current.top = startY - fingerLine.current.offsetHeight / 2; // 높이의 절반만큼 올리기
-    console.log(fingerLine.current.offsetHeight);
     // 선의 스타일 설정
     fingerLine.current.width = length;
-    // console.log(length)
     fingerLine.current.transform = `rotate(${angle}deg)`;
     fingerLine.current.transformOrigin = "0 0"; // 회전의 기준점을 선의 시작점으로 설정
     setFingerLineStlye({
@@ -289,7 +281,6 @@ const PaintWithAi = () => {
     // 선을 보이게 함
     // fingerLine.current.display = 'block';
     setDisplay(true);
-    console.log(fingerLine.current);
   }
 
   const onCapture = () => {

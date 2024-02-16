@@ -39,6 +39,7 @@
     transition: width 0.2s ease;
     /* 선의 너비 변화에 애니메이션 적용 */
     margin-top: 70px;
+    margin-left: 400px;
 }
 
 #eraserIndicator {
