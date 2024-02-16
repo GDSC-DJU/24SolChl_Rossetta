@@ -15,7 +15,7 @@ import {
 } from 'chart.js';
 import { Line, Radar, Doughnut, Bar } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
-import '../styles/myPage.css'
+import '../styles/MyPage.css'
 import axios from 'axios'
 import Gallery from './ModalGallery'
 import styled from 'styled-components';
@@ -662,7 +662,7 @@ z-index: 999;
           <Link to={`./userInfo`}>
             <div>회원 정보 수정</div>
           </Link>
-          <button className="btn-hover gallery" onClick={openModalHandler} > 갤러리 </button>
+          <div onClick={openModalHandler} > 갤러리 </div>
 
         </div>
         <div className="sign-out">
