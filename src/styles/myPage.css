@@ -1,19 +1,14 @@
-/* {
 
-} */
-a{
-  text-decoration-line: none;
-  color: black;
-}
 .my-page-container{
   all: initial;
   text-align: center;
-  width: 100vw;
+  width: 90vw;
   height: 90vh;
   display: grid;
   grid-template-columns: 85% 15%;
   background-color: #f8f9fa;
   overflow: hidden;
+  padding: 2vh 10vh;
 }
 
 .graph-container{
@@ -84,6 +79,11 @@ a{
   margin: 5px;
   font-size: 1.0em;
   font-weight:600;
+  color: black;
+
+}
+.menu-container a{
+  text-decoration: none;
 }
 .sign-out{
   color: red;
