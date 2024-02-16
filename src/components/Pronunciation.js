@@ -152,14 +152,14 @@ const bufferToBase64 = (buffer)=> {
         "Content-Type":'application/json',
         Authorization: cookies.get('token')
       }
-  })
-  .then((res)=>{
-    console.log(res);
-    setSentence(res.data.response);
-  })
-  .catch((err)=>{
-    console.log(err);
-  })
+    })
+    .then((res)=>{
+      console.log(res);
+      setSentence(res.data.response);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
   },[])
 
 

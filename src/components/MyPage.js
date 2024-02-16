@@ -19,12 +19,13 @@ import '../styles/MyPage.css'
 import axios from 'axios'
 import Gallery from './ModalGallery'
 import styled from 'styled-components';
-
+import { Cookies } from 'react-cookie';
 
 
 
 
 const MyPage = () => {
+  const cookies = new Cookies();
   ChartJS.register(CategoryScale, RadialLinearScale, LinearScale, PointElement, BarElement, LineElement, ArcElement, Filler, Title, Tooltip, Legend);
   //웩슬러 정보
   const [wchslerInfo, setWchslerInfo] = useState({
@@ -58,7 +59,7 @@ const MyPage = () => {
     axios.get(`http://localhost:8000/pronunciation/info/score/${pDate}/${level}`, {
       headers: {
         "Content-Type": 'application/json',
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        Authorization: cookies.get('token')
       }
     })
       .then((res) => {
@@ -106,21 +107,10 @@ const MyPage = () => {
       })
   }
   useEffect(() => {
-    // axios.post('http://localhost:8000/member/sign-in', 
-    //   {
-    //     id:'minseok0338',
-    //     pw:'tjrdl1651!'
-    //   })
-    //   .then((res)=>{
-    //     console.log(res);
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err);
-    //   })
     axios.get(`http://localhost:8000/member/parents/info`, {
       headers: {
         "Content-Type": 'application/json',
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        Authorization: cookies.get('token')
       }
     })
       .then((res) => {
@@ -140,7 +130,7 @@ const MyPage = () => {
     axios.get(`http://localhost:8000/pattern/${level}/${pDate}`, {
       headers: {
         "Content-Type": 'application/json',
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        Authorization: cookies.get('token')
       }
     })
       .then((res) => {
@@ -213,7 +203,7 @@ const MyPage = () => {
     axios.get(`http://localhost:8000/wechsler/info`, {
       headers: {
         "Content-Type": 'application/json',
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        Authorization: cookies.get('token')
       }
     })
       .then((res) => {
