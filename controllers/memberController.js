@@ -54,13 +54,14 @@ exports.parentsSignUp = async(req,res,next) => {
     try{
         const info = req.body;
         const date = new Date();
-        const joinDate = date.getFullYear() + '.' +date.getMonth() + '.' + getgetDate();
+        const joinDate = date.getFullYear() + '.' +date.getMonth() + '.' + date.getDate();
         await insertParents(info,joinDate);
         res.status(200).json({
             code:200,
             massage:'success signUp',
         });
     }catch(err){
+        console.log(err);
         res.status(400).json({
             code:400,
             massage:'failed signUp',
