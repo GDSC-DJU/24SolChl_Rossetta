@@ -68,7 +68,7 @@ const Situation = () => {
             );
         }
         resultScreen.push(
-            <p style={{magin: "200px 0"}}>
+            <p style={{marginTop:"200px"}}>
                 총 {count}문제 중 {correct}개 정답입니다!
                 {correct > count/2 ? "  잘했어요!" : "  조금 더 분발해 보아요!"}
             </p>
