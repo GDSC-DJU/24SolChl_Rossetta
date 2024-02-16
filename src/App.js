@@ -15,6 +15,7 @@ import Introduction from "./pages/Introduction";
 import SituationQuiz from "./components/Situation";
 
 import ChangeUserInfo from "./pages/ChangeUserInfo";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -32,7 +33,9 @@ function App() {
           <Route path="learning" element={<Learning />}/>
 		      <Route path="mypage/userinfo" element={<ChangeUserInfo/>}/>
 		    </Routes>
+    <Footer/>
     </Container>
+
   );
 }
 
@@ -43,7 +46,7 @@ const Container = styled.div`
 	display: block;
 	position: relative;
 	height: auto;
-  min-height: 100vh
+  min-height: 100vh;
 	z-index: 1;
 `;
 

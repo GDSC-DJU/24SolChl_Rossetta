@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   height: 100vh;
-  background-color: #f8f9fa;
   font-family: 'Korean-Font-bold';
 }
 
@@ -17,6 +16,7 @@
 
   background-color: #fff;
   box-shadow:1px 1px 1px #adb5bd;
+  border: 1px solid #adb5bd;
   border-radius: 10px;
   box-sizing : border-box;
   overflow: hidden;
