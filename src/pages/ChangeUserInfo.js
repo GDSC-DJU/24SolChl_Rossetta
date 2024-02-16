@@ -18,7 +18,7 @@ const ChangeUserInfo = () =>{
     const [wchslerData2, setWechslerData2] = useState('');
     const [wchslerData3, setWechslerData3] = useState('');
     const [wchslerData4, setWechslerData4] = useState('');
-    const [wchslerData5, setWechslerData5] = useState(1);
+    const [wchslerData5, setWechslerData5] = useState('');
     const [wchslerNum,setWchslerNum] = useState('');
     // 버튼 활성화를 위한 버튼 입력값 판단
     const [pwValid, setPwValid] = useState(false);
@@ -95,6 +95,7 @@ const ChangeUserInfo = () =>{
           setWechslerData2(wchslerInfo.pr);
           setWechslerData3(wchslerInfo.wm);
           setWechslerData4(wchslerInfo.ps);
+          setWechslerData5(wchslerInfo.iq);
           setWchslerNum(wchslerInfo.num);
         }
         
@@ -153,8 +154,8 @@ const ChangeUserInfo = () =>{
       }
     };
     //회원 정보 수정 버튼
-    const onClickUpdateButton = () => {
-      axios.put('http://localhost:8000/member/parents/update',{
+    const onClickUpdateButton = async() => {
+      await axios.put('http://localhost:8000/member/parents/update',{
         pw:pw !== '' ? pw : pwCompare,
         phoneNum:mobile,
       },{
@@ -171,7 +172,7 @@ const ChangeUserInfo = () =>{
       })
 
       if(wchslerNum === ''){
-        axios.post('http://localhost:8000/wechsler/sign-up/wechsler',{
+        await axios.post('http://localhost:8000/wechsler/sign-up/wechsler',{
           id:username,
           lang:wchslerData1,
           pr:wchslerData2,
@@ -186,7 +187,8 @@ const ChangeUserInfo = () =>{
           console.log(err);
         })
       }else{
-        axios.put('http://localhost:8000/wechsler/update',{
+        console.log(wchslerNum)
+        await axios.put(`http://localhost:8000/wechsler/update/${wchslerNum}`,{
           lang:wchslerData1,
           pr:wchslerData2,
           wm:wchslerData3,
@@ -205,7 +207,7 @@ const ChangeUserInfo = () =>{
           console.log(err);
         })
       }
-      navigate(-1);
+      // navigate(-1);
     };
   
     return (
@@ -387,6 +389,16 @@ const ChangeUserInfo = () =>{
                   onChange={(e)=>setWechslerData4(e.target.value)}
                 />
               </div>
+              <div className="inputTitle" style={{ marginTop: "8px" }}>IQ</div>
+              <div className="inputWrap">
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="IQ 점수"
+                  value={wchslerData5}
+                  onChange={(e)=>setWechslerData5(e.target.value)}
+                />
+              </div>
               <div className='wecsler'>
                 <button className="btn-hover gallery" onClick={closeModalHandler}>닫기</button>
               </div>
@@ -395,7 +407,7 @@ const ChangeUserInfo = () =>{
         )}
         </div>
         <button onClick={onClickUpdateButton} disabled={!formValid} className="signupButton">
-          가입하기
+          수정하기
         </button>
       </div>
     );
