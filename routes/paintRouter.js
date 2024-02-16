@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/mypicpaint', verifyToken, insertPaint);
 
 // myPicPaint 테이블에서 특정 id의 데이터를 조회하는 router
-router.get('/mypicpaint', verifyToken, getPaint);
+router.get('/mypicpaint/info', verifyToken, getPaint);
 
 // myPicPaint 테이블에서 특정 num의 데이터를 삭제하는 router
 router.delete('/mypicpaint/:num', verifyToken, deletePaint);
