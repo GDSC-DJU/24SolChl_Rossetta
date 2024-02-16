@@ -30,7 +30,7 @@ function App() {
           <Route path="login" element={<Login/>}/>
           <Route path="signup" element={<Signup/>}/>
           <Route path="learning" element={<Learning />}/>
-		      <Route path="userinfo" element={<ChangeUserInfo/>}/>
+		      <Route path="mypage/userinfo" element={<ChangeUserInfo/>}/>
 		    </Routes>
     </Container>
   );

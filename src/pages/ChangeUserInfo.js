@@ -2,32 +2,33 @@ import { useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import '../styles/Login.css'
 import styled from 'styled-components';
-
+import { useNavigate } from 'react-router-dom';
 const ChangeUserInfo = () =>{
     // input tage values
     const [username, setUsername] = useState('');
     const [pw, setPw] = useState('');
     const [pwConfirm, setPwConfirm] = useState('');
     const [name, setName] = useState('');
-    const [pwCompare,setPwCompare] = useState('');
+    const [pwCompare,setPwCompare] = useState();
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [gender, setGender] = useState('');
     const [birthdate, setBirthdate] = useState('');
-    const [wchslerData1, setWechslerData1] = useState();
-    const [wchslerData2, setWechslerData2] = useState();
-    const [wchslerData3, setWechslerData3] = useState();
-    const [wchslerData4, setWechslerData4] = useState();
+    const [wchslerData1, setWechslerData1] = useState('');
+    const [wchslerData2, setWechslerData2] = useState('');
+    const [wchslerData3, setWechslerData3] = useState('');
+    const [wchslerData4, setWechslerData4] = useState('');
+    const [wchslerData5, setWechslerData5] = useState(1);
+    const [wchslerNum,setWchslerNum] = useState('');
     // 버튼 활성화를 위한 버튼 입력값 판단
     const [pwValid, setPwValid] = useState(false);
     const [pwConfirmValid, setPwConfirmValid] = useState(false);
-    const [emailValid, setEmailValid] = useState(false);
     const [mobileValid, setMobileValid] = useState(false);
-    const [birthdateValid, setBirthdateValid] = useState(false);
     const [formValid, setFormValid] = useState(false);
     const [pwCompareValid,setPwCompareValid] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const navigate = useNavigate();
 
     const Modal = styled.div`
     position: fixed;
@@ -59,6 +60,8 @@ const ChangeUserInfo = () =>{
     const closeModalHandler = () => {
       setIsModalOpen(false);
     };
+
+    //회원 정보 받아오기
     useEffect(()=>{
       axios.get('http://localhost:8000/member/parents/info',{
         headers: {
@@ -67,7 +70,6 @@ const ChangeUserInfo = () =>{
         }
       })
       .then((res)=>{
-        console.log(res);
         const data = res.data.response;
         setPwCompare(data.pw);
         setUsername(data.id);
@@ -80,45 +82,47 @@ const ChangeUserInfo = () =>{
       .catch((err)=>{
         console.log(err);
       })
-      axios.get('http://localhost:8000/member/wechsler/info',{
+      axios.get('http://localhost:8000/wechsler/info',{
         headers: {
           "Content-Type":'application/json',
           Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
         }
       })
       .then((res)=>{
-        const wchslerIndo = res.data.response;
-        setWechslerData1(wchslerIndo.lang);
-        setWechslerData2(wchslerData2.pr);
-        setWechslerData3(wchslerIndo.wm);
-        setWechslerData4(wchslerIndo.ps);
+        const wchslerInfo = res.data.response;
+        if(res.data.response !== undefined){
+          setWechslerData1(wchslerInfo.lang);
+          setWechslerData2(wchslerInfo.pr);
+          setWechslerData3(wchslerInfo.wm);
+          setWechslerData4(wchslerInfo.ps);
+          setWchslerNum(wchslerInfo.num);
+        }
+        
       })
       .catch((err)=>{
         console.log(err);
       })
     },[])
 
+    
+
   
     useEffect(() => {
       setFormValid(
-        !pwCompareValid && pwValid && pwConfirmValid && mobileValid
+        !pwCompareValid && pw === '' ? true : pwValid && pw === '' ? true : pwConfirmValid && mobileValid
       );
-      console.log(pwCompare)
     }, [ pw, pwConfirm, pwValid, pwConfirmValid, mobileValid,pwCompareValid]);
     
-    useEffect(()=>{
-      console.log(formValid)
-    },[formValid]);
+
   
     useEffect(()=>{
       // 비밀번호 확인 유효성 검사 추가
+
       setPwConfirmValid(pw === pwConfirm);
       setPwCompareValid(pwCompare === pw);
       // 핸드폰 번호 유효성 검사 추가
       setMobileValid(/^\d{11}$/.test(mobile));
-      // 생년월일 유효성 검사 추가
-      setBirthdateValid(/^\d{8}$/.test(birthdate));
-    },[pw,birthdate,pwConfirm])
+    },[pw,pwConfirm])
     
     
     const handlePw = (e) => {
@@ -131,8 +135,6 @@ const ChangeUserInfo = () =>{
     const handleEmail = (e) => {
       const value = e.target.value;
       setEmail(value);
-      const regex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-      setEmailValid(regex.test(value));
     };
   
     const handleMobile = (e) => {
@@ -150,10 +152,10 @@ const ChangeUserInfo = () =>{
         setBirthdate(value);
       }
     };
-  
+    //회원 정보 수정 버튼
     const onClickUpdateButton = () => {
       axios.put('http://localhost:8000/member/parents/update',{
-        pw:pw,
+        pw:pw !== '' ? pw : pwCompare,
         phoneNum:mobile,
       },{
         headers: {
@@ -167,6 +169,43 @@ const ChangeUserInfo = () =>{
       .catch((err)=>{
         console.log(err);
       })
+
+      if(wchslerNum === ''){
+        axios.post('http://localhost:8000/wechsler/sign-up/wechsler',{
+          id:username,
+          lang:wchslerData1,
+          pr:wchslerData2,
+          wm:wchslerData3,
+          ps:wchslerData4,
+          iq:wchslerData5
+        })
+        .then((res)=>{
+          console.log(res);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }else{
+        axios.put('http://localhost:8000/wechsler/update',{
+          lang:wchslerData1,
+          pr:wchslerData2,
+          wm:wchslerData3,
+          ps:wchslerData4,
+          iq:wchslerData5
+        },{
+          headers: {
+            "Content-Type":'application/json',
+            Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+          }
+        })
+        .then((res)=>{
+          console.log(res);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
+      navigate(-1);
     };
   
     return (

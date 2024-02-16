@@ -659,7 +659,7 @@ z-index: 999;
         </div>
 
         <div className="menu-container">
-          <Link to={`/userInfo`}>
+          <Link to={`./userInfo`}>
             <div>회원 정보 수정</div>
           </Link>
           <button className="btn-hover gallery" onClick={openModalHandler} > 갤러리 </button>
