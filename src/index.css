@@ -40,6 +40,9 @@ table {
   border-collapse: collapse;
 	border-spacing: 0;
 }
+
+html {overflow-y: scroll;}
+
 /* HTML5 display-role reset for older browsers */
 
 @font-face {
