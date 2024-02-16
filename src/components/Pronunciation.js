@@ -4,8 +4,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import PageLayout from './PageLayout';
 import styled from 'styled-components';
+import { Cookies } from 'react-cookie';
 
 const Pronunciation = () =>{
+  const cookies = new Cookies();
+
   const [stream, setStream] = useState();
   const [media, setMedia] = useState();
   const [onRec, setOnRec] = useState(true);
@@ -20,7 +23,9 @@ const Pronunciation = () =>{
   let { level } = useParams();
 
 
+
   const onRecAudio = async() => {
+
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
@@ -57,6 +62,7 @@ const Pronunciation = () =>{
 
 
   const offRecAudio = () => {
+
     // dataavailable 이벤트로 Blob 데이터에 대한 응답을 받을 수 있음
     media.ondataavailable = function (e) {
       // audioArray.push(e.data);
@@ -107,7 +113,8 @@ const bufferToBase64 = (buffer)=> {
   return resampledAudioBuffer;
 }
 
-const onSubmitAudioFile = useCallback(async () => {
+  const onSubmitAudioFile = useCallback(async () => {
+
   let base64;
     if (audioUrl) {
 
@@ -127,6 +134,8 @@ const onSubmitAudioFile = useCallback(async () => {
     }
     setResult(true)
   }, [audioUrl]);
+
+  
   useEffect(()=>{
     if(audioUrl){
       setUrl(URL.createObjectURL(audioUrl));
@@ -136,11 +145,12 @@ const onSubmitAudioFile = useCallback(async () => {
   const [wait,setWait] = useState(true);
 
   // 문장 api
+
   useEffect(()=>{
     axios.get('http://localhost:8000/pronunciation/info/1',{
       headers: {
         "Content-Type":'application/json',
-        Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        Authorization: cookies.get('token')
       }
   })
   .then((res)=>{
@@ -197,7 +207,7 @@ const onSubmitAudioFile = useCallback(async () => {
       },{
         headers: {
           // "Content-Type":'application/json',
-          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+          Authorization: cookies.get('token')
       }},)
       .then((res)=>{
         console.log(res);
