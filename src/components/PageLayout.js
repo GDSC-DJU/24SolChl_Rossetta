@@ -52,7 +52,7 @@ const PageLayout = ({ name, children }) => {
                     </ContentWrapper>
                 </PageWrapper>
             </PageContainer>
-            <Footer/>
+            {/* <Footer/> */}
         </>
     )
 }
