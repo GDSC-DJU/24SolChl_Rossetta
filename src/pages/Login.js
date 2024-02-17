@@ -47,8 +47,8 @@ const Login = () => {
         setPwValid(false);
       }
     };
-    const onClickConfirmButton = () => {
-      axios.post('http://localhost:8000/member/sign-in',{
+    const onClickConfirmButton = async() => {
+      await axios.post('http://localhost:8000/member/sign-in',{
         id:username,
         pw:pw
       })
@@ -59,6 +59,10 @@ const Login = () => {
       .catch((err)=>{
         console.log(err);
       })
+      if(cookies.get('token') !== undefined){
+        signupNavigate(-1);
+
+      }
     }
 
     return (
