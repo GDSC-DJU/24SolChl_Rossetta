@@ -330,7 +330,7 @@ const PaintWithAi = () => {
 
 
   return (
-    <PageLayout name="따라 그리기">
+    <PageLayout name="그림 그리기">
       <div className="paint-with-ai-page-container">
         <div id="container">
           <video ref={videoRef} id="video"></video>
