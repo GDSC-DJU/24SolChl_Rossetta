@@ -3,7 +3,10 @@ import axios from 'axios';
 import '../styles/Login.css'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 const ChangeUserInfo = () =>{
+  //쿠키 사용
+  const cookies = new Cookies();
     // input tage values
     const [username, setUsername] = useState('');
     const [pw, setPw] = useState('');
@@ -66,7 +69,7 @@ const ChangeUserInfo = () =>{
       axios.get('http://localhost:8000/member/parents/info',{
         headers: {
           "Content-Type":'application/json',
-          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+          Authorization: cookies.get('token')
         }
       })
       .then((res)=>{
@@ -85,7 +88,7 @@ const ChangeUserInfo = () =>{
       axios.get('http://localhost:8000/wechsler/info',{
         headers: {
           "Content-Type":'application/json',
-          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+          Authorization: cookies.get('token')
         }
       })
       .then((res)=>{
@@ -161,7 +164,7 @@ const ChangeUserInfo = () =>{
       },{
         headers: {
           "Content-Type":'application/json',
-          Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+          Authorization: cookies.get('token')
         }
       })
       .then((res)=>{
@@ -197,7 +200,7 @@ const ChangeUserInfo = () =>{
         },{
           headers: {
             "Content-Type":'application/json',
-            Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+            Authorization: cookies.get('token')
           }
         })
         .then((res)=>{

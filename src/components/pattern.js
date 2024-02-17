@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/pattern.css';
+import '../styles/Pattern.css';
 import { useParams } from 'react-router-dom';
 import PageLayout from './PageLayout';
+import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 const generateRandomPattern = (size) => {
   const pattern = [];
@@ -16,13 +18,15 @@ const generateRandomPattern = (size) => {
 };
 
 const Pattern = () => {
-  const { patternId } = useParams();
+  //const { patternId } = useParams();
   const [gridSize, setGridSize] = useState(10);
   const [gridPattern, setGridPattern] = useState(generateRandomPattern(10));
   const [userPattern, setUserPattern] = useState(Array(10).fill(0).map(() => Array(10).fill(false)));
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [timerID, setTimerID] = useState(null);
   const [isPatternMatching, setIsPatternMatching] = useState(false);
+  const [level, setLevel] = useState(useParams().level);
+  const [time, setTime] = useState(useParams().time); 
 
   useEffect(() => {
     document.documentElement.style.setProperty('--grid-size', gridSize);
@@ -30,11 +34,11 @@ const Pattern = () => {
 
   useEffect(() => {
     let size;
-    switch (patternId) {
-      case 'pattern1':
+    switch (level) {
+      case '1':
         size = 3;
         break;
-      case 'pattern2':
+      case '2':
         size = 5;
         break;
       default:
@@ -43,7 +47,7 @@ const Pattern = () => {
     setGridSize(size);
     setGridPattern(generateRandomPattern(size));
     setUserPattern(Array(size).fill(0).map(() => Array(size).fill(false)));
-  }, [patternId]);
+  }, [level]);
 
   useEffect(() => {
     const grid = document.querySelector('.pattern-grid');
@@ -77,9 +81,33 @@ const Pattern = () => {
   const handleSubmit = () => {
     clearInterval(timerID);
     setTimerID(null);
+    setTime(time);
+    setLevel(level);
 
+    const cookies = new Cookies();
     const isMatching = checkPatternMatching();
+    const currentDate = new Date();
+    const date = currentDate.toISOString().split('T')[0];
     setIsPatternMatching(isMatching);
+
+    axios.post(`http://localhost:8000/pattern/`, {
+      level: level,
+      time: time,
+      date: date,
+    }, {
+      headers: {
+        "Content-Type": 'application/json',
+        Authorization: cookies.get('token')
+      }
+    })
+    .then((res) => {
+      console.log(res);
+      //setLevel(res.data.level);
+      //setTime(res.data.time);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   const nextPattern = () => {
@@ -174,4 +202,3 @@ const Pattern = () => {
 };
 
 export default Pattern;
-
