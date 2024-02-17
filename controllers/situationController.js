@@ -6,7 +6,7 @@ const {insertSituation,deleteSituation,updateSituation,selectSituation,insertSit
 exports.insertSituationInfo = async(req,res,next) => { 
     try{
         const body = req.body;
-        const num = Math.floor(Math.random() * 10000000000000000000000);
+        const num = Math.floor(Math.random() * 1000000);
         const {situation,select} = body
         await insertSituation(situation,num);
         await insertSituationSelect(select,num);
@@ -67,16 +67,17 @@ exports.situationInfo = async(req,res,next) => {
         const info = await selectSituation(level);
         info.forEach(async(item,index) => {
             const select = await selectSituationSelect(item.num);
-            situation.push({
+            await situation.push({
                 situationNum:item.num,
                 index:select.num,
                 image:item.image,
                 question:item.question,
-                choice:[select.firstNum,select.secondNum,select.thirdNum,select.fourthNum],
+                choices:[select.firstNum,select.secondNum,select.thirdNum,select.fourthNum],
                 answer:item.answer,
                 level:item.level
             })
             if(info.length === index+1){
+                console.log(situation)
                 res.status(200).json({
                     code:200,
                     massage:'success selecte',
