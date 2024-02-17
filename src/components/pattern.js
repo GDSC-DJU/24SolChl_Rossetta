@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/pattern.css';
+import '../styles/Pattern.css';
 import { useParams } from 'react-router-dom';
 import PageLayout from './PageLayout';
 import axios from 'axios';

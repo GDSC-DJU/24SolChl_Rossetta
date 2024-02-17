@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from 'axios'
+import { Cookies } from 'react-cookie';
+
 const ImageContentWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,29 +77,29 @@ const ImageContent = () => {
       images[nextIndex],
     ];
   };
-  const [visibleImages,setVisibleImages] = useState([]);
+  const [visibleImages, setVisibleImages] = useState([]);
+  const cookies = new Cookies()
 
-  useEffect(()=>{
+  useEffect(() => {
     axios.get(`http://localhost:8000/paint/mypicpaint/info`, {
       headers: {
         "Content-Type": 'application/json',
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+        Authorization: cookies.get('token')
       }
     }).then((res) => {
-        console.log(res.data.response);
-        setVisibleImages(res.data.response);
-      })
+      console.log(res.data);
+      setVisibleImages([res.data]);
+    })
       .catch((err) => {
         console.log(err);
       })
-  },[])
+  }, [])
 
   return (
     <ImageContentWrap>
       <FestivalMainImageWrap>
         <FestivalMainImage
           src={visibleImages.length !== 0 ? visibleImages[selectedImageIndex].image : ''}
-          alt="Festival Image"
         />
       </FestivalMainImageWrap>
       <ImageContentRow>

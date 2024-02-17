@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from 'react-router-dom';
-
+import axios from "axios";
+import { Cookies } from 'react-cookie';
 
 const ImageContentWrap = styled.div`
   display: flex;
@@ -48,7 +49,7 @@ const ButtonIcon = styled.svg`
 
 const ImageContent = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  let { level } = useParams();
+  const [level, setLevel] = useState(useParams().level);
 
   const onClickImage = (index) => {
     setSelectedImageIndex(index);
@@ -64,32 +65,51 @@ const ImageContent = () => {
     );
   };
 
+  const cookies = new Cookies();
   
 let images = [];
 
 if (level == 1) {
   // 이미지 경로를 동적으로 생성
   images = [
-    "/paintwithai/LV.1/1.webp",
-    "/paintwithai/LV.1/3.webp",
-    "/paintwithai/LV.1/9.webp",
+    "/assets/paintwithai/LV.1/1.webp",
+    "/assets/paintwithai/LV.1/2.webp",
+    "/assets/paintwithai/LV.1/3.png",
+    "/assets/paintwithai/LV.1/4.webp",
   ].map((src) => ({ source: src }));
 } else if (level == 2) {
   images = [
-    "/paintwithai/LV.2/2.webp",
-    "/paintwithai/LV.2/8.webp",
-    "/paintwithai/LV.2/7.png",
+    "/assets/paintwithai/LV.2/5.webp",
+    "/assets/paintwithai/LV.2/6.webp",
+    "/assets/paintwithai/LV.2/7.webp",
+    "/assets/paintwithai/LV.2/8.webp",
+    "/assets/paintwithai/LV.2/9.webp",
   ].map((src) => ({ source: src }));
 
 } else if (level == 3) {
   images = [
-    "/paintwithai/LV.3/4.webp",
-    "/paintwithai/LV.3/5.webp",
-    "/paintwithai/LV.3/6.webp",
+    "/assets/paintwithai/LV.3/10.webp",
+    "/assets/paintwithai/LV.3/11.webp",
+    "/assets/paintwithai/LV.3/12.webp",
+    "/assets/paintwithai/LV.3/13.webp",
+    "/assets/paintwithai/LV.3/14.webp",
   ].map((src) => ({ source: src }));
 }
 
+axios.get(`http://localhost:8000//paint/paintex/${level}`,{
+  headers: {
+    "Content-Type": 'application/json',
+    Authorization: cookies.get('token')
 
+  }
+})  
+.then((res) => {
+    console.log(res);
+    images = res.data.response;
+  })
+  .catch((err) =>{
+    console.log(err);
+  });
 
   // 현재 선택된 이미지를 중심으로 전, 후 이미지 배열 생성
   const getVisibleImages = () => {
@@ -127,7 +147,6 @@ if (level == 1) {
         </ButtonIcon>
         <FestivalMainImage
           src={images[selectedImageIndex].source}
-          alt="Festival Image"
         />
         <ButtonIcon
           xmlns="http://www.w3.org/2000/svg"
