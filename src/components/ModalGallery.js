@@ -100,7 +100,6 @@ const ImageContent = () => {
       <FestivalMainImageWrap>
         <FestivalMainImage
           src={visibleImages.length !== 0 ? visibleImages[selectedImageIndex].image : ''}
-          alt="Festival Image"
         />
       </FestivalMainImageWrap>
       <ImageContentRow>
