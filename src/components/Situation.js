@@ -4,21 +4,46 @@ import '../styles/Situation.css';
 import '../styles/Button.css';
 import PageLayout from './PageLayout';
 import { useParams } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
+import axios from 'axios';
 
 const Situation = () => {
+    const cookies = new Cookies();
     const [currentQuiz, setCurrentQuiz] = useState({});             // 현재 문제 번호
     const [userAnswer, setUserAnswer] = useState('X');              // 유저가 선택한 선지
     const [totalAnswer, setTotalAnswer] = useState([]);             // 전체 문제 오답 체크
     const [count, setCount] = useState(0);                          // 푼 문제 카운트
     const [checkedAnswer, setCheckedAnswer] = useState(false);      // 선지 선택 유무
     const [finish, setFinish] = useState(false);                    // 모든 문제 풀이 완료
-    const [quiz, setQuiz] = useState(quizData);                     // 남아있는 문제
+    const [quiz, setQuiz] = useState([{}]);                     // 남아있는 문제
     const [correct, setCorrect] = useState(0);
+    const [totalSize,setTotalSize] = useState(100);                   //전체 문제 수
     
     let { level } = useParams();
+    useEffect(()=>{
+        axios.get(`http://localhost:8000/situation/info/${level}`,{
+            headers: {
+                "Content-Type":'application/json',
+                Authorization: cookies.get('token')
+            }
+        })
+        .then((res)=>{
+            setQuiz(res.data.response);
+            setTotalSize(res.data.response.length);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    },[])
 
+    useEffect(()=>{
+        if(quiz.length !== 0){
+            setCurrentQuiz(quiz[RandomIndex(quiz.length)]);
+        }
+    },[quiz])
     useEffect(() => {
-        if(count === 3){
+        
+        if(count === totalSize){
             setFinish(true);
         }
         else{
@@ -38,14 +63,15 @@ const Situation = () => {
     };
     
     const NextQuiz = () => {      
-        if(userAnswer === currentQuiz.answer){            // 정답,오답 기록
+        if(userAnswer == currentQuiz.answer){   
+            // 정답,오답 기록
             setTotalAnswer([...totalAnswer, 'O']);
             setCorrect((pre) => ++pre);
         }
         else{
             setTotalAnswer([...totalAnswer, 'X']);
         }
-        if(count < 3){
+        if(count < quiz.length+1){
             let remainingQuiz = JSON.parse(JSON.stringify(quiz));
             let filteredQuiz= remainingQuiz.filter(qz => qz.index !== currentQuiz.index);
             setQuiz(filteredQuiz);
