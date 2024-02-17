@@ -103,11 +103,10 @@ const NavInside = styled.div`
 const MenuWrapper = styled.div`
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   width: 500px;
-  gap: 200px;
-  padding-left: 50px;
+  gap: 250px;
   height: 100%;
   font-Size: 20px; 
   font-Family:'Korean-Font-bold';
