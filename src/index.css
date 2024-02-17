@@ -67,8 +67,14 @@ html {overflow-y: scroll;}
 }
 
 @font-face {
-  font-family: 'News-Font-bold';
+  font-family: 'NotoSansBold';
   src: url('/public/assets/NotoSansKR-Bold.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSans';
+  src: url('/public/assets/NotoSansKR.ttf');
   font-style: normal;
 }
 

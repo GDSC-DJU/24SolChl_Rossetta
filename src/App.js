@@ -13,6 +13,7 @@ import styled from "styled-components";
 import MyPage from "./components/MyPage"
 import ChangeUserInfo from "./pages/ChangeUserInfo";
 import Footer from "./components/Footer";
+import Introduction from "./pages/Introduction";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
 		<Nav />
       	<Routes>
           <Route path="/" element={<Main/>}/>
+          <Route path="introduction" element={<Introduction/>}/>
           <Route path="learning/situation/:level" element={<Situation/>}/>
           <Route path="learning/pronunciation/:level" element={<Pronunciation/>}/>
           <Route path="learning/paintwithai/:level" element={<PaintWithAi />} />

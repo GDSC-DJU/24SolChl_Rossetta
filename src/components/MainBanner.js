@@ -6,7 +6,7 @@ const MainBanner = () => {
         <MainBannerWrapper>
             <img 
                 alt="매인배너이미지"
-                src="./assets/rossetta-banner.png"
+                src="./assets/main-banner6.png"
                 style={{top: "100px", width: "100%"}}
             />
         </MainBannerWrapper>
