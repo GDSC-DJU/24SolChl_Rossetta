@@ -8,7 +8,11 @@ import Pronunciation from "./components/Pronunciation";
 import PaintWithAi from './components/PaintWithAi';
 import Signup from "./pages/Signup";
 import Learning from "./pages/Learning";
+<<<<<<< HEAD
 import Pattern from "./components/Pattern";
+=======
+import Pattern from "./components/pattern";
+>>>>>>> 2edd313ccba9203e9ae8c19aeb6870ed879c41dd
 import styled from "styled-components";
 import MyPage from "./components/MyPage"
 import ChangeUserInfo from "./pages/ChangeUserInfo";

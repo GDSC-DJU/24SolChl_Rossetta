@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from 'react-router-dom';
-
+import axios from "axios";
+import { Cookies } from 'react-cookie';
 
 const ImageContentWrap = styled.div`
   display: flex;
@@ -48,7 +49,7 @@ const ButtonIcon = styled.svg`
 
 const ImageContent = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  let { level } = useParams();
+  const [level, setLevel] = useState(useParams().level);
 
   const onClickImage = (index) => {
     setSelectedImageIndex(index);
@@ -64,6 +65,7 @@ const ImageContent = () => {
     );
   };
 
+  const cookies = new Cookies();
   
 let images = [];
 
@@ -89,7 +91,20 @@ if (level == 1) {
   ].map((src) => ({ source: src }));
 }
 
+axios.get(`http://localhost:8000//paint/paintex/${level}`,{
+  headers: {
+    "Content-Type": 'application/json',
+    Authorization: cookies.get('token')
 
+  }
+})  
+.then((res) => {
+    console.log(res);
+    images = res.data.response;
+  })
+  .catch((err) =>{
+    console.log(err);
+  });
 
   // 현재 선택된 이미지를 중심으로 전, 후 이미지 배열 생성
   const getVisibleImages = () => {

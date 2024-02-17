@@ -10,6 +10,7 @@ import html2canvas from "html2canvas";
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import PageLayout from "./PageLayout";
+import { Cookies } from 'react-cookie';
 
 
 
@@ -60,6 +61,7 @@ const PaintWithAi = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
+ 
   const hands = new Hands({
     locateFile: (file) =>
       `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
@@ -285,6 +287,7 @@ const PaintWithAi = () => {
 
   const onCapture = () => {
     html2canvas(canvasRef.current, { scale: 4 }).then((canvas) => {
+      
       let now = new Date();
       const month = now.getMonth() + 1 < 10 ? "0" + (now.getMonth() + 1) : now.getMonth() + 1;
       const date = now.getDate() < 10 ? "0" + now.getDate() : now.getDate();
@@ -293,16 +296,18 @@ const PaintWithAi = () => {
       const minutes = now.getMinutes() < 10 ? "0" + now.getMinutes() : now.getMinutes();
       const seconds = now.getSeconds() < 10 ? "0" + now.getSeconds() : now.getSeconds();
       const time = hour + "" + minutes + "" + seconds;
+      
       let img = canvas.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
-      axios.post('http://localhost:8000/paint/mypicpaint',
-        {
+      const cookies = new Cookies();
+
+      axios.post('http://localhost:8000/paint/mypicpaint/',{
           Picname: '안녕',
           img: JSON.stringify(img),
           fileName: `${YMD}${time}`
         }, {
         headers: {
-          // "Content-Type":'application/json',
-          Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiSldUIiwiaWQiOiJtaW5zZW9rMDMzOCIsInB3IjoidGpyZGwxNjUxISIsImlhdCI6MTcwNzk2ODgzMCwiZXhwIjoxNzA4NTY4ODMwLCJpc3MiOiJzZXJ2ZXIifQ.3xD5lLzuT4lMsWMwixf6QMqrKm7_sUEbrIRKSacQYiE"
+          "Content-Type": 'application/json',
+          Authorization: cookies.get('token')
         }
       },)
         .then((res) => {
@@ -311,7 +316,6 @@ const PaintWithAi = () => {
         .catch((err) => {
           console.log(err);
         });
-
 
       onSaveAs(canvas.toDataURL('image/jpeg'), `_${YMD}_${time}.jpeg`,);
     });
@@ -325,7 +329,6 @@ const PaintWithAi = () => {
     link.click();
     document.body.removeChild(link);
     // navigatorR(-1);
-
   };
 
 
