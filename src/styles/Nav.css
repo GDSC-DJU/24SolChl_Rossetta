@@ -25,7 +25,7 @@
     margin-right: 10px;
 }
 
-#link-to__signup::before{
+#link-to__logout::before{
     content: "";
     background-image: url('../../public/assets/logout.png');
     display: inline-block;
@@ -36,7 +36,7 @@
     margin-right: 10px;
 }
 
-#link-to__signup::before{
+#link-to__mypage::before{
     content: "";
     background-image: url('../../public/assets/mypage.png');
     display: inline-block;

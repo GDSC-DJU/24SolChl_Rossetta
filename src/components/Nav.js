@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import styled from'styled-components'
 import '../styles/Nav.css'
@@ -25,6 +25,10 @@ const Nav = () => {
       setShow(false);
     }
   }
+
+  const handleLogout = useCallback (() => {
+    cookies.remove('token');
+  }, [cookies]);
  
   if(cookies.get('token') === undefined) {
     return (
@@ -34,8 +38,8 @@ const Nav = () => {
             <Link to="introduction" className='link-to'>소개</Link>
             <Link to="learning" className='link-to'>학습</Link>
           </MenuWrapper>
-          <TitleWrapper style={{cursor:"pointer"}}onClick={() => (window.location.href = "/")}>
-              <img src="../../assets/title-black.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
+          <TitleWrapper style={{cursor:"pointer"}} onClick={() => (window.location.href = "/")}>
+              <img src="../../assets/title-black.png" style={{width: "100%", height:"100%"}} alt="Rossetta title" />
           </TitleWrapper>
           <UserMenuWrapper>
             <Link to="login" className='link-to' id='link-to__login' >로그인</Link>
@@ -53,12 +57,12 @@ const Nav = () => {
             <Link to="introduction" className='link-to'>소개</Link>
             <Link to="learning" className='link-to'>학습</Link>
           </MenuWrapper>
-          <TitleWrapper style={{cursor:"pointer"}}onClick={() => (window.location.href = "/")}>
+          <TitleWrapper style={{cursor:"pointer"}} onClick={() => (window.location.href = "/")}>
               <img src="../../assets/title-black.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
           </TitleWrapper>
           <UserMenuWrapper>
-            <Link to="login" className='link-to' id='link-to__logout' >로그아웃</Link>
-            <Link to="login" className='link-to' id='link-to__mypage' >마이페이지</Link>
+            <Link to="/" className='link-to' id='link-to__logout' onClick={()=> handleLogout}>로그아웃</Link>
+            <Link to="mypage" className='link-to' id='link-to__mypage' >마이페이지</Link>
           </UserMenuWrapper>
         </NavInside>
       </NavWrapper>
@@ -132,5 +136,3 @@ const UserMenuWrapper = styled.div`
   font-Family: 'Korean-Font-bold';
   text-Decoration: "none"
 `;
-
-
