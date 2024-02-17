@@ -147,7 +147,7 @@ const bufferToBase64 = (buffer)=> {
   // 문장 api
 
   useEffect(()=>{
-    axios.get('http://localhost:8000/pronunciation/info/1',{
+    axios.get(`http://localhost:8000/pronunciation/info/${level}`,{
       headers: {
         "Content-Type":'application/json',
         Authorization: cookies.get('token')
@@ -193,7 +193,7 @@ const bufferToBase64 = (buffer)=> {
   },[recordedData])
 
   const levelClick = () =>{
-    let num = Math.floor(Math.random() * 5);
+    let num = Math.floor(Math.random() * sentence.length);
     console.log(num)
     setText(sentence[num].sentence);
   }
@@ -228,17 +228,6 @@ const bufferToBase64 = (buffer)=> {
     <PageLayout name="발음교정훈련">
     <div className='pronunciation-page-container'>
       <div className='pronunciation-container'>
-        {/* <div className='level-container'>
-          <button onClick={()=>{setLevel(1); setText('')}} className='level-button'>
-            1
-          </button>
-          <button onClick={()=>{setLevel(2); setText('')}} className='level-button'>
-            2
-          </button>
-          <button onClick={()=>{setLevel(3); setText('')}} className='level-button'>
-            3
-          </button>
-        </div> */}
         <div className='level-container'>
             LEVEL {level}
         </div>
