@@ -75,15 +75,32 @@ const PaintWithAi = () => {
   });
 
   useEffect(() => {
-    const camera = new Camera(videoRef.current, {
-      onFrame: async () => {
-        await hands.send({ image: videoRef.current });
-      },
-      width: 800,
-      height: 450,
-    });
-
-    camera.start();
+    const checkCameraAvailability = async () => {
+      try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoInputDevices = devices.filter(device => device.kind === 'videoinput');
+        if (videoInputDevices.length === 0) {
+          // 비디오 입력 장치(캠)가 없는 경우
+          alert('캠이 없어 서비스 이용이 제한됩니다.');
+          return; // 여기서 함수를 종료하여 더 이상 진행하지 않음
+        }
+  
+        // 캠이 있는 경우, 카메라 시작 로직 실행
+        const camera = new Camera(videoRef.current, {
+          onFrame: async () => {
+            await hands.send({ image: videoRef.current });
+          },
+          width: 800,
+          height: 450,
+        });
+        await camera.start();
+  
+      } catch (error) {
+        console.error('카메라 접근 중 오류 발생:', error);
+      }
+    };
+  
+    checkCameraAvailability();
   }, []);
 
   function areFingersUp(landmarks) {
