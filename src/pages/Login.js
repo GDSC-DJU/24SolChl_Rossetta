@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/Login.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 const User = {
   email: 'test@example.com',
@@ -15,6 +17,7 @@ const Login = () => {
     const [usernameValid, setUsernameValid] = useState(false);
     const [pwValid, setPwValid] = useState(false); //입력값과 정규표현식 비교 판단 state
     const [notAllow, setNotAllow] = useState(true); //로그인 버튼 활성화 판단 state
+    const cookies = new Cookies();
 
     const signupNavigate = useNavigate();
 
@@ -45,7 +48,17 @@ const Login = () => {
       }
     };
     const onClickConfirmButton = () => {
-	//DB 회원정보랑 비교 
+      axios.post('http://localhost:8000/member/sign-in',{
+        id:username,
+        pw:pw
+      })
+      .then((res)=>{
+        console.log(res);
+        cookies.set('token',res.data.token);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     }
 
     return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Login.css';
 import styled from 'styled-components';
-
+import axios from 'axios'
 
 const Signup = () => {
   // input tage values
@@ -85,8 +85,38 @@ const Signup = () => {
     }
   };
 
-  const onClickRegisterButton = () => {
-    // 여기에 회원가입 로직을 추가합니다.
+  const onClickRegisterButton = async() => {
+    await axios.post('http://localhost:8000/member/sign-up/parents',{
+        id:username,
+        pw:pw,
+        phoneNum:mobile,
+        gender: gender,
+        name: name,
+        email: email,
+      })
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    if(wchslerData1 && wchslerData2 && wchslerData3 && wchslerData4 && wchslerData5){
+      await axios.post('http://localhost:8000/wechsler/sign-up/wechsler',{
+        id:username,
+        lang:wchslerData1,
+        pr:wchslerData2,
+        wm:wchslerData3,
+        ps:wchslerData4,
+        iq:wchslerData5
+      })
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
+    
   };
 
   // 간단한 모달 컴포넌트 스타일
@@ -245,7 +275,7 @@ const Signup = () => {
         </div>
         <div className='wecsler'>
           <button className="btn-hover gallery" onClick={openModalHandler}> 웩슬러 지능 검사 점수 입력 </button>
-          <div style={{marginTop: "10px", fontSize: "16px", fontWeight: "bold", color: "red"  }}>웩슬러 지능 검사 점수 입력은 필수 입력이 아닙니다 :)</div>
+          <div style={{marginTop: "14px", fontSize: "13px", fontWeight: "bold", color: "red"  }}>웩슬러 점수는 필수 입력이 아닙니다.</div>
         </div>
         {isModalOpen && (
           <>
