@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useParams } from 'react-router-dom';
+
 
 const ImageContentWrap = styled.div`
   display: flex;
@@ -40,19 +42,13 @@ const ButtonIcon = styled.svg`
   margin-bottom: 20%;
 `;
 
-// 이미지 경로를 동적으로 생성
-const images = [
-  "/paintwithai/LV.1/1.webp",
-  "/paintwithai/LV.1/2.webp",
-  "/paintwithai/LV.1/3.webp",
-  "/paintwithai/LV.1/4.webp",
-  "/paintwithai/LV.1/5.webp",
-  "/paintwithai/LV.1/6.webp",
-  "/paintwithai/LV.1/7.png",
-].map((src) => ({ source: src }));
+
+
+
 
 const ImageContent = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  let { level } = useParams();
 
   const onClickImage = (index) => {
     setSelectedImageIndex(index);
@@ -67,6 +63,33 @@ const ImageContent = () => {
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
+
+  
+let images = [];
+
+if (level == 1) {
+  // 이미지 경로를 동적으로 생성
+  images = [
+    "/paintwithai/LV.1/1.webp",
+    "/paintwithai/LV.1/3.webp",
+    "/paintwithai/LV.1/9.webp",
+  ].map((src) => ({ source: src }));
+} else if (level == 2) {
+  images = [
+    "/paintwithai/LV.2/2.webp",
+    "/paintwithai/LV.2/8.webp",
+    "/paintwithai/LV.2/7.png",
+  ].map((src) => ({ source: src }));
+
+} else if (level == 3) {
+  images = [
+    "/paintwithai/LV.3/4.webp",
+    "/paintwithai/LV.3/5.webp",
+    "/paintwithai/LV.3/6.webp",
+  ].map((src) => ({ source: src }));
+}
+
+
 
   // 현재 선택된 이미지를 중심으로 전, 후 이미지 배열 생성
   const getVisibleImages = () => {
