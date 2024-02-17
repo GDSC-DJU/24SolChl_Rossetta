@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import quizData from './SituationQuizData';
 import '../styles/Situation.css';
 import '../styles/Button.css';
 import PageLayout from './PageLayout';
