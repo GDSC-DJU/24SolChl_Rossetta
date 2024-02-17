@@ -1,0 +1,73 @@
+/* .BannerPoster{
+    src: url('assets/snow-drop.jpg');
+    object-fit: contain;
+    width: 100%;
+    max-height: 144px;
+    margin-right: 10px;
+    transform: transform 450ms;
+    border-radius: 4px;
+} */
+
+.slider{
+    position: relative;
+    top: 70px;
+    left: -8px;
+}
+
+.slider__arrow {
+    background-clip: content-box;
+    padding: 20px 0;
+    box-sizing: border-box;
+    transform: 400ms all ease-in-out;
+    cursor: pointer;
+    width: 80px;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.arrow {
+    transition: 400ms all ease-in-out;
+}
+
+.arrow:hover {
+    transition: 400ms all ease-in-out;
+    transform: scale(1.5);
+}
+
+.slider:hover .slider__arrow {
+    transition: 400ms all ease-in-out;
+    visibility: visible;
+}
+
+
+.slider__arrow:hover {
+    background: rgba(20, 20, 20, 0.5);
+    transition: 400ms all ease-in-out;
+}
+
+.banner-row {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+.banner-row::-webkit-scrollbar {
+    display: none;
+}
+
+.banner-image {
+    object-fit: contain;
+    width: 100%;
+    max-height: 144px;
+    margin-right: 10px;
+    transform: transform 450ms;
+    border-radius: 4px;
+}
+

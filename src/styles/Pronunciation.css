@@ -1,0 +1,72 @@
+.pronunciation-page-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  font-family: 'Korean-Font-bold';
+}
+
+.pronunciation-container{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  display: grid;
+  grid-template-rows: 10% 90%;
+  /* grid-row-gap: 20%; */
+  width: 50%;
+
+  background-color: #fff;
+  box-shadow:1px 1px 1px #adb5bd;
+  border: 1px solid #adb5bd;
+  border-radius: 10px;
+  box-sizing : border-box;
+  overflow: hidden;
+
+}
+.level-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.pronunciation-funtion-container{
+  display: grid;
+  grid-template-rows:28% 28% 20% 20%;
+}
+.pronunciation-funtion-container div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pronunciation-funtion-container .audio-container{
+  /* padding-top: 10%; */
+}
+.pronunciation-funtion-container .example-text{
+  /* padding-top: 15%; */
+  font-size: 130%;
+}
+.pronunciation-funtion-container .score{
+  /* padding-top: 10%; */
+  font-size: 130%;
+}
+.pronunciation-button-container{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+.pronunciation-button-container button{
+  margin: 2%;
+  background-color: rgba(173, 181, 189, 0.5);
+  border: 1px solid rgba(173, 181, 189, 1);
+  box-shadow:1px 1px 1px #adb5bd;
+  border-radius: 10px;
+  width: 30%;
+  height: 50%;
+  font-family: 'Korean-Font-bold';
+
+}
+.pronunciation-button-container button:hover{
+  background-color: rgba(173, 181, 189, 0.2);
+}
+.audio-container audio{
+  width: 90%;
+}

@@ -1,0 +1,104 @@
+.all-pattern-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.pattern-canvas-container {
+  margin-right: 20px;
+  transform: translateY(-60px);
+}
+
+.grid-canvas {
+  border: 1px solid #000;
+  width: 200px;
+  height: 200px;
+  transform: translateY(-20px);
+}
+
+.pattern-container {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-60px);
+}
+
+.pattern-grid {
+  display: grid;
+}
+
+.pattern-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.pattern-grid-5 {
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.pattern-grid-10 {
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.grid-row {
+  display: flex;
+}
+
+.grid-cell {
+  width: calc(400px / var(--grid-size));
+  height: calc(400px / var(--grid-size));
+  border: 1px solid lightgray;
+  box-sizing: border-box;
+}
+
+.grid-cell.active {
+  background-color: black;
+}
+
+.pattern-grid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pattern-submit-button, .pattern-next-button {
+  width: 100px;  /* 버튼의 너비 */
+  height: 50px;  /* 버튼의 높이 */
+  transform: translateY(-20px);
+}
+
+.pattern-submit-button {
+  background-color: #36BC98;
+  width: 90px;
+  height: 50px;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 4px;
+  transform: translateY(-20px);
+}
+
+.pattern-next-button {
+  margin-left: 4px;  /* 다음 문제 버튼의 왼쪽에 간격 추가 */
+  width: 90px;
+  height: 50px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transform: translateY(-20px);
+}
+
+.error-message {
+  color: red;
+}
+
+.pattern-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

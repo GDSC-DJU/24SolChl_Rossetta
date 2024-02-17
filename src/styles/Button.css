@@ -1,0 +1,59 @@
+.btn-hover {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    height: 35px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-5 {
+    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+    margin-left: 20px;
+}
+.btn-hover.gallery {
+    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+}
+
+ /* Used: 상황 판단 퀴즈 버튼 */
+ .btnFloat {
+    background: #36BC9B;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    transition: all 0.2s ;
+    background-color: #36BC9B;
+    width: 380px;
+    height: 50px;
+    margin-top: 150px;
+    font-size: 22px;
+    transition: all 0.2s ease-in;
+    font-family: 'Korean-Font-Bold';
+  }
+  
+  .btnFloat:hover {
+    margin-top: 147px;
+    margin-left: 0px;
+    transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    -webkit-transform: scale(1.1,1.1);
+    box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+  }
