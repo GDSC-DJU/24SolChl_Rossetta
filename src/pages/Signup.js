@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Login.css';
 import styled from 'styled-components';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   // input tage values
@@ -27,6 +28,8 @@ const Signup = () => {
   const [wchslerData3, setWechslerData3] = useState();
   const [wchslerData4, setWechslerData4] = useState();
   const [wchslerData5, setWechslerData5] = useState();
+
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -117,6 +120,7 @@ const Signup = () => {
       })
     }
     
+    navigate('/login');
   };
 
   // 간단한 모달 컴포넌트 스타일
