@@ -2,10 +2,12 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import styled from'styled-components'
 import '../styles/Nav.css'
+import { Cookies } from 'react-cookie';
 
 
 const Nav = () => {
   const [show, setShow] = useState(false); // handleScroll function
+  const cookies = new Cookies();
 
   //이벤트 리스너 리-랜더링 시 재등록 방지
   useEffect(() => {
@@ -24,24 +26,44 @@ const Nav = () => {
     }
   }
  
-  return (
-    <NavWrapper show={show}>
-      <NavInside>
-        <MenuWrapper>
-          <Link to="introduction" className='link-to'>소개</Link>
-          <Link to="learning" className='link-to'>학습</Link>
-          <li>검사</li>
-        </MenuWrapper>
-        <TitleWrapper style={{cursor:"pointer"}}onClick={() => (window.location.href = "/")}>
-            <img src="../../assets/title-black.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
-        </TitleWrapper>
-        <UserMenuWrapper>
-          <Link to="login" className='link-to' id='link-to__login' >로그인</Link>
-          <Link to="signup" className='link-to' id='link-to__signup'>회원가입</Link>
-        </UserMenuWrapper>
-      </NavInside>
-    </NavWrapper>
-  )
+  if(cookies.get('token') === undefined) {
+    return (
+      <NavWrapper show={show}>
+        <NavInside>
+          <MenuWrapper>
+            <Link to="introduction" className='link-to'>소개</Link>
+            <Link to="learning" className='link-to'>학습</Link>
+          </MenuWrapper>
+          <TitleWrapper style={{cursor:"pointer"}}onClick={() => (window.location.href = "/")}>
+              <img src="../../assets/title-black.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
+          </TitleWrapper>
+          <UserMenuWrapper>
+            <Link to="login" className='link-to' id='link-to__login' >로그인</Link>
+            <Link to="signup" className='link-to' id='link-to__signup'>회원가입</Link>
+          </UserMenuWrapper>
+        </NavInside>
+      </NavWrapper>
+    )
+  }
+  else{
+    return(
+      <NavWrapper show={show}>
+        <NavInside>
+          <MenuWrapper>
+            <Link to="introduction" className='link-to'>소개</Link>
+            <Link to="learning" className='link-to'>학습</Link>
+          </MenuWrapper>
+          <TitleWrapper style={{cursor:"pointer"}}onClick={() => (window.location.href = "/")}>
+              <img src="../../assets/title-black.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
+          </TitleWrapper>
+          <UserMenuWrapper>
+            <Link to="login" className='link-to' id='link-to__logout' >로그아웃</Link>
+            <Link to="login" className='link-to' id='link-to__mypage' >마이페이지</Link>
+          </UserMenuWrapper>
+        </NavInside>
+      </NavWrapper>
+    )
+  }
 }
 export default Nav
 
@@ -77,10 +99,11 @@ const NavInside = styled.div`
 const MenuWrapper = styled.div`
   list-style: none;
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   width: 500px;
-  gap: 150px;
+  gap: 200px;
+  padding-left: 50px;
   height: 100%;
   font-Size: 20px; 
   font-Family:'Korean-Font-bold';

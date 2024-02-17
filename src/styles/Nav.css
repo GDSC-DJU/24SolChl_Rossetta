@@ -5,7 +5,7 @@
 
 #link-to__login::before{
     content: "";
-    background-image: url('../../public/assets/unlock.png');
+    background-image: url('../../public/assets/login.png');
     display: inline-block;
     background-size: 12px 13px;
     width: 12px;
@@ -16,7 +16,29 @@
 
 #link-to__signup::before{
     content: "";
-    background-image: url('../../public/assets/profile-user.png');
+    background-image: url('../../public/assets/signup.png');
+    display: inline-block;
+    background-size: 12px 13px;
+    width: 12px;
+    height: 13px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#link-to__signup::before{
+    content: "";
+    background-image: url('../../public/assets/logout.png');
+    display: inline-block;
+    background-size: 12px 13px;
+    width: 12px;
+    height: 13px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#link-to__signup::before{
+    content: "";
+    background-image: url('../../public/assets/mypage.png');
     display: inline-block;
     background-size: 12px 13px;
     width: 12px;
