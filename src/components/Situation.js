@@ -5,8 +5,10 @@ import PageLayout from './PageLayout';
 import { useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Situation = () => {
+    const navigate = useNavigate();
     const cookies = new Cookies();
     const [currentQuiz, setCurrentQuiz] = useState({});             // 현재 문제 번호
     const [userAnswer, setUserAnswer] = useState('X');              // 유저가 선택한 선지
@@ -20,6 +22,11 @@ const Situation = () => {
     
     let { level } = useParams();
     useEffect(()=>{
+        //로그인 안하면 로그임 페이지로 넘어가기
+        if(cookies.get('token') === undefined){
+            navigate('/login');
+        }
+        //퀴즈 정보 가져오기
         axios.get(`http://localhost:8000/situation/info/${level}`,{
             headers: {
                 "Content-Type":'application/json',

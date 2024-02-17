@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import PageLayout from './PageLayout';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const generateRandomPattern = (size) => {
   const pattern = [];
@@ -18,6 +19,8 @@ const generateRandomPattern = (size) => {
 };
 
 const Pattern = () => {
+  const navigate = useNavigate();
+  const cookies = new Cookies();
   //const { patternId } = useParams();
   const [gridSize, setGridSize] = useState(10);
   const [gridPattern, setGridPattern] = useState(generateRandomPattern(10));
@@ -84,7 +87,7 @@ const Pattern = () => {
     setTime(time);
     setLevel(level);
 
-    const cookies = new Cookies();
+
     const isMatching = checkPatternMatching();
     const currentDate = new Date();
     const date = currentDate.toISOString().split('T')[0];
@@ -157,6 +160,13 @@ const Pattern = () => {
       ctx.stroke();
     }
   }, [gridPattern, gridSize]);
+
+  useEffect(()=>{
+    //로그인 안하면 로그임 페이지로 넘어가기
+    if(cookies.get('token') === undefined){
+      navigate('/login');
+    }  
+  },[])
   
   return (
     <PageLayout name ="패턴따라 그리기">

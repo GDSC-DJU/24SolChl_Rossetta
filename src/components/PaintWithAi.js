@@ -11,6 +11,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import PageLayout from "./PageLayout";
 import { Cookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -23,6 +24,8 @@ let xp = 0,
 let thickness = 20;
 
 const PaintWithAi = () => {
+  const cookies = new Cookies();
+  const navigate = useNavigate();
   const videoRef = useRef();
   const canvasRef = useRef();
   let canvasCtx;
@@ -45,14 +48,53 @@ const PaintWithAi = () => {
     thickness = value;
   }, [value]);
 
+  useEffect(()=>{
+    
+  },[])
+
   // vedio, canvas 크기 설정
   useEffect(() => {
-    videoRef.current.width = 800;
-    videoRef.current.height = 450;
-    canvasRef.current.width = 800;
-    canvasRef.current.height = 450;
-    canvasCtx = canvasRef.current.getContext("2d");
+    if(cookies.get('token') === undefined){
+      navigate('/login');
+
+    }else{
+      videoRef.current.width = 800;
+      videoRef.current.height = 450;
+      canvasRef.current.width = 800;
+      canvasRef.current.height = 450;
+      canvasCtx = canvasRef.current.getContext("2d");
+
+      const checkCameraAvailability = async () => {
+        try {
+          const devices = await navigator.mediaDevices.enumerateDevices();
+          const videoInputDevices = devices.filter(device => device.kind === 'videoinput');
+          if (videoInputDevices.length === 0) {
+            // 비디오 입력 장치(캠)가 없는 경우
+            alert('캠이 없어 서비스 이용이 제한됩니다.');
+            return; // 여기서 함수를 종료하여 더 이상 진행하지 않음
+          }
+    
+          // 캠이 있는 경우, 카메라 시작 로직 실행
+          const camera = new Camera(videoRef.current, {
+            onFrame: async () => {
+              await hands.send({ image: videoRef.current });
+            },
+            width: 800,
+            height: 450,
+          });
+          await camera.start();
+    
+        } catch (error) {
+          console.error('카메라 접근 중 오류 발생:', error);
+        }
+      };
+    
+      checkCameraAvailability();
+    }
+
+    
   }, []);
+
 
 
   const clearCanvas = () => {
@@ -75,32 +117,7 @@ const PaintWithAi = () => {
   });
 
   useEffect(() => {
-    const checkCameraAvailability = async () => {
-      try {
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const videoInputDevices = devices.filter(device => device.kind === 'videoinput');
-        if (videoInputDevices.length === 0) {
-          // 비디오 입력 장치(캠)가 없는 경우
-          alert('캠이 없어 서비스 이용이 제한됩니다.');
-          return; // 여기서 함수를 종료하여 더 이상 진행하지 않음
-        }
-  
-        // 캠이 있는 경우, 카메라 시작 로직 실행
-        const camera = new Camera(videoRef.current, {
-          onFrame: async () => {
-            await hands.send({ image: videoRef.current });
-          },
-          width: 800,
-          height: 450,
-        });
-        await camera.start();
-  
-      } catch (error) {
-        console.error('카메라 접근 중 오류 발생:', error);
-      }
-    };
-  
-    checkCameraAvailability();
+    
   }, []);
 
   function areFingersUp(landmarks) {
@@ -315,7 +332,7 @@ const PaintWithAi = () => {
       const time = hour + "" + minutes + "" + seconds;
       
       let img = canvas.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
-      const cookies = new Cookies();
+
 
       axios.post('http://localhost:8000/paint/mypicpaint/',{
           Picname: '안녕',
@@ -348,7 +365,7 @@ const PaintWithAi = () => {
     // navigatorR(-1);
   };
 
-
+  
   return (
     <PageLayout name="그림 그리기">
       <div className="paint-with-ai-page-container">

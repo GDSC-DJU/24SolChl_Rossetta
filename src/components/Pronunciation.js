@@ -5,10 +5,11 @@ import { useParams } from 'react-router-dom';
 import PageLayout from './PageLayout';
 import styled from 'styled-components';
 import { Cookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Pronunciation = () =>{
   const cookies = new Cookies();
-
+  const navigate = useNavigate();
   const [stream, setStream] = useState();
   const [media, setMedia] = useState();
   const [onRec, setOnRec] = useState(true);
@@ -147,6 +148,9 @@ const bufferToBase64 = (buffer)=> {
   // 문장 api
 
   useEffect(()=>{
+    if(cookies.get('token') === undefined){
+      navigate('/login');
+    }
     axios.get(`http://localhost:8000/pronunciation/info/${level}`,{
       headers: {
         "Content-Type":'application/json',

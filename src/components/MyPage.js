@@ -14,7 +14,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line, Radar, Doughnut, Bar } from 'react-chartjs-2';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import '../styles/MyPage.css'
 import axios from 'axios'
 import Gallery from './ModalGallery'
@@ -26,6 +26,7 @@ import { Cookies } from 'react-cookie';
 
 const MyPage = () => {
   const cookies = new Cookies();
+  const navigate = useNavigate();
   ChartJS.register(CategoryScale, RadialLinearScale, LinearScale, PointElement, BarElement, LineElement, ArcElement, Filler, Title, Tooltip, Legend);
   //웩슬러 정보
   const [wchslerInfo, setWchslerInfo] = useState({
@@ -200,6 +201,9 @@ const MyPage = () => {
 
   //웩슬러 정보 불러오기
   useEffect(() => {
+    if(cookies.get('token') === undefined){
+      navigate('/login');
+    }
     axios.get(`http://localhost:8000/wechsler/info`, {
       headers: {
         "Content-Type": 'application/json',
