@@ -28,7 +28,7 @@ app.use(cors());
 app.use(express.static(__dirname + '/img'));
 
 
-// 구동방식 변경 http://35.208.138.116:3000 GCP 외부 주소 접속 / localhost:3000 로컬 상 구동
+// 구동방식 변경 http://35.208.138.116:8000 GCP 외부 주소 접속 / localhost:3000 로컬 상 구동
 app.use(cors({ origin: 'http://localhost:3000'}));
 
 app.use('/wechsler',wechslerRouter);
