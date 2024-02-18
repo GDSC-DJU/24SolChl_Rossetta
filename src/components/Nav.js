@@ -2,14 +2,13 @@ import React, {useCallback, useEffect, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import styled from'styled-components'
 import '../styles/Nav.css'
-import { Cookies, useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 
 
 const Nav = () => {
   const [show, setShow] = useState(false); // handleScroll function
   const cookies = new Cookies();
   const navigate = useNavigate();
-
   //이벤트 리스너 리-랜더링 시 재등록 방지
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -63,7 +62,7 @@ const Nav = () => {
               <img src="../../assets/title-black.png" style={{width: "100%", height:"100%"}}alt="Rossetta title" />
           </TitleWrapper>
           <UserMenuWrapper>
-            <Link to="/" className='link-to' id='link-to__logout' onClick={()=> handleLogout}>로그아웃</Link>
+            <Link to="/" className='link-to' id='link-to__logout' onClick={handleLogout}>로그아웃</Link>
             <Link to="mypage" className='link-to' id='link-to__mypage' >마이페이지</Link>
           </UserMenuWrapper>
         </NavInside>

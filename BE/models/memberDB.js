@@ -8,7 +8,7 @@ exports.insertParents = async (body,joinDate)=> {
         const conn = await pool.getConnection(async(conn) => conn);
         const {id,pw,gender,name,phoneNum,email,birth} = body;
         // console.log(pwd)
-        await conn.query(`INSERT INTO parents (id,pw,gender,name,phoneNum,email,joinDate,birth) VALUES ("${id}","${pw}","${gender}","${name}",,"${phoneNum}","${email}","${joinDate}","${birth}")`);
+        await conn.query(`INSERT INTO parents (id,pw,gender,name,phoneNum,email,joinDate,birth) VALUES ("${id}","${pw}","${gender}","${name}","${phoneNum}","${email}","${joinDate}","${birth}")`);
         conn.release();
 
     }catch(err){

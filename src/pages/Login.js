@@ -60,7 +60,7 @@ const Login = () => {
         console.log(err);
       })
       if(cookies.get('token') !== undefined){
-        signupNavigate(-1);
+        signupNavigate('/');
 
       }
     }
