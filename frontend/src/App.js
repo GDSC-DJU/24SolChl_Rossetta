@@ -10,7 +10,7 @@ import Signup from "./pages/Signup";
 import Learning from "./pages/Learning";
 import Pattern from "./components/Pattern";
 import styled from "styled-components";
-import MyPage from "./components/MyPage"
+import MyPage from "./pages/MyPage"
 import ChangeUserInfo from "./pages/ChangeUserInfo";
 import Footer from "./components/Footer";
 import Introduction from "./pages/Introduction";
