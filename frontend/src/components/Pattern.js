@@ -81,6 +81,10 @@ const Pattern = () => {
     }
   };
 
+  useEffect(()=>{
+    setTime(timeElapsed);
+  },[timeElapsed])
+
   const handleSubmit = () => {
     clearInterval(timerID);
     setTimerID(null);
