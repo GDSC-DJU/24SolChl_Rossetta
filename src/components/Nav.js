@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import styled from'styled-components'
 import '../styles/Nav.css'
 import { Cookies } from 'react-cookie';
@@ -8,6 +8,7 @@ import { Cookies } from 'react-cookie';
 const Nav = () => {
   const [show, setShow] = useState(false); // handleScroll function
   const cookies = new Cookies();
+  const navigate = useNavigate();
   //이벤트 리스너 리-랜더링 시 재등록 방지
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -27,6 +28,7 @@ const Nav = () => {
 
   const handleLogout = useCallback (() => {
     cookies.remove('token');
+    navigate('/');
   }, [cookies]);
  
   if(cookies.get('token') === undefined) {
