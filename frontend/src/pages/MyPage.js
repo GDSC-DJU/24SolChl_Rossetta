@@ -17,7 +17,7 @@ import { Line, Radar, Doughnut, Bar } from 'react-chartjs-2';
 import { Link,useNavigate } from 'react-router-dom';
 import '../styles/MyPage.css'
 import axios from 'axios'
-import Gallery from './ModalGallery'
+import Gallery from '../components/ModalGallery'
 import styled from 'styled-components';
 import { Cookies } from 'react-cookie';
 
@@ -639,9 +639,6 @@ z-index: 999;
           </Link>
           <div onClick={openModalHandler} > 갤러리 </div>
 
-        </div>
-        <div className="sign-out">
-          로그아웃
         </div>
         {isModalOpen && (
           <>
