@@ -10,7 +10,7 @@ router.delete('/delete/:wechslernum',verifyToken,deleteWechslerInfo);
 router.get('/info/',verifyToken,wechslerInfo);
 
 //웩슬러 정보 입력 router
-router.post('/sign-up/wechsler',verifyToken,insertWechslerInfo);
+router.post('/sign-up/wechsler',insertWechslerInfo);
 
 //웩슬러 정보 수정 router
 router.put('/update/:wechslerNum',verifyToken,wechslerInfoUpdate);
