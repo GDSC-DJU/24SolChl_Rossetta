@@ -6,7 +6,8 @@ const {insertPattern, selectPattern, deletePattern, updatePattern} = require('..
 exports.insertPatternData = async(req, res, next) => {
     try {
         const body = req.body;
-        await insertPattern(body);
+        const {id} = req.decoded;
+        await insertPattern(body,id);
         res.status(200).json({
             code: 200,
             message: 'success insert'

@@ -3,10 +3,10 @@ const {pool} = require('./db');
 // pattern 테이블 관련 함수
 
 //pattern 테이블에 데이터를 삽입
-exports.insertPattern = async (body) => {
+exports.insertPattern = async (body,id) => {
     try {
         const conn = await pool.getConnection(async(conn) => conn);
-        const {id, level, time, date} = body;
+        const {level, time, date} = body;
         await conn.query(`INSERT INTO pattern (id, level, time, date) VALUES ("${id}", ${level}, "${time}", "${date}")`);
         conn.release();
     } catch(err) {
