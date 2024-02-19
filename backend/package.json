@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/GDSC-DJU/24SolChl_Rossetta_BE#readme",
   "dependencies": {
+    "axios": "^1.6.7",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.4",
