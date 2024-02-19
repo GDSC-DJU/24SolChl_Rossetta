@@ -66,7 +66,7 @@ const ChangeUserInfo = () =>{
 
     //회원 정보 받아오기
     useEffect(()=>{
-      axios.get('http://http://35.208.138.116:8000/member/parents/info',{
+      axios.get('http://35.208.138.116:8000/member/parents/info',{
         headers: {
           "Content-Type":'application/json',
           Authorization: cookies.get('token')
@@ -85,7 +85,7 @@ const ChangeUserInfo = () =>{
       .catch((err)=>{
         console.log(err);
       })
-      axios.get('http://http://35.208.138.116:8000/wechsler/info',{
+      axios.get('http://35.208.138.116:8000/wechsler/info',{
         headers: {
           "Content-Type":'application/json',
           Authorization: cookies.get('token')
@@ -158,7 +158,7 @@ const ChangeUserInfo = () =>{
     };
     //회원 정보 수정 버튼
     const onClickUpdateButton = async() => {
-      await axios.put('http://http://35.208.138.116:8000/member/parents/update',{
+      await axios.put('http://35.208.138.116:8000/member/parents/update',{
         pw:pw !== '' ? pw : pwCompare,
         phoneNum:mobile,
       },{
