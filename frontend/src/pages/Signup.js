@@ -89,7 +89,7 @@ const Signup = () => {
   };
 
   const onClickRegisterButton = async() => {
-    await axios.post('http://localhost:8000/member/sign-up/parents',{
+    await axios.post('http://35.208.138.116:8000/member/sign-up/parents',{
         id:username,
         pw:pw,
         phoneNum:mobile,
@@ -104,7 +104,7 @@ const Signup = () => {
         console.log(err);
       })
     if(wchslerData1 && wchslerData2 && wchslerData3 && wchslerData4 && wchslerData5){
-      await axios.post('http://localhost:8000/wechsler/sign-up/wechsler',{
+      await axios.post('http://35.208.138.116:8000/wechsler/sign-up/wechsler',{
         id:username,
         lang:wchslerData1,
         pr:wchslerData2,

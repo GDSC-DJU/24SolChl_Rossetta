@@ -97,7 +97,7 @@ const Pattern = () => {
     const date = currentDate.toISOString().split('T')[0];
     setIsPatternMatching(isMatching);
 
-    axios.post(`http://localhost:8000/pattern/`, {
+    axios.post(`http://35.208.138.116:8000/pattern/`, {
       level: level,
       time: time,
       date: date,

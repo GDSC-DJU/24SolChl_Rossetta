@@ -334,7 +334,7 @@ const PaintWithAi = () => {
       let img = canvas.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
 
 
-      axios.post('http://localhost:8000/paint/mypicpaint/',{
+      axios.post('http://35.208.138.116:8000/paint/mypicpaint/',{
           Picname: '안녕',
           img: JSON.stringify(img),
           fileName: `${YMD}${time}`

@@ -96,7 +96,7 @@ if (level == 1) {
   ].map((src) => ({ source: src }));
 }
 useEffect(()=>{
-  axios.get(`http://localhost:8000/paint/paintex/${level}`,{
+  axios.get(`http://35.208.138.116:8000/paint/paintex/${level}`,{
     headers: {
       "Content-Type": 'application/json',
       Authorization: cookies.get('token')
