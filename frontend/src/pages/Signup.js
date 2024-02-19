@@ -96,6 +96,7 @@ const Signup = () => {
         gender: gender,
         name: name,
         email: email,
+        birth: birthdate,
       })
       .then((res)=>{
         console.log(res);
