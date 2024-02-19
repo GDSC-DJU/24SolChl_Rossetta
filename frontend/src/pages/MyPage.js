@@ -526,7 +526,7 @@ z-index: 999;
 
             <div className="wchsler-data">
               <div className="first-color"></div>
-              <div className="percentage">{wchslerInfo.lang / 160 * 100}</div>
+              <div className="percentage">{wchslerInfo.lang / 160 * 100}%</div>
               <div className="name">언어 이해</div>
               <div className="data">{wchslerInfo.lang}점</div>
             </div>
