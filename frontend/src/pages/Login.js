@@ -48,7 +48,7 @@ const Login = () => {
       }
     };
     const onClickConfirmButton = async() => {
-      await axios.post('http://localhost:8000/member/sign-in',{
+      await axios.post('http://35.208.138.116:8000/member/sign-in',{
         id:username,
         pw:pw
       })

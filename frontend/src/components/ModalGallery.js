@@ -81,7 +81,7 @@ const ImageContent = () => {
   const cookies = new Cookies()
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/paint/mypicpaint/info`, {
+    axios.get(`http://35.208.138.116:8000/paint/mypicpaint/info`, {
       headers: {
         "Content-Type": 'application/json',
         Authorization: cookies.get('token')

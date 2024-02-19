@@ -57,7 +57,7 @@ const MyPage = () => {
 
   //문장 반복말하기
   const pronunciationScore = () => {
-    axios.get(`http://localhost:8000/pronunciation/info/score/${pDate}/${level}`, {
+    axios.get(`http://35.208.138.116:8000/pronunciation/info/score/${pDate}/${level}`, {
       headers: {
         "Content-Type": 'application/json',
         Authorization: cookies.get('token')
@@ -108,7 +108,7 @@ const MyPage = () => {
       })
   }
   useEffect(() => {
-    axios.get(`http://localhost:8000/member/parents/info`, {
+    axios.get(`http://35.208.138.116:8000/member/parents/info`, {
       headers: {
         "Content-Type": 'application/json',
         Authorization: cookies.get('token')
@@ -128,7 +128,7 @@ const MyPage = () => {
   }, [])
 
   const patternScore = () => {
-    axios.get(`http://localhost:8000/pattern/${level}/${pDate}`, {
+    axios.get(`http://35.208.138.116:8000/pattern/${level}/${pDate}`, {
       headers: {
         "Content-Type": 'application/json',
         Authorization: cookies.get('token')
@@ -204,7 +204,7 @@ const MyPage = () => {
     if(cookies.get('token') === undefined){
       navigate('/login');
     }
-    axios.get(`http://localhost:8000/wechsler/info`, {
+    axios.get(`http://35.208.138.116:8000/wechsler/info`, {
       headers: {
         "Content-Type": 'application/json',
         Authorization: cookies.get('token')
