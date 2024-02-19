@@ -2,7 +2,6 @@
 .my-page-container{
   all: initial;
   text-align: center;
-  width: 90vw;
   height: 90vh;
   display: grid;
   grid-template-columns: 85% 15%;
