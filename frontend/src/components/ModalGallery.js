@@ -87,8 +87,8 @@ const ImageContent = () => {
         Authorization: cookies.get('token')
       }
     }).then((res) => {
-      console.log(res.data);
-      setVisibleImages([res.data]);
+      console.log(res.data.reponse);
+      setVisibleImages(res.data.response);
     })
       .catch((err) => {
         console.log(err);
