@@ -34,6 +34,7 @@ const Situation = () => {
             }
         })
         .then((res)=>{
+            console.log(res.data.response);
             setQuiz(res.data.response);
             setTotalSize(res.data.response.length);
         })
