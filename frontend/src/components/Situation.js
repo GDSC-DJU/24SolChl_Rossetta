@@ -78,7 +78,7 @@ const Situation = () => {
         else{
             setTotalAnswer([...totalAnswer, 'X']);
         }
-        if(count < quiz.length+1){
+        if(count < totalSize){
             let remainingQuiz = JSON.parse(JSON.stringify(quiz));
             let filteredQuiz= remainingQuiz.filter(qz => qz.index !== currentQuiz.index);
             setQuiz(filteredQuiz);
