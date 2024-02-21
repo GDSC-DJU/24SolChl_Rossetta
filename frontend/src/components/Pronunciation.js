@@ -270,10 +270,7 @@ const bufferToBase64 = (buffer)=> {
             </div>
           </div>
           <div className='score'>
-            <div>
-              점수 : 
-            </div>
-            <div> {wait ? score*20+'점' : '잠시만 기다려 주세요!'}</div>
+            <div> {wait ? Math.ceil(score*20)+'점' : '잠시만 기다려 주세요!'}</div>
           </div>
           <div className='pronunciation-button-container'>
             <button onClick={levelClick}> 랜덤 문장</button>
