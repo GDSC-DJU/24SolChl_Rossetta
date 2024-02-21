@@ -43,11 +43,11 @@
 }
 .pronunciation-funtion-container .example-text{
   /* padding-top: 15%; */
-  font-size: 130%;
+  font-size: 180%;
 }
 .pronunciation-funtion-container .score{
   /* padding-top: 10%; */
-  font-size: 130%;
+  font-size: 190%;
 }
 .pronunciation-button-container{
   display: grid;
