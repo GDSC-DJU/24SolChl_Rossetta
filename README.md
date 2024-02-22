@@ -97,15 +97,17 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 ## 🎞 Demo Video
 
+[![Rossetta Video](assets/main.png)](https://www.youtube.com/watch?v=H9LvbVILIwI)
+
 ## 🌊  Rough Configuration
 
-<img src="assets/사용자흐름/main.png" >
+<img src="assets/Rough Configuration/main.png" >
 
-<img src="assets/사용자흐름/Introduction.png" >
+<img src="assets/Rough Configuration/Introduction.png" >
 
-<img src="assets/사용자흐름/learning.png" >
+<img src="assets/Rough Configuration/learning.png" >
 
-<img src="assets/사용자흐름/mypage.png" >
+<img src="assets/Rough Configuration/mypage.png" >
 
 ## ✏  Learning Descriptions & Expected Effects
 
@@ -200,6 +202,8 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 ## 📌  Getting Started
 
+### How to access url
+
 📢 **There is something you need to do before accessing our website!**
 
 1. Run the chrome browser on the Client and enter **"[chrome://flags](chrome://flags)"** in the address bar
@@ -213,7 +217,37 @@ id: rosseta
 pw: rossetta1865!
 ```
 
-## 🎨  Design Source
+### How to run a project
+
+⚠ **For pronunciation correction learning, an ETRI API key is required. Please try accessing pronunciation correction learning via an IP (http://35.208.138.116:3000)**.
+
+**Clone Project**
+```
+git clone https://github.com/GDSC-DJU/24SolChl_Rossetta.git
+```
+
+**Install Package**
+```
+//Go to frontend folder
+cd ./frontend
+
+//Download of node_modules in React
+npm ci
+
+//Move from frontend folder to backend folder
+cd ../backend
+
+//Download of node_modules in Express
+npm ci
+```
+
+**Strat Project**
+```
+//start (When you npm start in the backend folder, the frontend folder also runs.)
+npm start
+```
+
+## 🎨  Design Board
 <img src="assets/design.png" width="830px" >
 
 ## 👨‍💻  Contributors
