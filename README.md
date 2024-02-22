@@ -23,7 +23,7 @@ Rossetta is trying to solve various problems facing 7 million people in the esti
 
 In addition, while it is very important for children with border intelligence to receive effective early treatment and education, the cost of education for this is very high, at more than W10 million per year, which is **economic burden***. It is one of the main obstacles preventing many families from getting the education and support they need.
 
-Our service is focused on recognizing these issues and helping chlidren with borderline intelligence and families overcome barriers to economic and accessibility issues. Through this, we want to build a **more comprehensive and accessible education system** and help children with borderline intelligence reach their full potential.
+Our service is focused on recognizing these issues and helping children with borderline intelligence and families overcome barriers to economic and accessibility issues. Through this, we want to build a **more comprehensive and accessible education system** and help children with borderline intelligence reach their full potential.
 
 
 ## 🎯  &nbsp;UN's Sustainable Development Goals & Targets
@@ -36,7 +36,7 @@ Our service is focused on recognizing these issues and helping chlidren with bor
 
 Rossetta helps early child development to prepare for **primary education**.
 
-We provide customized online learning programs for children with borderline intelligence so that they can develop their cognitive, spatial, and linguistic abilities comprehensively. These educational programs help children have the basic necessary preparations for primary education, so that every child has the opportunity to reach their full potential through education.
+We provide customized online learning programs for children with borderline intelligence so that they can develop their cognitive, spatial, and linguistic abilities comprehensively. These educational programs help children have the basic necessary preparations for primary education so that every child has the opportunity to reach their full potential through education.
 
 ### Goal 10: Reduced Inequalities
 
@@ -202,14 +202,14 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 ## 📌  Getting Started
 
-### How to access url
+### How to access URL
 
 📢 **There is something you need to do before accessing our website!**
 
-1. Run the chrome browser on the Client and enter **"[chrome://flags](chrome://flags)"** in the address bar
+1. Run the Chrome browser on the Client and enter **"[chrome://flags](chrome://flags)"** in the address bar
 2. Enter **“Insecure origins treated as secure”** in the search field at the top.
 3. **Enter the IP** to connect **(http://35.208.138.116:3000)**, enable it, and **restart the browser**.
-4. If you connect to the server address again, you can confirm that the camera and audio has permission.
+4. If you connect to the server address again, you can confirm that the camera and audio have permission.
 
 **Please enter the ID and password below after accessing this [Rossetta](http://35.208.138.116:3000/)**
 ```
@@ -222,28 +222,29 @@ pw: rossetta1865!
 ⚠ **For pronunciation correction learning, an ETRI API key is required. Please try accessing pronunciation correction learning via an IP (http://35.208.138.116:3000)**.
 
 **Clone Project**
-```
+```bash
 git clone https://github.com/GDSC-DJU/24SolChl_Rossetta.git
+cd ./24SolChl_Rossetta
 ```
 
 **Install Package**
-```
-//Go to frontend folder
+```bash
+# Go to frontend folder
 cd ./frontend
 
-//Download of node_modules in React
+# Download of node_modules in React
 npm ci
 
-//Move from frontend folder to backend folder
+# Move from frontend folder to backend folder
 cd ../backend
 
-//Download of node_modules in Express
+# Download of node_modules in Express
 npm ci
 ```
 
-**Strat Project**
-```
-//start (When you npm start in the backend folder, the frontend folder also runs.)
+**Start Project**
+```bash
+# start (When you npm start in the backend folder, the frontend folder also runs.)
 npm start
 ```
 
