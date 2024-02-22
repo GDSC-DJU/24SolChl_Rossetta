@@ -113,7 +113,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 
 <div align="center" >
-    <h2> 1. Drawing PIctures </h2>
+    <h2> 1. Motion Drawing </h2>
     <img src="assets/학습별 GIF/그림그리기.gif" width="830px" >
 </div>
 
