@@ -1,33 +1,28 @@
+<div align="center">
+    <h1>Rosetta Index</h1>
+</div>
+
+- [Rosetta Introduction](##rosetta-platform-for-children-with-borderline-intelligence)
 - [Problem Statement](#problem-statement)
-- [🎯  &nbsp;UN's Sustainable Development Goals & Targets](#-----nbsp-un-s-sustainable-development-goals---targets)
-  * [Goal 4: Quality Education (Target: 4.2)](#goal-4--quality-education--target--42-)
-  * [Goal 10: Reduced Inequalities](#goal-10--reduced-inequalities)
-- [💻  Technology Stack](#----technology-stack)
-- [✔  Project Architecture](#---project-architecture)
-- [🛠  Entity Relationship Diagram](#----entity-relationship-diagram)
-- [🎞 Demo Video](#---demo-video)
-- [🌊  Rough Configuration](#----rough-configuration)
-- [✏  Learning Descriptions & Expected Effects](#---learning-descriptions---expected-effects)
-  * [Learning Introduction](#learning-introduction)
-  * [How to Use](#how-to-use)
-  * [Learning Introduction](#learning-introduction-1)
-  * [How to Use](#how-to-use-1)
-  * [Learning Introduction](#learning-introduction-2)
-  * [How to Use](#how-to-use-2)
-  * [Learning Introduction](#learning-introduction-3)
-  * [How to Use](#how-to-use-3)
-- [🗂  Directory structure](#----directory-structure)
-- [📌  Getting Started](#----getting-started)
+- [🎯 SDG](#🎯-uns-sustainable-development-goals--targets)
+  * [Goal 4(Target: 4.2)](#goal-4-quality-education-target-42)
+  * [Goal 10](#goal-10-reduced-inequalities)
+- [💻  Technology Stack](#💻-technology-stack)
+- [✔  Project Architecture](#✔-project-architecture)
+- [🛠  Entity Relationship Diagram](#🛠-entity-relationship-diagram)
+- [🎞 Demo Video](#🎞-demo-video)
+- [🌊  Rough Configuration](#🌊-rough-configuration)
+- [✏  Learning Descriptions & Expected Effects](#✏-learning-descriptions--expected-effects)
+- [🗂  Directory structure](#🗂-directory-structure)
+- [📌  Getting Started](#📌-getting-started)
   * [How to access URL](#how-to-access-url)
   * [How to run a project](#how-to-run-a-project)
-- [🎨  Design Board](#🎨--design-board)
-- [👨‍💻  Contributors](#-------contributors)
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+- [🎨  Design Board](#🎨-design-board)
+- [👨‍💻  Contributors](#👨‍💻-contributors)
 
 
+# Rosetta: Platform for children with borderline intelligence
 <div align="center">
-    <h1> <i>Rosetta: Platform for children with borderline intelligence</i> </h1>
     <img src="assets/main.png" >
 </div>
 
