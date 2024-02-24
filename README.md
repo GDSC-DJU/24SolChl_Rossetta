@@ -4,7 +4,7 @@
 
 - [Rosetta Introduction](#rosetta-platform-for-children-with-borderline-intelligence)
 - [Problem Statement](#problem-statement)
-- [🎯 SDG](#🎯-uns-sustainable-development-goals--targets)
+- [🎯 SDG](#uns-sustainable-development-goals--targets)
   * [Goal 4(Target: 4.2)](#goal-4-quality-education-target-42)
   * [Goal 10](#goal-10-reduced-inequalities)
 - [💻  Technology Stack](#💻-technology-stack)
