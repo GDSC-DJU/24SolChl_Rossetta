@@ -10,7 +10,7 @@
 - [💻  Technology Stack](#--technology-stack)
 - [✔  Project Architecture](#--project-architecture)
 - [🛠  Entity Relationship Diagram](#--entity-relationship-diagram)
-- [🎞 Demo Video](#--demo-video)
+- [🎞 Demo Video](#-demo-video)
 - [🌊  Rough Configuration](#--rough-configuration)
 - [✏  Learning Descriptions & Expected Effects](#--learning-descriptions--expected-effects)
 - [🗂  Directory structure](#--directory-structure)
