@@ -20,7 +20,7 @@
 - [📌  Getting Started](#----getting-started)
   * [How to access URL](#how-to-access-url)
   * [How to run a project](#how-to-run-a-project)
-- [🎨  Design Board](#----design-board)
+- [🎨  Design Board](#🎨--design-board)
 - [👨‍💻  Contributors](#-------contributors)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
