@@ -11,7 +11,7 @@ Rosetta is an educational solution for children with borderline intelligence. Cu
 </table>
 
 ### Index
-- [❓ Problem Statement](#problem-statement)
+- [❓ Problem Statement](#-problem-statement)
 - [🎯 SDG](#--uns-sustainable-development-goals--targets)
 - [💻  Technology Stack](#--technology-stack)
 - [✔  Project Architecture](#--project-architecture)
