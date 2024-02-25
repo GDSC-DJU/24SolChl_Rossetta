@@ -1,26 +1,3 @@
-<div align="center">
-    <h1>Rosetta Index</h1>
-</div>
-
-- [Rosetta Introduction](#rosetta-platform-for-children-with-borderline-intelligence)
-- [Problem Statement](#problem-statement)
-- [🎯 SDG](#--uns-sustainable-development-goals--targets)
-  * [Goal 4(Target: 4.2)](#goal-4-quality-education-target-42)
-  * [Goal 10](#goal-10-reduced-inequalities)
-- [💻  Technology Stack](#--technology-stack)
-- [✔  Project Architecture](#--project-architecture)
-- [🛠  Entity Relationship Diagram](#--entity-relationship-diagram)
-- [🎞 Demo Video](#-demo-video)
-- [🌊  Rough Configuration](#--rough-configuration)
-- [✏  Learning Descriptions & Expected Effects](#--learning-descriptions--expected-effects)
-- [🗂  Directory structure](#--directory-structure)
-- [📌  Getting Started](#--getting-started)
-  * [How to access URL](#how-to-access-url)
-  * [How to run a project](#how-to-run-a-project)
-- [🎨  Design Board](#--design-board)
-- [👨‍💻  Contributors](#--contributors)
-
-
 # Rosetta: Platform for children with borderline intelligence
 <div align="center">
     <img src="assets/main.png" >
@@ -32,6 +9,21 @@ Rosetta is an educational solution for children with borderline intelligence. Cu
 <tr><td><img src="assets/team/RosettaSherwoodHall.png" width="300px" ></td><td> <b> Rosetta Sherwood Hall </b> </br> After coming to Korea in 1890, Rosetta Sherwood Hall served as a missionary for 44 years, focusing mainly on welfare, education, and medical services for women and the disabled. Rosetta Hall began the first modernized special education in Korea. </td></tr>
 <tr><td> <img src="assets/team/logo_bg.png" width="150px"> </td><td> <b> Snow Drop </b> </br> Seolganghwa with the meaning of flower words such as hope and solace It means, "I look forward to the spring of hope for everyone to open up their shrunken bodies and minds like Seolganghwa, which broke through the frozen ground in the cold." </td></tr>
 </table>
+
+### Index
+- [❓ Problem Statement](#problem-statement)
+- [🎯 SDG](#--uns-sustainable-development-goals--targets)
+- [💻  Technology Stack](#--technology-stack)
+- [✔  Project Architecture](#--project-architecture)
+- [🛠  Entity Relationship Diagram](#--entity-relationship-diagram)
+- [🎞 Demo Video](#-demo-video)
+- [🌊  Rough Configuration](#--rough-configuration)
+- [✏  Learning Descriptions & Expected Effects](#--learning-descriptions--expected-effects)
+- [🗂  Directory structure](#--directory-structure)
+- [📌  Getting Started](#--getting-started)
+- [🎨  Design Board](#--design-board)
+- [👨‍💻  Contributors](#--contributors)
+<br/><br/><br/>
 
 
 
@@ -136,6 +128,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 
 <div align="center" >
+    <br/>
     <h2> 1. Motion Drawing </h2>
     <img src="assets/학습별 GIF/그림그리기.gif" width="830px" >
 </div>
