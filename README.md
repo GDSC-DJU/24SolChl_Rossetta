@@ -1,5 +1,5 @@
+## Rosetta: Platform for children with borderline intelligence
 <div align="center">
-    <h1> <i>Rosetta: Platform for children with borderline intelligence</i> </h1>
     <img src="assets/main.png" >
 </div>
 
@@ -10,9 +10,24 @@ Rosetta is an educational solution for children with borderline intelligence. Cu
 <tr><td> <img src="assets/team/logo_bg.png" width="150px"> </td><td> <b> Snow Drop </b> </br> Seolganghwa with the meaning of flower words such as hope and solace It means, "I look forward to the spring of hope for everyone to open up their shrunken bodies and minds like Seolganghwa, which broke through the frozen ground in the cold." </td></tr>
 </table>
 
+### Index
+- [❓ Problem Statement](#-problem-statement)
+- [🎯 SDG](#--uns-sustainable-development-goals--targets)
+- [💻  Technology Stack](#--technology-stack)
+- [✔  Project Architecture](#--project-architecture)
+- [🛠  Entity Relationship Diagram](#--entity-relationship-diagram)
+- [🎞 Demo Video](#-demo-video)
+- [🌊  Rough Configuration](#--rough-configuration)
+- [✏  Learning Descriptions & Expected Effects](#--learning-descriptions--expected-effects)
+- [🗂  Directory structure](#--directory-structure)
+- [📌  Getting Started](#--getting-started)
+- [🎨  Design Board](#--design-board)
+- [👨‍💻  Contributors](#--contributors)
+<br/><br/><br/>
 
 
-## Problem Statement
+
+## ❓ Problem Statement
 <br/>
 <blockquote align='center'>  
 <h3> “In Korea, about 7 million people have people with borderline intelligence” </h3>
@@ -113,6 +128,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 
 <div align="center" >
+    <br/>
     <h2> 1. Motion Drawing </h2>
     <img src="assets/학습별 GIF/그림그리기.gif" width="830px" >
 </div>
