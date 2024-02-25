@@ -1,4 +1,4 @@
-# Rosetta: Platform for children with borderline intelligence
+## Rosetta: Platform for children with borderline intelligence
 <div align="center">
     <img src="assets/main.png" >
 </div>
