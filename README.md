@@ -112,7 +112,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 ## 🎞 Demo Video
 
-[![Rossetta Video](assets/main.png)](https://www.youtube.com/watch?v=H9LvbVILIwI)
+[![Rossetta Video](assets/main.png)](https://youtu.be/OuCPZIIJURc?si=tCl28KRDD0R1U0BV)
 
 ## 🌊  Rough Configuration
 
