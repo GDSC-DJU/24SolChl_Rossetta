@@ -27,7 +27,7 @@ Rosetta is an educational solution for children with borderline intelligence. Cu
 
 
 
-## Problem Statement
+## ❓ Problem Statement
 <br/>
 <blockquote align='center'>  
 <h3> “In Korea, about 7 million people have people with borderline intelligence” </h3>
