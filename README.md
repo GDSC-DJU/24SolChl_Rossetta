@@ -1,13 +1,13 @@
 ## Rosetta: Platform for children with borderline intelligence
 <div align="center">
-    <img src="assets/main.png" >
+    <img src="frontend/public/assets/README/main.png" >
 </div>
 
 Rosetta is an educational solution for children with borderline intelligence. Customized training provided by Rosetta allows users to improve their cognitive, language, visual perception, and other intellectual abilities and visually check their ability growth through learning outcomes.
 
 <table>
-<tr><td><img src="assets/team/RosettaSherwoodHall.png" width="300px" ></td><td> <b> Rosetta Sherwood Hall </b> </br> After coming to Korea in 1890, Rosetta Sherwood Hall served as a missionary for 44 years, focusing mainly on welfare, education, and medical services for women and the disabled. Rosetta Hall began the first modernized special education in Korea. </td></tr>
-<tr><td> <img src="assets/team/logo_bg.png" width="150px"> </td><td> <b> Snow Drop </b> </br> Seolganghwa with the meaning of flower words such as hope and solace It means, "I look forward to the spring of hope for everyone to open up their shrunken bodies and minds like Seolganghwa, which broke through the frozen ground in the cold." </td></tr>
+<tr><td><img src="frontend/public/assets/README/team/RosettaSherwoodHall.png" width="300px" ></td><td> <b> Rosetta Sherwood Hall </b> </br> After coming to Korea in 1890, Rosetta Sherwood Hall served as a missionary for 44 years, focusing mainly on welfare, education, and medical services for women and the disabled. Rosetta Hall began the first modernized special education in Korea. </td></tr>
+<tr><td> <img src="frontend/public/assets/README/team/logo_bg.png" width="150px"> </td><td> <b> Snow Drop </b> </br> Seolganghwa with the meaning of flower words such as hope and solace It means, "I look forward to the spring of hope for everyone to open up their shrunken bodies and minds like Seolganghwa, which broke through the frozen ground in the cold." </td></tr>
 </table>
 
 ### Index
@@ -44,7 +44,7 @@ Our service is focused on recognizing these issues and helping children with bor
 ## 🎯  &nbsp;UN's Sustainable Development Goals & Targets
 
 <div align="center" >
-    <img src="assets/SDG.png" width="700px" >
+    <img src="frontend/public/assets/README/SDG.png" width="700px" >
 </div>
 
 ### Goal 4: Quality Education (Target: 4.2)
@@ -65,31 +65,31 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 <div align="center">
 <kbd>
-<img src="/assets/logo/React.png" height="60" />
+<img src="frontend/public/assets/README/logo/React.png" height="60" />
 </kbd>
 <kbd>
-<img src="/assets/logo/reacthooks.png" height="60" />
+<img src="frontend/public/assets/README/logo/reacthooks.png" height="60" />
 </kbd>
 <kbd>
-<img src="/assets/logo/expressjs.png" height="60" />
+<img src="frontend/public/assets/README/logo/expressjs.png" height="60" />
 </kbd>
 <kbd>
-<img src="/assets/logo/MySQL.png" height="60" />
+<img src="frontend/public/assets/README/logo/MySQL.png" height="60" />
 </kbd>
 <kbd>
-<img src="/assets/logo/GCP.png" height="60" />
+<img src="frontend/public/assets/README/logo/GCP.png" height="60" />
 </kbd>
 <kbd>
-<img src="/assets/logo/media.png" height="60" />
+<img src="frontend/public/assets/README/logo/media.png" height="60" />
 </kbd>
 <kbd>
-<img src="/assets/logo/etri.png" height="60" />
+<img src="frontend/public/assets/README/logo/etri.png" height="60" />
 </kbd>
 <kbd>
-<img src="assets/logo/chart.js.png" height="60" />
+<img src="frontend/public/assets/README/logo/chart.js.png" height="60" />
 </kbd>
 <kbd>
-<img src="/assets/logo/styledcomponents.png" height="60" />
+<img src="frontend/public/assets/README/logo/styledcomponents.png" height="60" />
 </kbd>
 </div>
 
@@ -101,28 +101,28 @@ Through Rossetta's learning service, we will help children with borderline intel
 ## ✔  Project Architecture
 
 <div align="center" >
-    <img src="assets/drawio.svg" width="830px" >
+    <img src="frontend/public/assets/README/drawio.svg" width="830px" >
 </div>
 
 ## 🛠  Entity Relationship Diagram
 
 <div align="center" >
-    <img src="assets/erd.png" width="830px" >
+    <img src="frontend/public/assets/README/erd.png" width="830px" >
 </div>
 
 ## 🎞 Demo Video
 
-[![Rossetta Video](assets/main.png)](https://youtu.be/OuCPZIIJURc?si=tCl28KRDD0R1U0BV)
+[![Rossetta Video](frontend/public/assets/main.png)](https://youtu.be/OuCPZIIJURc?si=tCl28KRDD0R1U0BV)
 
 ## 🌊  Rough Configuration
 
-<img src="assets/Rough Configuration/main.png" >
+<img src="frontend/public/assets/README/Rough Configuration/main.png" >
 
-<img src="assets/Rough Configuration/Introduction.png" >
+<img src="frontend/public/assets/README/Rough Configuration/Introduction.png" >
 
-<img src="assets/Rough Configuration/learning.png" >
+<img src="frontend/public/assets/README/Rough Configuration/learning.png" >
 
-<img src="assets/Rough Configuration/mypage.png" >
+<img src="frontend/public/assets/README/Rough Configuration/mypage.png" >
 
 ## ✏  Learning Descriptions & Expected Effects
 
@@ -130,7 +130,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 <div align="center" >
     <br/>
     <h2> 1. Motion Drawing </h2>
-    <img src="assets/학습별 GIF/그림그리기.gif" width="830px" >
+    <img src="frontend/public/assets/README/학습별 GIF/그림그리기.gif" width="830px" >
 </div>
 
 ### Learning Introduction
@@ -144,7 +144,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 <div align="center" >
     <h2> 2. Pronunciation Correction </h2>
-    <img src="assets/학습별 GIF/발음교정.gif" width="830px" >
+    <img src="frontend/public/assets/README/학습별 GIF/발음교정.gif" width="830px" >
 </div>
     
 ### Learning Introduction
@@ -160,7 +160,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 <div align="center" >
     <h2> 3. Situational Awareness </h2>
-    <img src="assets/학습별 GIF/상황인지.gif" width="830px" >
+    <img src="frontend/public/assets/README/학습별 GIF/상황인지.gif" width="830px" >
 </div>
 
 ### Learning Introduction
@@ -175,7 +175,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 <div align="center" >
     <h2> 4. Pattern Matching </h2>
-    <img src="assets/학습별 GIF/패턴맞추기.gif" width="830px" >
+    <img src="frontend/public/assets/README/학습별 GIF/패턴맞추기.gif" width="830px" >
 </div>
 
 ### Learning Introduction
@@ -265,13 +265,13 @@ npm start
 ```
 
 ## 🎨  Design Board
-<img src="assets/design.png" width="830px" >
+<img src="frontend/public/assets/README/design.png" width="830px" >
 
 ## 👨‍💻  Contributors
 
-| <img src="assets/team/김진우.jpg" width="180px" > | <img src="assets/team/이홍교.jpg" width="180px" > | <img src="assets/team/어태규.jpg" width="180px" > | <img src="assets/team/최민석.jpg" width="180px" > |
+| <img src="frontend/public/assets/README/team/김진우.jpg" width="180px" > | <img src="frontend/public/assets/README/team/이홍교.jpg" width="180px" > | <img src="frontend/public/assets/README/team/어태규.jpg" width="180px" > | <img src="frontend/public/assets/README/team/최민석.jpg" width="180px" > |
 | --- | --- | --- | --- |
 | <div align="center"><h3><b><a href="https://github.com/ray9583">Kim Jinwo</a></b></h3><p><i>Daejeon University</i></p></div> | <div align="center"><h3><b><a href="https://github.com/LeeHongyo">Lee Honggyo</a></b></h3></a><p><i>Daejeon University</i></p></div></a> | <div align="center"><h3><b><a href="https://github.com/EOTAEGYU">Eo Taegyu</a></b></h3></a><p><i>Daejeon University</i></p></div> | <div align="center"><h3><b><a href="https://github.com/seok019283501">Choi Minseok</a></b></h3></a><p><i>Daejeon University</i></p></div> |
 
-<img src="assets/main-banner2.png" >
+<img src="frontend/public/assets/README/main-banner2.png" >
 
