@@ -191,28 +191,29 @@ Through Rossetta's learning service, we will help children with borderline intel
 ## 🗂  Directory structure
 
 ```
-│.gitignore
-├─🗃️backend
-│   ├─package.json
-│   ├─package-lock.json
-│   ├─server.js
-│   ├─🗂️contllers
-│   ├─🗂️middlewares
-│   ├─🗂️models
-│   ├─🗂️routes
-│   └─🗂️img
-└─🗃️frontend
-    │package.json
-    │package-lock.json
-    ├─🗂️public
-    │  └─📁assets
-    └─🗂️src
-       ├─📁components
-       ├─📁pages
-       ├─📁styles
-       ├─app.js
-       ├─index.js
-       └─index.css
+📂24SolChl_Rossetta
+    │.gitignore
+    ├─🗃️backend
+    │   ├─package.json
+    │   ├─package-lock.json
+    │   ├─server.js
+    │   ├─🗂️contllers
+    │   ├─🗂️middlewares
+    │   ├─🗂️models
+    │   ├─🗂️routes
+    │   └─🗂️img
+    └─🗃️frontend
+        │package.json
+        │package-lock.json
+        ├─🗂️public
+        │  └─📁assets
+        └─🗂️src
+           ├─📁components
+           ├─📁pages
+           ├─📁styles
+           ├─app.js
+           ├─index.js
+           └─index.css
 
 ```
 
