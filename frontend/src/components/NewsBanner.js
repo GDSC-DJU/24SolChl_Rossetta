@@ -25,7 +25,7 @@ const NewsBanner = () => {
                             700만명 육박하는 느린학습자, 지원책커녕 용어조차 없다
                         </span>
                     </NewsItemSmall>
-                    <NewsItemSmall onClick={() => window.open('https://www.hani.co.kr/arti/area/gangwon/1090490.html')}>
+                    <NewsItemSmall onClick={() => window.open('https://m.kmib.co.kr/view.asp?arcid=0924324165&code=11131100&sid1=soc')}>
                         <NewsImageWrapper>
                             <NewsImage src='./assets/news2.jpg'>
                             </NewsImage>
