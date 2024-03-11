@@ -275,7 +275,7 @@ npm start
 
 | <img src="frontend/public/assets/README/team/김진우.jpg" width="180px" > | <img src="frontend/public/assets/README/team/이홍교.jpg" width="180px" > | <img src="frontend/public/assets/README/team/어태규.jpg" width="180px" > | <img src="frontend/public/assets/README/team/최민석.jpg" width="180px" > |
 | --- | --- | --- | --- |
-| <div align="center"><h3><b><a href="https://github.com/ray9583">Jinwoo Kim</a></b></h3><p><i>Daejeon University</i></p></div> | <div align="center"><h3><b><a href="https://github.com/LeeHongyo">Honggyo Lee</a></b></h3></a><p><i>Daejeon University</i></p></div></a> | <div align="center"><h3><b><a href="https://github.com/EOTAEGYU">Taegyu Eo</a></b></h3></a><p><i>Daejeon University</i></p></div> | <div align="center"><h3><b><a href="https://github.com/seok019283501">Minseok Choi</a></b></h3></a><p><i>Daejeon University</i></p></div> |
+| <div align="center"><h3><b><a href="https://github.com/ray9583">Jinwoo Kim</a></b></h3><p><i>GDSC Daejeon</i></p></div> | <div align="center"><h3><b><a href="https://github.com/LeeHongyo">Honggyo Lee</a></b></h3></a><p><i>GDSC Daejeon</i></p></div></a> | <div align="center"><h3><b><a href="https://github.com/EOTAEGYU">Taegyu Eo</a></b></h3></a><p><i>GDSC Daejeon</i></p></div> | <div align="center"><h3><b><a href="https://github.com/seok019283501">Minseok Choi</a></b></h3></a><p><i>GDSC Daejeon</i></p></div> |
 
 <img src="frontend/public/assets/README/main-banner2.png" >
 
