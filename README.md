@@ -268,6 +268,9 @@ npm start
 ## 🎨  Design Board
 <img src="frontend/public/assets/README/design.png" width="830px" >
 
+### 🧑‍🔬 The training provided by our Rossetta was produced through consultation with experts.
+<img src="frontend/public/assets/README/team/interview.jpg" width="415px">
+
 ## 👨‍💻  Contributors
 
 | <img src="frontend/public/assets/README/team/김진우.jpg" width="180px" > | <img src="frontend/public/assets/README/team/이홍교.jpg" width="180px" > | <img src="frontend/public/assets/README/team/어태규.jpg" width="180px" > | <img src="frontend/public/assets/README/team/최민석.jpg" width="180px" > |
