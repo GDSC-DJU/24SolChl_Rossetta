@@ -24,12 +24,11 @@ app.set('port',process.env.PORT || 8000);
 app.use(bodyParser.json({ limit: '1mb' }));
 app.use(bodyParser.urlencoded({ limit: '1mb', extended: true }));
 app.use(express.static(path.join(__dirname,'public')));
-app.use(cors());
 app.use(express.static(__dirname + '/img'));
 
 
 // 구동방식 변경 http://35.208.138.116:8000 GCP 외부 주소 접속 / localhost:3000 로컬 상 구동
-app.use(cors({ origin: 'http://35.208.138.116:3000'}));
+app.use(cors());
 
 app.use('/wechsler',wechslerRouter);
 app.use('/member',memberRouter);
