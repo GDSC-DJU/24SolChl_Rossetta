@@ -1,7 +1,7 @@
 const mysql = require('mysql2/promise')
 
 exports.pool = mysql.createPool({
-    host: '127.0.0.1',
+    host: '35.216.81.26',
     user: 'root',
     password: process.env.DB_SECRET,
     database: 'rossetta',

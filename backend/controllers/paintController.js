@@ -12,7 +12,7 @@ exports.insertPaint = async(req, res, next) => {
         const {id} = req.decoded;
         let {img,name,fileName} = body;
         const url = path.join(__dirname, `../`,`img/${fileName}.jpeg`);
-        const saveUrl = `http://localhost:8000/${fileName}.jpeg`;
+        const saveUrl = `http://35.216.81.26:8000/${fileName}.jpeg`;
         fs.writeFile(url, img, 'base64', function(err) {
             console.log(err)
             if(err) {
