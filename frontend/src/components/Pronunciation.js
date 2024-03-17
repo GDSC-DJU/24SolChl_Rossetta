@@ -174,7 +174,7 @@ const bufferToBase64 = (buffer)=> {
     if(cookies.get('token') === undefined){
       navigate('/login');
     }
-    axios.get(`http://35.208.138.116:8000/pronunciation/info/${level}`,{
+    axios.get(`http://35.216.81.26:8000/pronunciation/info/${level}`,{
       headers: {
         "Content-Type":'application/json',
         Authorization: cookies.get('token')
@@ -203,7 +203,7 @@ const bufferToBase64 = (buffer)=> {
       },{
         headers: {
           // "Content-Type":'application/json',
-          Authorization:'5929a343-7541-4e6d-8d50-dd3c89f2bf09'
+          Authorization:'3e97461b-2a86-4b24-ab12-982318d1eced'
       }},)
       .then((res)=>{
         console.log(res);
@@ -226,7 +226,7 @@ const bufferToBase64 = (buffer)=> {
   }
   useEffect(()=>{
     if(score !== 0.0){
-      axios.post('http://35.208.138.116:8000/pronunciation/insert/score', 
+      axios.post('http://35.216.81.26:8000/pronunciation/insert/score', 
       {
         sentence:text,
         level:level,
