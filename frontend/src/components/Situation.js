@@ -27,13 +27,14 @@ const Situation = () => {
             navigate('/login');
         }
         //퀴즈 정보 가져오기
-        axios.get(`http://localhost:8000/situation/info/${level}`,{
+        axios.get(`http://35.208.138.116:8000/situation/info/${level}`,{
             headers: {
                 "Content-Type":'application/json',
                 Authorization: cookies.get('token')
             }
         })
         .then((res)=>{
+            console.log(res.data.response);
             setQuiz(res.data.response);
             setTotalSize(res.data.response.length);
         })
@@ -77,7 +78,7 @@ const Situation = () => {
         else{
             setTotalAnswer([...totalAnswer, 'X']);
         }
-        if(count < quiz.length+1){
+        if(count < totalSize){
             let remainingQuiz = JSON.parse(JSON.stringify(quiz));
             let filteredQuiz= remainingQuiz.filter(qz => qz.index !== currentQuiz.index);
             setQuiz(filteredQuiz);

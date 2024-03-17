@@ -24,7 +24,7 @@ function Cards() {
                     </ul>    
                     <ul className='cards__items'>
                         <CardItem
-                        src='assets/Learningimg/Situation.PNG'
+                        src='assets/Learningimg/Situation.png'
                         text='그림을 보고 상황을 인지해 보세요!'
                         label='상황 인지'
                         path='situation'

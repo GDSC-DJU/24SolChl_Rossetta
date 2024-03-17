@@ -96,7 +96,7 @@ if (level == 1) {
   ].map((src) => ({ source: src }));
 }
 useEffect(()=>{
-  axios.get(`http://localhost:8000/paint/paintex/${level}`,{
+  axios.get(`http://35.208.138.116:8000/paint/paintex/${level}`,{
     headers: {
       "Content-Type": 'application/json',
       Authorization: cookies.get('token')
@@ -118,7 +118,7 @@ useEffect(()=>{
     const totalImages = images.length;
     const prevIndex = (selectedImageIndex - 1 + totalImages) % totalImages;
     const nextIndex = (selectedImageIndex + 1) % totalImages;
-
+    
     return [
       images[prevIndex],
       images[selectedImageIndex],
@@ -173,7 +173,7 @@ useEffect(()=>{
             key={index}
             src={image.source}
             alt={`Preview Image ${index}`}
-            onClick={() => onClickImage(images.indexOf(image))} // 이미지 클릭 시 해당 이미지로 변경
+            onClick={() => onClickImage(index)} // 이미지 클릭 시 해당 이미지로 변경
           />
         ))}
       </ImageContentRow>

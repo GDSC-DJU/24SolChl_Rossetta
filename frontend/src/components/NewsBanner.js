@@ -16,13 +16,13 @@ const NewsBanner = () => {
                             </NewsTitle>
                         </NewsImageWrapper>
                     </NewsItem>
-                    <NewsItemSmall onClick={() => window.open('https://www.newsfreezone.co.kr/news/articleView.html?idxno=546390')}>
+                    <NewsItemSmall onClick={() => window.open('https://m.kmib.co.kr/view.asp?arcid=0924324165&code=11131100&sid1=soc')}>
                         <NewsImageWrapper>
                             <NewsImage src='./assets/news1.jpg'>
                             </NewsImage>
                         </NewsImageWrapper>
                         <span>
-                            김광명 부산시의원, 경계선지능 청년에 너무 높은 벽, 자립! 성인 느린학습자의 홀로서기 정책지원 강조
+                            700만명 육박하는 느린학습자, 지원책커녕 용어조차 없다
                         </span>
                     </NewsItemSmall>
                     <NewsItemSmall onClick={() => window.open('https://www.hani.co.kr/arti/area/gangwon/1090490.html')}>

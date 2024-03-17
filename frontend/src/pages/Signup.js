@@ -89,13 +89,14 @@ const Signup = () => {
   };
 
   const onClickRegisterButton = async() => {
-    await axios.post('http://localhost:8000/member/sign-up/parents',{
+    await axios.post('http://35.208.138.116:8000/member/sign-up/parents',{
         id:username,
         pw:pw,
         phoneNum:mobile,
         gender: gender,
         name: name,
         email: email,
+        birth: birthdate,
       })
       .then((res)=>{
         console.log(res);
@@ -104,7 +105,7 @@ const Signup = () => {
         console.log(err);
       })
     if(wchslerData1 && wchslerData2 && wchslerData3 && wchslerData4 && wchslerData5){
-      await axios.post('http://localhost:8000/wechsler/sign-up/wechsler',{
+      await axios.post('http://35.208.138.116:8000/wechsler/sign-up/wechsler',{
         id:username,
         lang:wchslerData1,
         pr:wchslerData2,
@@ -292,6 +293,7 @@ const Signup = () => {
                   type="number"
                   placeholder="언어 이해 점수"
                   value={wchslerData1}
+                  onChange={(e)=>setWechslerData1(e.target.value)}
                 />
               </div>
               <div className="inputTitle" style={{ marginTop: "8px" }}>지각 추론</div>
@@ -301,6 +303,7 @@ const Signup = () => {
                   type="number"
                   placeholder="지각 추론 점수"
                   value={wchslerData2}
+                  onChange={(e)=>setWechslerData2(e.target.value)}
                 />
               </div>
               <div className="inputTitle" style={{ marginTop: "8px" }}>작업 기억</div>
@@ -310,6 +313,7 @@ const Signup = () => {
                   type="number"
                   placeholder="작업 기억 점수"
                   value={wchslerData3}
+                  onChange={(e)=>setWechslerData3(e.target.value)}
                 />
               </div>
               <div className="inputTitle" style={{ marginTop: "8px" }}>처리 속도</div>
@@ -319,6 +323,7 @@ const Signup = () => {
                   type="number"
                   placeholder="처리 속도 점수"
                   value={wchslerData4}
+                  onChange={(e)=>setWechslerData4(e.target.value)}
                 />
               </div>
               <div className="inputTitle" style={{ marginTop: "8px" }}>IQ</div>
@@ -328,6 +333,7 @@ const Signup = () => {
                   type="number"
                   placeholder="IQ 점수"
                   value={wchslerData5}
+                  onChange={(e)=>setWechslerData5(e.target.value)}
                 />
               </div>
               <div className='wecsler'>

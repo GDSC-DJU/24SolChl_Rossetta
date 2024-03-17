@@ -146,7 +146,7 @@ export default Introduction
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 80%;
     min-width: 1000px;
 `;
 

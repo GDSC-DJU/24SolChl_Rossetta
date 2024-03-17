@@ -23,7 +23,47 @@ const Pronunciation = () =>{
   const [sentence,setSentence] = useState([]);
   let { level } = useParams();
 
-
+  const getSpeech = () => {
+    let voices = [];
+  
+    //디바이스에 내장된 voice를 가져온다.
+    const setVoiceList = () => {
+      voices = window.speechSynthesis.getVoices();
+    };
+  
+    setVoiceList();
+  
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      //voice list에 변경됐을때, voice를 다시 가져온다.
+      window.speechSynthesis.onvoiceschanged = setVoiceList;
+    }
+  
+    const speech = (txt) => {
+      const lang = "ko-KR";
+      const utterThis = new SpeechSynthesisUtterance(txt);
+  
+      utterThis.lang = lang;
+  
+      /* 한국어 vocie 찾기
+         디바이스 별로 한국어는 ko-KR 또는 ko_KR로 voice가 정의되어 있다.
+      */
+      const kor_voice = voices.find(
+        (elem) => elem.lang === lang || elem.lang === lang.replace("-", "_")
+      );
+  
+      //힌국어 voice가 있다면 ? utterance에 목소리를 설정한다 : 리턴하여 목소리가 나오지 않도록 한다.
+      if (kor_voice) {
+        utterThis.voice = kor_voice;
+      } else {
+        return;
+      }
+  
+      //utterance를 재생(speak)한다.
+      window.speechSynthesis.speak(utterThis);
+    };
+  
+    speech(text);
+  };
 
   const onRecAudio = async() => {
 
@@ -96,23 +136,7 @@ const bufferToBase64 = (buffer)=> {
   return window.btoa(binary);
 }
 
- const downsampleAudioBuffer = async(audioBuffer, targetSampleRate) =>{
-  const numberOfChannels = audioBuffer.numberOfChannels;
-  const offlineAudioContext = new OfflineAudioContext(numberOfChannels, audioBuffer.duration * targetSampleRate, targetSampleRate);
-  
-  // Create buffer and copy data.
-  const bufferSource = offlineAudioContext.createBufferSource();
-  bufferSource.buffer = audioBuffer;
 
-  // Connect the source to the offline context
-  bufferSource.connect(offlineAudioContext.destination);
-  bufferSource.start(0);
-  
-  // Render the audio at the new sample rate.
-  const resampledAudioBuffer = await offlineAudioContext.startRendering();
-
-  return resampledAudioBuffer;
-}
 
   const onSubmitAudioFile = useCallback(async () => {
 
@@ -122,7 +146,6 @@ const bufferToBase64 = (buffer)=> {
       const arrayBuffer = await audioUrl.arrayBuffer();
     const audioContext = new AudioContext();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    // const resampledAudioBuffer = await downsampleAudioBuffer(audioBuffer, 16000);
     const pcmData = audioBuffer.getChannelData(0);
     const pcmArrayBuffer = pcmData.buffer;
     
@@ -151,7 +174,7 @@ const bufferToBase64 = (buffer)=> {
     if(cookies.get('token') === undefined){
       navigate('/login');
     }
-    axios.get(`http://localhost:8000/pronunciation/info/${level}`,{
+    axios.get(`http://35.208.138.116:8000/pronunciation/info/${level}`,{
       headers: {
         "Content-Type":'application/json',
         Authorization: cookies.get('token')
@@ -203,7 +226,7 @@ const bufferToBase64 = (buffer)=> {
   }
   useEffect(()=>{
     if(score !== 0.0){
-      axios.post('http://localhost:8000/pronunciation/insert/score', 
+      axios.post('http://35.208.138.116:8000/pronunciation/insert/score', 
       {
         sentence:text,
         level:level,
@@ -247,13 +270,11 @@ const bufferToBase64 = (buffer)=> {
             </div>
           </div>
           <div className='score'>
-            <div>
-              점수 : 
-            </div>
-            <div> {wait ? score*20+'점' : '잠시만 기다려 주세요!'}</div>
+            <div> {wait ? Math.ceil(score*20)+'점' : '잠시만 기다려 주세요!'}</div>
           </div>
           <div className='pronunciation-button-container'>
             <button onClick={levelClick}> 랜덤 문장</button>
+            <button onClick={getSpeech}>발음 듣기</button>
             <button className='pronunciation-record-button' onClick={onRec ? onRecAudio : offRecAudio} >{onRec ? '녹음' : '중지'}</button>
             <button className='pronunciation-evaluation-button' onClick={onSubmitAudioFile} disabled={result}>결과 확인</button>
           </div>

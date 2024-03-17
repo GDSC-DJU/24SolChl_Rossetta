@@ -60,30 +60,27 @@ exports.situationInfoUpdate = async(req,res,next) => {
 
 //상황 가져오기
 exports.situationInfo = async(req,res,next) => { 
-    const {level} = req.params;
-    let situation = [];
 
-    try{
+    const {level} = req.params;
+    
+    try {
         const info = await selectSituation(level);
-        info.forEach(async(item,index) => {
+        const situation = await Promise.all(info.map(async(item) => {
             const select = await selectSituationSelect(item.num);
-            await situation.push({
-                situationNum:item.num,
-                index:select.num,
-                image:item.image,
-                question:item.question,
-                choices:[select.firstNum,select.secondNum,select.thirdNum,select.fourthNum],
-                answer:item.answer,
-                level:item.level
-            })
-            if(info.length === index+1){
-                console.log(situation)
-                res.status(200).json({
-                    code:200,
-                    massage:'success selecte',
-                    response:situation.reverse()
-                });
-            }
+            return {
+                situationNum: item.num,
+                index: select.num,
+                image: item.image,
+                question: item.question,
+                choices: [select.firstNum, select.secondNum, select.thirdNum, select.fourthNum],
+                answer: item.answer,
+                level: item.level
+            };
+        }));
+        res.status(200).json({
+            code: 200,
+            message: 'success select',
+            response: situation.reverse()
         });
         
         
