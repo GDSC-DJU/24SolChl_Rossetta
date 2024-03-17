@@ -27,7 +27,7 @@ const Situation = () => {
             navigate('/login');
         }
         //퀴즈 정보 가져오기
-        axios.get(`http://35.208.138.116:8000/situation/info/${level}`,{
+        axios.get(`http://35.216.81.26:8000/situation/info/${level}`,{
             headers: {
                 "Content-Type":'application/json',
                 Authorization: cookies.get('token')
