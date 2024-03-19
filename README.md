@@ -228,7 +228,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 3. **Enter the IP** to connect **(http://35.208.138.116:3000)**, enable it, and **restart the browser**.
 4. If you connect to the server address again, you can confirm that the camera and audio have permission.
 
-**Please enter the ID and password below after accessing this [Rossetta](http://35.208.138.116:3000/)**
+**Please enter the ID and password below after accessing this [Rossetta](http://35.216.81.26:3000/)**
 ```
 id: rosseta
 pw: rossetta1865!
