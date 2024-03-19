@@ -225,7 +225,7 @@ Through Rossetta's learning service, we will help children with borderline intel
 
 1. Run the Chrome browser on the Client and enter **"[chrome://flags](chrome://flags)"** in the address bar
 2. Enter **“Insecure origins treated as secure”** in the search field at the top.
-3. **Enter the IP** to connect **(http://35.208.138.116:3000)**, enable it, and **restart the browser**.
+3. **Enter the IP** to connect **(http://35.216.81.26:3000/)**, enable it, and **restart the browser**.
 4. If you connect to the server address again, you can confirm that the camera and audio have permission.
 
 **Please enter the ID and password below after accessing this [Rossetta](http://35.216.81.26:3000/)**
@@ -236,7 +236,7 @@ pw: rossetta1865!
 
 ### How to run a project
 
-⚠ **For pronunciation correction learning, an ETRI API key is required. Please try accessing pronunciation correction learning via an IP (http://35.208.138.116:3000)**.
+⚠ **For pronunciation correction learning, an ETRI API key is required. Please try accessing pronunciation correction learning via an IP (http://35.216.81.26:3000/)**.
 
 **Clone Project**
 ```bash
